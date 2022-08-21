@@ -1,6 +1,6 @@
 export type InitialStateType = any
 type ActionsType = any
-
+const a = 2
 const initialState: InitialStateType = {}
 
 export const authReducer = (
