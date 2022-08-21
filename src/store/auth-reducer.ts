@@ -1,11 +1,14 @@
-export type InitialStateType = any;
-type ActionsType = any;
+export type InitialStateType = any
+type ActionsType = any
 
-const initialState: InitialStateType = {};
+const initialState: InitialStateType = {}
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
-	switch (action.type) {
-		default:
-			return state;
-	}
-};
+export const authReducer = (
+  state: InitialStateType = initialState,
+  action: ActionsType
+): InitialStateType => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}

@@ -1,12 +1,15 @@
 .radio {
-  outline: none;
-  height: 12px;
-  width: 12px;
-  appearance: none;
   cursor: pointer;
-  border-radius: 100%;
+
+  width: 12px;
+  height: 12px;
   margin-top: 10px;
+
   background: rgb(252, 252, 252);
+  border-radius: 100%;
+  outline: none;
+
+  appearance: none;
 }
 
 .radio:hover {

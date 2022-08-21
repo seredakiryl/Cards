@@ -1,8 +1,7 @@
-
 export const PasswordRecovery = () => {
-   return <>
-      <div>
-         PasswordRecovery
-      </div>
-   </>
+  return (
+    <>
+      <div>PasswordRecovery</div>
+    </>
+  )
 }

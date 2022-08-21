@@ -1,17 +1,18 @@
 .wrapper {
-    min-height: 360px;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 
-    align-items: center;
-    justify-content: space-around;
-
+  min-height: 360px;
+  padding-top: 20px;
 }
 .mail {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    align-items: center;
-    opacity: 0.5;
+  align-items: center;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+
+  opacity: 0.5;
 }

@@ -1,25 +1,27 @@
 .wrapper {
-    display: flex;
+  display: flex;
 }
 .icon {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 .inputBlock {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 4px;
+  padding-bottom: 4px;
 
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 .button {
-    border: none;
-    background: #366EFF;
-    padding: 0 10px;
-    border-radius: 2px;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 24px;
-    color: #FFFFFF;
+  padding: 0 10px;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ffffff;
+
+  background: #366eff;
+  border: none;
+  border-radius: 2px;
 }
 .input {
-    outline: none;
-    border: none;
+  border: none;
+  outline: none;
 }
