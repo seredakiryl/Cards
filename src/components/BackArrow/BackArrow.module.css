@@ -1,0 +1,23 @@
+.wrapper {
+    padding: 24px 136px 12px 136px;
+
+}
+.arrowBlock {
+    display: flex;
+    align-items: center;
+
+
+}
+.arrow {
+    background-image: url("./../../assets/icons/leftarrow.png");
+    background-size: cover;
+    width: 14px;
+    height: 9px;
+
+}
+.text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 12px;
+}

@@ -10,23 +10,27 @@ export const EditableSpan = () => {
     const onDoubleClickHandler = () => {
         setIsEdit(!isEdit)
     }
-    const onBlurHandler = () => {
-        setIsEdit(!isEdit)
-    }
     const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             setIsEdit(!isEdit)
         }
+    }
+    const onClickHandler = () => {
+        setIsEdit(!isEdit)
     }
 
     return (
         <div>
             {isEdit
                 ? (
-                    <input type={"text"} onBlur={onBlurHandler} onKeyPress={onEnterHandler} autoFocus/>
+                    <div className={s.inputBlock}>
+                        <input className={s.input} type={"text"} onKeyPress={onEnterHandler} autoFocus/>
+                        <button className={s.button} onClick={onClickHandler}>SAVE</button>
+                    </div>
+
                 ) : (
-                    <div className={s.wrapper}>
-                        <span onDoubleClick={onDoubleClickHandler}>Edit Your Name</span>
+                    <div className={s.wrapper} onDoubleClick={onDoubleClickHandler}>
+                        <span >Edit Your Name</span>
                         <div className={s.icon}><img src={editLogo} alt="edit"/></div>
                     </div>
                 )

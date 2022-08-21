@@ -6,10 +6,12 @@ import { Login } from './components/auth/login/Login'
 import { NewPassword } from './components/auth/newPassword/NewPassword';
 import { PasswordRecovery } from './components/auth/passwordRecovery/PasswordRecovery';
 import { Error404 } from './components/error404/Error404';
+import {Header} from "./components/Header/Header";
 
 const App = () => {
   return (
     <div >
+      <Header />
       <Routes>
         <Route path={'/Cards'} element={<Registration />}>
         </Route>
