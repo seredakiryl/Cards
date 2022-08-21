@@ -15,6 +15,7 @@ export const Profile = () => {
             <Avatar />
             <EditableSpan />
             <div>
+               <div>test git</div>
                <span className={s.mail}>your-email@gmail.com</span>
             </div>
             <ButtonLogOut />
