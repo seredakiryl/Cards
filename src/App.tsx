@@ -13,8 +13,7 @@ import { useEffect } from 'react'
 import { isLoggedInTC } from './store/auth-reducer'
 
 const App = () => {
-
-  const isLoggedIn = useAppSelector((state) => state.app.error)
+  const error = useAppSelector((state) => state.app.error)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
