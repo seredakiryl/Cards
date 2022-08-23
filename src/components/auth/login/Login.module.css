@@ -15,10 +15,11 @@
   justify-content: flex-start;
 
   width: 413px;
-  height: 552px;
+  min-height: 552px;
   padding: 0 33px;
 
   background-color: white;
+  border-radius: 2px;
 }
 
 .title {
@@ -39,7 +40,7 @@
   font-family: 'Montserrat';
 }
 .input {
-  padding: 5px 0px;
+  padding: 5px;
 
   font-family: 'Montserrat';
   font-weight: 500;
@@ -63,6 +64,7 @@
 }
 
 .forgotPassword {
+  display: block;
   align-self: flex-end;
 
   margin-top: 20px;
@@ -82,6 +84,7 @@
   font-family: 'Montserrat';
   font-size: 16px;
   font-weight: 500;
+  line-height: 20;
 }
 
 .newAccount {
@@ -98,6 +101,7 @@
 
 .signUp {
   margin-top: 11px;
+  margin-bottom: 42px;
 
   font-family: 'Montserrat';
   font-size: 16px;
