@@ -1,5 +1,6 @@
 import { authAPI } from '../api/auth-api'
 import { AppThunk } from './store'
+import { setAppErrorAC } from './app-reducer'
 
 const initialState = {
   isLoggedIn: false,
@@ -27,20 +28,32 @@ export const setIsLoggedInAC = (value: boolean) =>
 type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType
 
 export const isLoggedInTC = (): AppThunk => (dispatch) => {
-  authAPI.me().then((res) => {
-    if (res.data._id) {
-      dispatch(setIsLoggedInAC(true))
-    }
-  })
+  authAPI
+    .me()
+    .then((res) => {
+      if (res.data._id) {
+        dispatch(setIsLoggedInAC(true))
+        dispatch(setNewNameAC(res.data.name, res.data.avatar))
+      }
+    })
+    .catch((res) => {
+      dispatch(setAppErrorAC(res.message))
+    })
 }
-export const setNewNameAC = (name: string) => ({ type: 'PROFILE/SET-NEW-NAME', name } as const)
+export const setNewNameAC = (name: string, avatar: string) =>
+  ({ type: 'PROFILE/SET-NEW-NAME', name, avatar } as const)
 
 type SetNewNameACType = ReturnType<typeof setNewNameAC>
 
 export const setNewNameTC =
-  (name: string): AppThunk =>
+  (name: string, avatar: string): AppThunk =>
   (dispatch) => {
-    authAPI.changeName(name).then((res) => {
-      dispatch(setNewNameAC(name))
-    })
+    authAPI
+      .changeName(name, avatar)
+      .then((res) => {
+        dispatch(setNewNameAC(name, avatar))
+      })
+      .catch((res) => {
+        dispatch(setAppErrorAC(res.message))
+      })
   }

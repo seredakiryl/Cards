@@ -17,12 +17,12 @@ export const EditableSpan = () => {
   }
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      dispatch(setNewNameTC(name))
+      dispatch(setNewNameTC(name, ''))
       setIsEdit(!isEdit)
     }
   }
   const onClickHandler = () => {
-    dispatch(setNewNameTC(name))
+    dispatch(setNewNameTC(name, ''))
     setIsEdit(!isEdit)
   }
 

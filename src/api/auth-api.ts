@@ -12,8 +12,8 @@ export const authAPI = {
   me() {
     return instance.post<MeType>('/auth/me', {})
   },
-  changeName(name: string) {
-    return instance.put<ChangeNameResponseType>('/auth/me', name)
+  changeName(name: string, avatar: string) {
+    return instance.put<ChangeNameResponseType>('/auth/me', { name, avatar })
   },
 }
 
@@ -31,7 +31,7 @@ type MeType = {
   _id: string
   email: string
   name: string
-  avatar?: string
+  avatar: string
   publicCardPacksCount: number
   created: Date
   updated: Date

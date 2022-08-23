@@ -12,7 +12,7 @@ import { Navigate } from 'react-router-dom'
 export const Profile = () => {
   let isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
   if (!isLoggedIn) {
-    ;<Navigate to="/login" />
+    return <Navigate to="/login" />
   }
 
   return (
