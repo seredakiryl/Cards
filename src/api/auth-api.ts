@@ -11,6 +11,7 @@ export const authAPI = {
   },
   registration(model: RegistrationModelType) {
     return instance.post('/auth/register', model)
+  },
   me() {
     return instance.post<MeType>('/auth/me', {})
   },

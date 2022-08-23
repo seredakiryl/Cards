@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux'
 import { authAPI } from '../api/auth-api'
-import { Simulate } from 'react-dom/test-utils'
-import error = Simulate.error
 
 const initialState = {
   isLoggedIn: false,
