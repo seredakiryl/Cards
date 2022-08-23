@@ -9,6 +9,8 @@ export const authAPI = {
   login(model: LoginModelType) {
     return instance.post('/auth/login', { ...model, rememberMe: model.checkbox })
   },
+  registration(model: RegistrationModelType) {
+    return instance.post('/auth/register', model)
   me() {
     return instance.post<MeType>('/auth/me', {})
   },
@@ -21,6 +23,11 @@ type LoginModelType = {
   email: string
   password: string
   checkbox: boolean
+}
+
+type RegistrationModelType = {
+  email: string
+  password: string
 }
 
 type ChangeNameResponseType = {
