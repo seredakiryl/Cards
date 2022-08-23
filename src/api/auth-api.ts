@@ -11,6 +11,11 @@ export const authAPI = {
   },
   registration(model: RegistrationModelType) {
     return instance.post('/auth/register', model)
+  me() {
+    return instance.post<MeType>('/auth/me', {})
+  },
+  changeName(name: string) {
+    return instance.put<ChangeNameResponseType>('/auth/me', name)
   },
 }
 
@@ -19,7 +24,26 @@ type LoginModelType = {
   password: string
   checkbox: boolean
 }
+
 type RegistrationModelType = {
   email: string
   password: string
+}
+
+type ChangeNameResponseType = {
+  updatedUser: MeType
+  error?: string
+}
+type MeType = {
+  _id: string
+  email: string
+  name: string
+  avatar?: string
+  publicCardPacksCount: number
+  created: Date
+  updated: Date
+  isAdmin: boolean
+  verified: boolean
+  rememberMe: boolean
+  error?: string
 }
