@@ -2,7 +2,6 @@ import React from 'react'
 import { Button, Space } from 'antd'
 import s from './Regisration.module.css'
 
-
 export const Registration = () => {
   return (
     <div className={s.wrapper}>
