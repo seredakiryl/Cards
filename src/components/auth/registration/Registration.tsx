@@ -86,7 +86,8 @@ export const Registration = () => {
           {/*) : (*/}
           {/*  <div>It`s work</div>*/}
           {/*)}*/}
-          {/*это кусок тестовый, что так можно!!!*/}
+          {/*это кусок тестовый, что так можно!!!
+           */}
           {formik.touched.password && formik.errors.password ? (
             <Button
               disabled={true}
