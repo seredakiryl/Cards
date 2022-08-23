@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
- 
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(isLoggedInTC())
