@@ -1,11 +1,12 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from 'react'
 import s from './editableSpan.module.css'
-import { useAppDispatch } from '../../../store/store'
+import { useAppDispatch, useAppSelector } from '../../../store/store'
 import { setNewNameTC } from '../../../store/auth-reducer'
 
 export const EditableSpan = () => {
   let [isEdit, setIsEdit] = useState<boolean>(false)
-  let [name, setName] = useState('Onotole Ololoev')
+  const initialName = useAppSelector((state) => state.auth.name)
+  let [name, setName] = useState(initialName)
   const dispatch = useAppDispatch()
 
   const onDoubleClickHandler = () => {
