@@ -11,12 +11,12 @@ import { Alert } from 'antd'
 import { useAppSelector } from './store/store'
 
 const App = () => {
-  const isLoggedIn = useAppSelector((state) => state.app.error)
+  const error = useAppSelector((state) => state.app.error)
 
   return (
     <div>
       <Header />
-      {isLoggedIn ? <Alert type="error" message={isLoggedIn} banner closable /> : ''}
+      {error ? <Alert type="error" message={error} banner closable /> : ''}
       <Routes>
         <Route path={'/Registration'} element={<Registration />}></Route>
         <Route path={'/Login'} element={<Login />}></Route>
