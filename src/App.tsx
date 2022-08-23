@@ -13,8 +13,10 @@ import { useEffect } from 'react'
 import { isLoggedInTC } from './store/auth-reducer'
 
 const App = () => {
+
   const isLoggedIn = useAppSelector((state) => state.app.error)
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(isLoggedInTC())
   }, [])
@@ -22,7 +24,7 @@ const App = () => {
   return (
     <div>
       <Header />
-      {isLoggedIn ? <Alert type="error" message={isLoggedIn} banner closable /> : ''}
+      {error ? <Alert type="error" message={error} banner closable /> : ''}
       <Routes>
         <Route path={'/Registration'} element={<Registration />}></Route>
         <Route path={'/Login'} element={<Login />}></Route>
