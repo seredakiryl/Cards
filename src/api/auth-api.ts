@@ -9,10 +9,34 @@ export const authAPI = {
   login(model: LoginModelType) {
     return instance.post('/auth/login', { ...model, rememberMe: model.checkbox })
   },
+  me() {
+    return instance.post<MeType>('/auth/me', {})
+  },
+  changeName(name: string) {
+    return instance.put<ChangeNameResponseType>('/auth/me', name)
+  },
 }
 
 type LoginModelType = {
   email: string
   password: string
   checkbox: boolean
+}
+
+type ChangeNameResponseType = {
+  updatedUser: MeType
+  error?: string
+}
+type MeType = {
+  _id: string
+  email: string
+  name: string
+  avatar?: string
+  publicCardPacksCount: number
+  created: Date
+  updated: Date
+  isAdmin: boolean
+  verified: boolean
+  rememberMe: boolean
+  error?: string
 }
