@@ -9,9 +9,17 @@ import { Error404 } from './components/error404/Error404'
 import { Header } from './components/Header/Header'
 import { Alert } from 'antd'
 import { useAppSelector } from './store/store'
+import { useEffect } from 'react'
+import { isLoggedInTC } from './store/auth-reducer'
+import { useDispatch } from 'react-redux'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
+ 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(isLoggedInTC())
+  }, [])
 
   return (
     <div>
