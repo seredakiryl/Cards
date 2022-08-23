@@ -1,7 +1,5 @@
-import { Dispatch } from 'redux'
 import { authAPI } from '../api/auth-api'
-import { Simulate } from 'react-dom/test-utils'
-import error = Simulate.error
+import { AppThunk } from './store'
 
 const initialState = {
   isLoggedIn: false,
@@ -28,7 +26,7 @@ export const setIsLoggedInAC = (value: boolean) =>
 
 type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType
 
-export const isLoggedInTC = () => (dispatch: Dispatch) => {
+export const isLoggedInTC = (): AppThunk => (dispatch) => {
   authAPI.me().then((res) => {
     if (res.data._id) {
       dispatch(setIsLoggedInAC(true))
@@ -39,8 +37,10 @@ export const setNewNameAC = (name: string) => ({ type: 'PROFILE/SET-NEW-NAME', n
 
 type SetNewNameACType = ReturnType<typeof setNewNameAC>
 
-export const setNewNameTC = (name: string) => (dispatch: Dispatch) => {
-  authAPI.changeName(name).then((res) => {
-    dispatch(setNewNameAC(name))
-  })
-}
+export const setNewNameTC =
+  (name: string): AppThunk =>
+  (dispatch) => {
+    authAPI.changeName(name).then((res) => {
+      dispatch(setNewNameAC(name))
+    })
+  }

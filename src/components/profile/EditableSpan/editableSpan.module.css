@@ -2,7 +2,7 @@
   display: flex;
 }
 .icon {
-  padding-left: 10px;
+  margin-left: 10px;
 }
 .inputBlock {
   padding-bottom: 4px;
@@ -12,6 +12,7 @@
 .button {
   padding: 0 10px;
 
+  font-family: 'Montserrat';
   font-size: 12px;
   font-weight: 400;
   line-height: 24px;
@@ -22,6 +23,8 @@
   border-radius: 2px;
 }
 .input {
+  font-family: 'Montserrat';
+
   border: none;
   outline: none;
 }
