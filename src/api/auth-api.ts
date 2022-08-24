@@ -12,6 +12,9 @@ export const authAPI = {
   me() {
     return instance.post<MeType>('/auth/me', {})
   },
+  logout() {
+    return instance.delete('/auth/me', {})
+  },
   changeName(name: string, avatar: string) {
     return instance.put<ChangeNameResponseType>('/auth/me', { name, avatar })
   },

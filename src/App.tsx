@@ -11,21 +11,32 @@ import { Alert } from 'antd'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { useEffect } from 'react'
 import { isLoggedInTC } from './store/auth-reducer'
+import { Spin } from 'antd/es'
 
 const App = () => {
-  const isLoggedIn = useAppSelector((state) => state.app.error)
+  const error = useAppSelector((state) => state.app.error)
+  const isInitialized = useAppSelector((state) => state.app.initialized)
+  // const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(isLoggedInTC())
   }, [])
 
+  if (isInitialized) {
+    return (
+      <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
+        <Spin size="large" />
+      </div>
+    )
+  }
+
   return (
     <div>
       <Header />
-      {isLoggedIn ? <Alert type="error" message={isLoggedIn} banner closable /> : ''}
+      {error ? <Alert type="error" message={error} banner closable /> : ''}
       <Routes>
         <Route path={'/Registration'} element={<Registration />}></Route>
-        <Route path={'/Login'} element={<Login />}></Route>
+        <Route path={'/*'} element={<Login />}></Route>
         <Route path={'/NewPassword'} element={<NewPassword />}></Route>
         <Route path={'/PasswordRecovery'} element={<PasswordRecovery />}></Route>
         <Route path={'/Profile'} element={<Profile />}></Route>
