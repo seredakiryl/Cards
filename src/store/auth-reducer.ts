@@ -1,6 +1,8 @@
 import { authAPI } from '../api/auth-api'
+
 import { AppThunk } from './store'
 import { isInitializedAC, setAppErrorAC } from './app-reducer'
+
 
 const initialState = {
   isLoggedIn: false,

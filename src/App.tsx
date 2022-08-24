@@ -17,7 +17,9 @@ const App = () => {
   const error = useAppSelector((state) => state.app.error)
   const isInitialized = useAppSelector((state) => state.app.initialized)
   // const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(isLoggedInTC())
   }, [])
