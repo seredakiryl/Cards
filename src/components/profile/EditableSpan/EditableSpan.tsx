@@ -36,6 +36,7 @@ export const EditableSpan = () => {
             onKeyPress={onEnterHandler}
             onChange={onChangeHandler}
             autoFocus
+            placeholder={name}
           />
           <button className={s.button} onClick={onClickHandler}>
             SAVE
