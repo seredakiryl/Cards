@@ -1,17 +1,18 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Registration } from './components/auth/registration/Registration'
+import { Registration } from './components/auth/Registration/Registration'
 import { Profile } from './components/profile/Profile'
-import { Login } from './components/auth/login/Login'
-import { NewPassword } from './components/auth/newPassword/NewPassword'
-import { PasswordRecovery } from './components/auth/passwordRecovery/PasswordRecovery'
-import { Error404 } from './components/error404/Error404'
+import { Login } from './components/auth/Login/Login'
+import { NewPassword } from './components/auth/NewPassword/NewPassword'
+import { PasswordRecovery } from './components/auth/PasswordRecovery/PasswordRecovery'
+import { Error404 } from './components/Error404/Error404'
 import { Header } from './components/Header/Header'
 import { Alert } from 'antd'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { useEffect } from 'react'
 import { isLoggedInTC } from './store/auth-reducer'
 import { Spin } from 'antd/es'
+import { ForgotPassword } from './components/auth/ForgotPassword/ForgotPassword'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
@@ -38,9 +39,10 @@ const App = () => {
       {error ? <Alert type="error" message={error} banner closable /> : ''}
       <Routes>
         <Route path={'/Registration'} element={<Registration />}></Route>
+        <Route path={'/SetNewPassword/:token'} element={<NewPassword />}></Route>
         <Route path={'/*'} element={<Login />}></Route>
-        <Route path={'/NewPassword'} element={<NewPassword />}></Route>
         <Route path={'/PasswordRecovery'} element={<PasswordRecovery />}></Route>
+        <Route path={'/ForgotPassword'} element={<ForgotPassword />}></Route>
         <Route path={'/Profile'} element={<Profile />}></Route>
         <Route path={'/Error404'} element={<Error404 />}></Route>
       </Routes>

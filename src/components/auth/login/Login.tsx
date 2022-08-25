@@ -4,7 +4,7 @@ import { Button, Radio } from 'antd'
 import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { authAPI } from '../../../api/auth-api'
 import { setAppErrorAC } from '../../../store/app-reducer'
 import { setIsLoggedInAC } from '../../../store/auth-reducer'
@@ -19,6 +19,7 @@ export type FormikErrorType = {
 
 export const Login = (props: any): JSX.Element => {
   const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn)
+
   const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
@@ -54,6 +55,10 @@ export const Login = (props: any): JSX.Element => {
 
   if (isLoggedIn) {
     return <Navigate to="/Profile" />
+  }
+  const navigate = useNavigate()
+  const RedirectToRegistration = () => {
+    navigate('/registration')
   }
 
   return (
@@ -103,8 +108,10 @@ export const Login = (props: any): JSX.Element => {
           <Button type="primary" htmlType="submit" shape="round" className={s.Button}>
             Sign in
           </Button>
-          <a className={s.newAccount}>Already have an account?</a>
-          <a className={s.signUp}>Sign Up</a>
+          <span className={s.newAccount}>Already have an account?</span>
+          <a onClick={RedirectToRegistration} className={s.signUp}>
+            Sign Up
+          </a>
         </form>
       </div>
     </div>

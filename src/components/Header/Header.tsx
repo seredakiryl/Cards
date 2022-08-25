@@ -1,7 +1,4 @@
-import React from 'react'
 import s from './Header.module.css'
-import { Avatar } from '../profile/Avatar/Avatar'
-// const logo = require('./../../assets/images/logo.png')
 
 export const Header = () => {
   return (
