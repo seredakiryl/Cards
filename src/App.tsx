@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import { isLoggedInTC } from './store/auth-reducer'
 import { Spin } from 'antd/es'
 import { ForgotPassword } from './components/auth/ForgotPassword/ForgotPassword'
+import { CheckEmail } from './components/auth/CheckEmail/CheckEmail'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
@@ -44,6 +45,7 @@ const App = () => {
         <Route path={'/PasswordRecovery'} element={<PasswordRecovery />}></Route>
         <Route path={'/ForgotPassword'} element={<ForgotPassword />}></Route>
         <Route path={'/Profile'} element={<Profile />}></Route>
+        <Route path={'/CheckEmail'} element={<CheckEmail />}></Route>
         <Route path={'/Error404'} element={<Error404 />}></Route>
       </Routes>
     </div>

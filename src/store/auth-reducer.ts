@@ -4,7 +4,7 @@ import { isInitializedAC, setAppErrorAC } from './app-reducer'
 
 const initialState = {
   isLoggedIn: false,
-  name: '',
+  name: 'enter your name',
   avatar: '',
 }
 type InitialStateType = typeof initialState
