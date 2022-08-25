@@ -1,14 +1,25 @@
-import { Button } from 'antd'
+import React from 'react'
 import s from './Regisration.module.css'
 import { Input } from 'antd'
 import { useFormik } from 'formik'
 import { authAPI } from '../../../api/auth-api'
 import { setAppErrorAC } from '../../../store/app-reducer'
 import { useDispatch } from 'react-redux'
-import { FormikErrorType } from '../Login/Login'
+import { useNavigate } from 'react-router-dom'
+import { Button } from 'antd'
+
+export type FormikRegistrationType = {
+  email?: string
+  password?: string
+  confirm_password?: string
+}
 
 export const Registration = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const rederectToLogin = () => {
+    navigate('/')
+  }
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -16,7 +27,7 @@ export const Registration = () => {
       confirm_password: '',
     },
     validate: (values) => {
-      const errors: FormikErrorType = {}
+      const errors: FormikRegistrationType = {}
       if (!values.email) {
         errors.email = 'Required'
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -33,19 +44,16 @@ export const Registration = () => {
       }
 
       if (!values.confirm_password) {
-        //вот тут я хочу сделать допустим валидацию errors.confirm_password
-        errors.password = 'Required'
+        errors.confirm_password = 'Required'
       } else if (values.password.length < 5) {
-        errors.password = 'Must be 15 characters or less'
+        errors.confirm_password = 'Must be 15 characters or less'
       }
       return errors
     },
 
     onSubmit: (values) => {
-      const model = { email: values.email, password: values.password }
-
       authAPI
-        .registration(model)
+        .registration({ email: values.email, password: values.password })
         .then((res) => console.log(res))
         .catch((res) => dispatch(setAppErrorAC(res.message)))
     },
@@ -89,33 +97,22 @@ export const Registration = () => {
           {/*)}*/}
           {/*это кусок тестовый, что так можно!!!
            */}
-          {formik.touched.password && formik.errors.password ? (
-            <Button
-              disabled={true}
-              htmlType="submit"
-              type="primary"
-              shape="round"
-              size={'large'}
-              className={s.buttonSingUp}
-            >
-              Sing up
-            </Button>
-          ) : (
-            <Button
-              disabled={false}
-              htmlType="submit"
-              type="primary"
-              shape="round"
-              size={'large'}
-              className={s.buttonSingUp}
-            >
-              Sing up
-            </Button>
-          )}
+
+          <Button
+            disabled={formik.touched.password && formik.errors.password ? true : false}
+            htmlType="submit"
+            type="primary"
+            shape="round"
+            size={'large'}
+            className={s.buttonSingUp}
+          >
+            Sing up
+          </Button>
+
           <Button type="link" className={s.buttonHaveAccaunt}>
             Already have an account?
           </Button>
-          <Button type="link" className={s.buttonSingIn}>
+          <Button type="link" className={s.buttonSingIn} onClick={rederectToLogin}>
             Sign in
           </Button>
         </form>

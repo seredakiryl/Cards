@@ -60,6 +60,9 @@ export const Login = (props: any): JSX.Element => {
   const RedirectToRegistration = () => {
     navigate('/registration')
   }
+  const navigateToForrgotPassword = () => {
+    navigate('/ForgotPassword')
+  }
 
   return (
     <div className={s.wrapper}>
@@ -104,7 +107,9 @@ export const Login = (props: any): JSX.Element => {
               Remember me
             </Checkbox>
           </div>
-          <a className={s.forgotPassword}>Forgot Password?</a>
+          <a className={s.forgotPassword} onClick={navigateToForrgotPassword}>
+            Forgot Password?
+          </a>
           <Button type="primary" htmlType="submit" shape="round" className={s.Button}>
             Sign in
           </Button>
