@@ -1,9 +1,7 @@
-import React from 'react'
 import s from './Header.module.css'
 import { Avatar } from '../profile/Avatar/Avatar'
 import { useAppSelector } from '../../store/store'
 import { Button } from 'antd'
-// const logo = require('./../../assets/images/logo.png')
 
 export const Header = () => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)

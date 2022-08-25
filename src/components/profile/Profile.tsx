@@ -13,7 +13,7 @@ export const Profile = () => {
   // let isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
   let isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   if (isLoggedIn === false) {
-    return <Navigate to="/login" />
+    return <Navigate to="/" />
   }
 
   return (

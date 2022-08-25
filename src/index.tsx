@@ -1,16 +1,17 @@
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import 'antd/dist/antd.css'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-  <BrowserRouter>
+// eslint-disable-next-line react/no-render-return-value
+const root = ReactDOM.render(
+  <HashRouter>
     <Provider store={store}>
       <App />
-    </Provider>
-  </BrowserRouter>
+    </Provider>{' '}
+  </HashRouter>,
+  document.getElementById('root')
 )
