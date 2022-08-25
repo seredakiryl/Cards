@@ -2,17 +2,11 @@ import React from 'react'
 import s from '../CreateNewPassword/CreateNewPassword.module.css'
 import { Title } from '../../profile/Title/Title'
 import { Button, Input } from 'antd'
-
-import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
-import { authAPI } from '../../../api/auth-api'
-import { setIsLoggedInAC } from '../../../store/auth-reducer'
-import { setAppErrorAC } from '../../../store/app-reducer'
 import { FormikErrorType } from '../login/Login'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 
 export const CreateNewPassword = () => {
-  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       password: '',
