@@ -39,7 +39,6 @@
   align-self: flex-start;
 
   margin-top: 41px;
-  margin-left: 33px;
 
   font-family: 'Montserrat';
   font-size: 13px;
@@ -51,18 +50,22 @@
   opacity: 0.5;
 }
 
-.inputEmail {
-  width: 347px;
+.input {
+  padding: 5px;
 
-  border: none;
-  border-bottom: 2px solid gray;
+  font-family: 'Montserrat';
+  font-weight: 500;
 }
+.strip {
+  width: 100%;
+  height: 1px;
 
+  border-bottom: 2px solid #3d3d3d;
+}
 .headerPassword {
   align-self: flex-start;
 
   margin-top: 24px;
-  margin-left: 33px;
 
   font-family: 'Montserrat';
   font-size: 13px;
@@ -72,20 +75,12 @@
   color: #000000;
 
   opacity: 0.5;
-}
-
-.inputPassword {
-  width: 347px;
-
-  border: none;
-  border-bottom: 2px solid gray;
 }
 
 .headerConfirmPassword {
   align-self: flex-start;
 
   margin-top: 24px;
-  margin-left: 33px;
 
   font-family: 'Montserrat';
   font-size: 13px;
@@ -96,12 +91,7 @@
 
   opacity: 0.5;
 }
-.inputConfirmPassword {
-  width: 347px;
 
-  border: none;
-  border-bottom: 2px solid gray;
-}
 .buttonSingUp {
   width: 347px;
   margin-top: 60px;

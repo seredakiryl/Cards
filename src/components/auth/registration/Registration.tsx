@@ -66,26 +66,43 @@ export const Registration = () => {
         <label htmlFor={'email'} className={s.headerEmail}>
           Email
         </label>
-        <Input type="email" className={s.inputEmail} {...formik.getFieldProps('email')} />
+        <Input
+          type="email"
+          bordered={false}
+          size="middle"
+          className={s.input}
+          {...formik.getFieldProps('email')}
+        />
+        <div className={s.strip}></div>
         {formik.touched.email && formik.errors.email && (
           <div style={{ color: 'red' }}>{formik.errors.email}</div>
         )}
-        <div className={s.headerPassword}>Password</div>
+        <label htmlFor={'password'} className={s.headerPassword}>
+          Password
+        </label>
         <Input.Password
-          className={s.inputPassword}
+          className={s.input}
+          bordered={false}
+          size="middle"
           type="password"
           {...formik.getFieldProps('password')}
         />
+        <div className={s.strip}></div>
         {formik.touched.password && formik.errors.password && (
           <div style={{ color: 'red' }}>{formik.errors.password}</div>
         )}
         {/*вот этот допустим отработает, а вот ниже нет или наоборот*/}
-        <div className={s.headerConfirmPassword}>Confirm password</div>
+        <label htmlFor={'confirmPassword'} className={s.headerConfirmPassword}>
+          Confirm password
+        </label>
         <Input.Password
-          className={s.inputConfirmPassword}
+          className={s.input}
           type="confirm_password"
+          bordered={false}
+          size="middle"
           {...formik.getFieldProps('confirm_password')}
         />
+        <div className={s.strip}></div>
         {formik.touched.confirm_password && formik.errors.confirm_password && (
           <div style={{ color: 'red' }}>{formik.errors.confirm_password}</div>
         )}
@@ -110,9 +127,7 @@ export const Registration = () => {
           Sing up
         </Button>
 
-        <Button type="link" className={s.buttonHaveAccaunt}>
-          Already have an account?
-        </Button>
+        <span className={s.buttonHaveAccaunt}>Already have an account?</span>
         <Button type="link" className={s.buttonSingIn} onClick={rederectToLogin}>
           Sign in
         </Button>
