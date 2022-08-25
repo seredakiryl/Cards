@@ -14,6 +14,7 @@ import { isLoggedInTC } from './store/auth-reducer'
 import { Spin } from 'antd/es'
 import { ForgotPassword } from './components/auth/ForgotPassword/ForgotPassword'
 import { CheckEmail } from './components/auth/CheckEmail/CheckEmail'
+import { CreateNewPassword } from './components/auth/CreateNewPassword/CreateNewPassword'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/SetNewPassword/:token" element={<NewPassword />}></Route>
         <Route path="/" element={<Login />}></Route>
         <Route path="/PasswordRecovery" element={<PasswordRecovery />}></Route>
+        <Route path={'/CreateNewPassword'} element={<CreateNewPassword />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/CheckEmail" element={<CheckEmail />}></Route>
