@@ -4,6 +4,8 @@
   justify-content: center;
 
   height: 100vh;
+
+  background-color: #3d3d3d;
 }
 .container {
   display: flex;
@@ -12,10 +14,10 @@
   justify-content: flex-start;
 
   width: 413px;
-  height: 528px;
-  padding: 0;
+  min-height: 552px;
+  padding: 0 33px;
 
-  background: #ffffff;
+  background-color: white;
   border-radius: 2px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
 }
