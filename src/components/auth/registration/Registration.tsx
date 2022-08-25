@@ -18,7 +18,7 @@ export const Registration = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const rederectToLogin = () => {
-    navigate('/Login')
+    navigate('/')
   }
   const formik = useFormik({
     initialValues: {

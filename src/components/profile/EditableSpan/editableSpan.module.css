@@ -1,8 +1,14 @@
 .wrapper {
+  cursor: pointer;
+
   display: flex;
 }
 .icon {
+  width: 16px;
+  height: 16px;
   margin-left: 10px;
+
+  background-image: url("./../../../assets/icons/Edit.png");
 }
 .inputBlock {
   padding-bottom: 4px;
@@ -10,6 +16,8 @@
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 .button {
+  cursor: pointer;
+
   padding: 0 10px;
 
   font-family: 'Montserrat';
