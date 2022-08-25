@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from 'antd'
 import s from './Regisration.module.css'
 import { Input } from 'antd'
@@ -6,7 +5,7 @@ import { useFormik } from 'formik'
 import { authAPI } from '../../../api/auth-api'
 import { setAppErrorAC } from '../../../store/app-reducer'
 import { useDispatch } from 'react-redux'
-import { FormikErrorType } from '../login/Login'
+import { FormikErrorType } from '../Login/Login'
 
 export const Registration = () => {
   const dispatch = useDispatch()
@@ -43,8 +42,10 @@ export const Registration = () => {
     },
 
     onSubmit: (values) => {
+      const model = { email: values.email, password: values.password }
+
       authAPI
-        .registration(values)
+        .registration(model)
         .then((res) => console.log(res))
         .catch((res) => dispatch(setAppErrorAC(res.message)))
     },
