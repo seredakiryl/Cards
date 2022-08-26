@@ -39,9 +39,6 @@ export const isLoggedInTC = (): AppThunk => (dispatch) => {
       dispatch(setIsLoggedInAC(true))
       dispatch(setNewNameAC(res.data.name, res.data.avatar))
     })
-    .catch((res) => {
-      dispatch(setAppErrorAC(res.message))
-    })
     .finally(() => {
       dispatch(isInitializedAC(false))
     })

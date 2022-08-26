@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Registration } from './components/auth/registration/Registration'
 import { Profile } from './components/profile/Profile'
