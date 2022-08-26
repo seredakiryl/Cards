@@ -35,9 +35,16 @@
 .label {
   align-self: flex-start;
 
-  margin-top: 24px;
+  margin-top: 41px;
 
   font-family: 'Montserrat';
+  font-size: 13px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  color: #000000;
+
+  opacity: 0.5;
 }
 .input {
   padding: 5px;
