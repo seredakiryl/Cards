@@ -7,6 +7,8 @@ const initialState = {
   isLoggedIn: false,
   name: 'enter your name',
   avatar: '',
+  password: '',
+  resetPasswordToken: '',
 }
 type InitialStateType = typeof initialState
 
@@ -19,6 +21,8 @@ export const authReducer = (
       return { ...state, isLoggedIn: action.value }
     case 'PROFILE/SET-NEW-NAME':
       return { ...state, name: action.name }
+    case 'LOGIN/SET-NEW-PASSWORD':
+      return { ...state, password: action.password }
     default:
       return state
   }
@@ -26,7 +30,7 @@ export const authReducer = (
 export const setIsLoggedInAC = (value: boolean) =>
   ({ type: 'LOGIN/SET-IS-LOGGED-IN', value } as const)
 
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType
+type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType | SetNewPasswordActionType
 
 export const isLoggedInTC = (): AppThunk => (dispatch) => {
   dispatch(isInitializedAC(true))
@@ -35,9 +39,6 @@ export const isLoggedInTC = (): AppThunk => (dispatch) => {
     .then((res) => {
       dispatch(setIsLoggedInAC(true))
       dispatch(setNewNameAC(res.data.name, res.data.avatar))
-    })
-    .catch((res) => {
-      dispatch(setAppErrorAC(res.message))
     })
     .finally(() => {
       dispatch(isInitializedAC(false))
@@ -78,6 +79,7 @@ export const logOutTC = (): AppThunk => (dispatch) => {
       dispatch(isInitializedAC(false))
     })
 }
+
 export const registrationTC =
   (email: string, password: string): AppThunk =>
   (dispatch) => {
@@ -86,6 +88,24 @@ export const registrationTC =
       .registration({ email, password })
       .then((res) => console.log(res))
       .catch((res) => dispatch(setAppErrorAC(res.message)))
+
+export const setNewPasswordAC = (password: string, resetPasswordToken: string) =>
+  ({ type: 'LOGIN/SET-NEW-PASSWORD', password, resetPasswordToken } as const)
+
+type SetNewPasswordActionType = ReturnType<typeof setNewPasswordAC>
+
+export const setNewPasswordTC =
+  (password: string, resetPasswordToken: string): AppThunk =>
+  (dispatch) => {
+    dispatch(isInitializedAC(true))
+    authAPI
+      .newPassword({ password, resetPasswordToken })
+      .then((res) => {
+        dispatch(setNewPasswordAC(password, 'some-token-from-url'))
+      })
+      .catch((res) => {
+        dispatch(setAppErrorAC(res.message))
+      })
       .finally(() => {
         dispatch(isInitializedAC(false))
       })

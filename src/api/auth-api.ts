@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_BACK_URL || 'https://neko-back.herokuapp.com/2.0',
+  baseURL: process.env.REACT_APP_BACK_URL || 'https://neko-back.herokuapp.com/2.0/',
   withCredentials: true,
 })
 
@@ -18,11 +18,11 @@ export const authAPI = {
   logout() {
     return instance.delete('/auth/me')
   },
-  forgotPassword(model: any) {
-    return instance.post('/auth/forgot', model)
+  forgotPassword(model: ForgotPasswordModelType) {
+    return instance.post<ForgotPasswordResponseType>('/auth/forgot', model)
   },
-  newPassword(model: any) {
-    return instance.post('/auth/set-new-password', model)
+  newPassword(model: NewPasswordModelType) {
+    return instance.post<NewPasswordResponseType>('/auth/set-new-password', model)
   },
   changeName(name: string, avatar: string) {
     return instance.put<ChangeNameResponseType>('/auth/me', { name, avatar })
@@ -34,7 +34,23 @@ type LoginModelType = {
   password: string
   checkbox: boolean
 }
-
+type NewPasswordModelType = {
+  password: string
+  resetPasswordToken?: string
+}
+type NewPasswordResponseType = {
+  info: string
+  error?: string
+}
+type ForgotPasswordModelType = {
+  email: string
+  from: string
+  message: string
+}
+type ForgotPasswordResponseType = {
+  info: string
+  error: string
+}
 type RegistrationModelType = {
   email: string
   password: string
