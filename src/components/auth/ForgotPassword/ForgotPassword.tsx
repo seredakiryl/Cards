@@ -1,51 +1,31 @@
-import { authAPI } from '../../../api/auth-api'
 import s from './ForgotPassword.module.css'
 import { Title } from '../../profile/Title/Title'
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { Button } from 'antd'
 import { useAppDispatch } from '../../../store/store'
-import { setAppErrorAC } from '../../../store/app-reducer'
 import { useNavigate } from 'react-router-dom'
+import { forgotPasswordTC } from '../../../store/auth-reducer'
+import { admin, messageStyle } from './ParamsForForgotPassword'
 
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch()
-  // let forgotPasswordModel = {
-  //   email: email,
-  //   from: 'test-front-admin <ai73a@yandex.by>',
-  //   message: `<div style="background-color: lime; padding: 15px">
-  //     password recovery link:
-  //     <a href='http://localhost:3000/SetNewPassword/$token$'>
-  //     link</a>
-  //     </div>`,
-  // }
+  const navigate = useNavigate()
   let [email, setEmail] = useState('Email')
-  let from = 'test-front-admin <ai73a@yandex.by>'
-  let message = `<div style="background-color: lime; padding: 15px">
-password recovery link: 
-<a href='http://localhost:3000/#/SetNewPassword/$token$'>
-link</a>
-</div>`
 
   const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value)
   }
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      console.log(email)
       onSendPassword()
     }
   }
 
-  const navigate = useNavigate()
   const onSendPassword = () => {
-    authAPI
-      .forgotPassword({ email, from, message })
-      .then((res) => {
-        console.log(res.data.info)
-      })
-      .catch((res) => dispatch(setAppErrorAC(res.message)))
+    dispatch(forgotPasswordTC(email, admin, messageStyle))
     navigate('/CheckEmail')
   }
+
   return (
     <div className={s.wrapper}>
       <div className={s.container}>

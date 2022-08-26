@@ -3,7 +3,6 @@ import './App.css'
 import { Registration } from './components/auth/registration/Registration'
 import { Profile } from './components/profile/Profile'
 import { Login } from './components/auth/login/Login'
-import { PasswordRecovery } from './components/auth/passwordRecovery/PasswordRecovery'
 import { Error404 } from './components/error404/Error404'
 import { Header } from './components/Header/Header'
 import { Alert } from 'antd'
@@ -41,7 +40,6 @@ const App = () => {
       <Routes>
         <Route path="/Registration" element={<Registration />}></Route>
         <Route path="/" element={<Login />}></Route>
-        <Route path="/PasswordRecovery" element={<PasswordRecovery />}></Route>
         <Route path="/SetNewPassword/:token" element={<CreateNewPassword />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>

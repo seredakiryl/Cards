@@ -127,3 +127,14 @@ export const loginTC =
         dispatch(setAppErrorAC(res.message))
       })
   }
+
+export const forgotPasswordTC =
+  (email: string, admin: string, messageStyle: string): AppThunk =>
+  (dispatch) => {
+    authAPI
+      .forgotPassword({ email, from: admin, message: messageStyle })
+      .then((res) => {
+        console.log(res.data.info)
+      })
+      .catch((res) => dispatch(setAppErrorAC(res.message)))
+  }
