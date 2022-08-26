@@ -83,6 +83,7 @@ export const logOutTC = (): AppThunk => (dispatch) => {
 export const registrationTC =
   (email: string, password: string): AppThunk =>
   (dispatch) => {
+    console.log({ email, password })
     dispatch(isInitializedAC(true))
     authAPI
       .registration({ email, password })

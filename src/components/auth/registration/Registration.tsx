@@ -59,6 +59,7 @@ export const Registration = () => {
 
     onSubmit: (values) => {
       dispatch(registrationTC(values.email, values.password))
+      navigate('/')
     },
   })
 
