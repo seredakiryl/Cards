@@ -25,16 +25,24 @@ export const Login = (props: any): JSX.Element => {
       checkbox: false,
     },
     validate: (values) => {
-      const errors: FormikLoginType = {}
-      if (!values.email) {
-        errors.email = 'Required'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-      }
-      if (!values.password) {
-        errors.password = 'enter password'
-      } else if (values.password.length < 3) {
-        errors.password = 'The password must contain at least 6 symbols.'
+      const errors: FormikErrorType = {}
+      switch (true) {
+        case !values.email: {
+          errors.email = 'Required'
+          break
+        }
+        case !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email): {
+          errors.email = 'Invalid email address'
+          break
+        }
+        case !values.password: {
+          errors.password = 'enter password'
+          break
+        }
+        case values.password.length < 5: {
+          errors.password = 'The password must contain at least 5 symbols.'
+          break
+        }
       }
       return errors
     },
@@ -64,7 +72,6 @@ export const Login = (props: any): JSX.Element => {
           </label>
           <Input
             id={'email'}
-            placeholder="Your Email"
             type="email"
             size="middle"
             bordered={false}
@@ -80,7 +87,6 @@ export const Login = (props: any): JSX.Element => {
           </label>
           <Input.Password
             id={'password'}
-            placeholder="Your Password"
             size="middle"
             type="password"
             bordered={false}
