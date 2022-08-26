@@ -1,6 +1,7 @@
 import { authAPI } from '../api/auth-api'
 import { AppThunk } from './store'
 import { isInitializedAC, setAppErrorAC } from './app-reducer'
+import { Dispatch } from 'redux'
 
 const initialState = {
   isLoggedIn: false,
@@ -77,3 +78,15 @@ export const logOutTC = (): AppThunk => (dispatch) => {
       dispatch(isInitializedAC(false))
     })
 }
+export const registrationTC =
+  (email: string, password: string): AppThunk =>
+  (dispatch) => {
+    dispatch(isInitializedAC(true))
+    authAPI
+      .registration({ email, password })
+      .then((res) => console.log(res))
+      .catch((res) => dispatch(setAppErrorAC(res.message)))
+      .finally(() => {
+        dispatch(isInitializedAC(false))
+      })
+  }
