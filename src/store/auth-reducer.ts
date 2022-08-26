@@ -88,6 +88,9 @@ export const registrationTC =
       .registration({ email, password })
       .then((res) => console.log(res))
       .catch((res) => dispatch(setAppErrorAC(res.message)))
+      .finally(() => {
+        dispatch(isInitializedAC(false))
+      })
   }
 export const setNewPasswordAC = (password: string, resetPasswordToken: string) =>
   ({ type: 'LOGIN/SET-NEW-PASSWORD', password, resetPasswordToken } as const)
