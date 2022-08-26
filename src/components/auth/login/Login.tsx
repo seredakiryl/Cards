@@ -16,7 +16,7 @@ export type FormikLoginType = {
 
 export const Login = (props: any): JSX.Element => {
   const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn)
-
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues: {
@@ -48,16 +48,18 @@ export const Login = (props: any): JSX.Element => {
     },
     onSubmit: (values) => {
       dispatch(loginTC(values))
+      navigate('/Profile')
     },
   })
 
   if (isLoggedIn) {
     return <Navigate to="/Profile" />
   }
-  const navigate = useNavigate()
+
   const RedirectToRegistration = () => {
     navigate('/registration')
   }
+
   const navigateToForrgotPassword = () => {
     navigate('/ForgotPassword')
   }
