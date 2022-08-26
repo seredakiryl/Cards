@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { FormikLoginType } from '../components/auth/login/Login'
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_BACK_URL || 'https://neko-back.herokuapp.com/2.0/',
@@ -6,7 +7,7 @@ export const instance = axios.create({
 })
 
 export const authAPI = {
-  login(model: LoginModelType) {
+  login(model: FormikLoginType) {
     return instance.post('/auth/login', { ...model, rememberMe: model.checkbox })
   },
   registration(model: RegistrationModelType) {

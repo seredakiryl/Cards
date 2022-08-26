@@ -1,17 +1,14 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { Alert, Input, message } from 'antd'
-import { Button, Radio } from 'antd'
+import { Input } from 'antd'
+import { Button } from 'antd'
 import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { authAPI } from '../../../api/auth-api'
-import { setAppErrorAC } from '../../../store/app-reducer'
-import { setIsLoggedInAC } from '../../../store/auth-reducer'
-import { AppRootStateType, useAppSelector } from '../../../store/store'
+import { loginTC } from '../../../store/auth-reducer'
+import { AppRootStateType, useAppDispatch, useAppSelector } from '../../../store/store'
 import s from './Login.module.css'
 
-export type FormikErrorType = {
+export type FormikLoginType = {
   email?: string
   password?: string
   checkbox?: boolean
@@ -20,7 +17,7 @@ export type FormikErrorType = {
 export const Login = (props: any): JSX.Element => {
   const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -28,7 +25,7 @@ export const Login = (props: any): JSX.Element => {
       checkbox: false,
     },
     validate: (values) => {
-      const errors: FormikErrorType = {}
+      const errors: FormikLoginType = {}
       if (!values.email) {
         errors.email = 'Required'
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -42,14 +39,7 @@ export const Login = (props: any): JSX.Element => {
       return errors
     },
     onSubmit: (values) => {
-      authAPI
-        .login(values)
-        .then((res) => {
-          dispatch(setIsLoggedInAC(true))
-        })
-        .catch((res) => {
-          dispatch(setAppErrorAC(res.message))
-        })
+      dispatch(loginTC(values))
     },
   })
 

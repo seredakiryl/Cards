@@ -2,10 +2,16 @@ import s from './Header.module.css'
 import { Avatar } from '../profile/Avatar/Avatar'
 import { useAppSelector } from '../../store/store'
 import { Button } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   const name = useAppSelector((state) => state.auth.name)
+  const navigate = useNavigate()
+  const navigateToRegistration = () => {
+    navigate('/Registration')
+  }
+
   return (
     <div className={s.wrapper}>
       <div className={s.logo}></div>
@@ -15,7 +21,13 @@ export const Header = () => {
           <div className={s.userAva}></div>
         </div>
       ) : (
-        <Button type="primary" htmlType="submit" shape="round" className={s.Button}>
+        <Button
+          onClick={navigateToRegistration}
+          type="primary"
+          htmlType="submit"
+          shape="round"
+          className={s.Button}
+        >
           Sign in
         </Button>
       )}

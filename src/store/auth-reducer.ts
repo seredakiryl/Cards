@@ -1,6 +1,8 @@
 import { authAPI } from '../api/auth-api'
-import { AppThunk } from './store'
+import { AppDispatch, AppThunk } from './store'
 import { isInitializedAC, setAppErrorAC } from './app-reducer'
+import { Dispatch } from 'redux'
+import { FormikLoginType } from '../components/auth/login/Login'
 
 const initialState = {
   isLoggedIn: false,
@@ -84,7 +86,7 @@ export const setNewPasswordAC = (password: string, resetPasswordToken: string) =
 type SetNewPasswordActionType = ReturnType<typeof setNewPasswordAC>
 
 export const setNewPasswordTC =
-  (password: string, resetPasswordToken: string): AppThunk =>
+  (password: string, resetPasswordToken: string | undefined): AppThunk =>
   (dispatch) => {
     dispatch(isInitializedAC(true))
     authAPI
@@ -97,5 +99,18 @@ export const setNewPasswordTC =
       })
       .finally(() => {
         dispatch(isInitializedAC(false))
+      })
+  }
+
+export const loginTC =
+  (values: FormikLoginType): AppThunk =>
+  (dispatch) => {
+    authAPI
+      .login(values)
+      .then((res) => {
+        dispatch(setIsLoggedInAC(true))
+      })
+      .catch((res) => {
+        dispatch(setAppErrorAC(res.message))
       })
   }

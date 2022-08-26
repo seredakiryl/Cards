@@ -3,7 +3,6 @@ import './App.css'
 import { Registration } from './components/auth/registration/Registration'
 import { Profile } from './components/profile/Profile'
 import { Login } from './components/auth/login/Login'
-import { NewPassword } from './components/auth/newPassword/NewPassword'
 import { PasswordRecovery } from './components/auth/passwordRecovery/PasswordRecovery'
 import { Error404 } from './components/error404/Error404'
 import { Header } from './components/Header/Header'
@@ -41,14 +40,12 @@ const App = () => {
       {error ? <Alert type="error" message={error} banner closable /> : ''}
       <Routes>
         <Route path="/Registration" element={<Registration />}></Route>
-        <Route path="/SetNewPassword/:token" element={<NewPassword />}></Route>
         <Route path="/" element={<Login />}></Route>
         <Route path="/PasswordRecovery" element={<PasswordRecovery />}></Route>
-        <Route path={'/CreateNewPassword'} element={<CreateNewPassword />}></Route>
+        <Route path="/SetNewPassword/:token" element={<CreateNewPassword />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/CheckEmail" element={<CheckEmail />}></Route>
-        <Route path="/404" element={<h1>404: PAGE NOT FOUND</h1>} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
