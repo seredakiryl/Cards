@@ -5,8 +5,12 @@ import { Button, Input } from 'antd'
 import { useFormik } from 'formik'
 import { FormikErrorType } from '../login/Login'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
+import { authAPI } from '../../../api/auth-api'
+import { setNewPasswordTC } from '../../../store/auth-reducer'
+import { useAppDispatch } from '../../../store/store'
 
 export const CreateNewPassword = () => {
+  const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -21,7 +25,7 @@ export const CreateNewPassword = () => {
       return errors
     },
     onSubmit: (values) => {
-      console.log('hi')
+      dispatch(setNewPasswordTC(values.password, ''))
     },
   })
 
