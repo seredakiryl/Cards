@@ -5,6 +5,7 @@ import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { Button } from 'antd'
 import { useAppDispatch } from '../../../store/store'
 import { setAppErrorAC } from '../../../store/app-reducer'
+import { useNavigate } from 'react-router-dom'
 
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch()
@@ -21,7 +22,7 @@ export const ForgotPassword = () => {
   let from = 'test-front-admin <ai73a@yandex.by>'
   let message = `<div style="background-color: lime; padding: 15px">
 password recovery link: 
-<a href='http://localhost:3000/#/set-new-password/$token$'>
+<a href='http://localhost:3000/#/SetNewPassword/$token$'>
 link</a>
 </div>`
 
@@ -34,6 +35,8 @@ link</a>
       onSendPassword()
     }
   }
+
+  const navigate = useNavigate()
   const onSendPassword = () => {
     authAPI
       .forgotPassword({ email, from, message })
@@ -41,6 +44,7 @@ link</a>
         console.log(res.data.info)
       })
       .catch((res) => dispatch(setAppErrorAC(res.message)))
+    navigate('/CheckEmail')
   }
   return (
     <div className={s.wrapper}>
