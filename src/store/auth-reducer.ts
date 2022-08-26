@@ -83,7 +83,6 @@ export const logOutTC = (): AppThunk => (dispatch) => {
 export const registrationTC =
   (email: string, password: string): AppThunk =>
   (dispatch) => {
-    console.log({ email, password })
     dispatch(isInitializedAC(true))
     authAPI
       .registration({ email, password })
@@ -118,6 +117,7 @@ export const setNewPasswordTC =
 export const loginTC =
   (values: FormikLoginType): AppThunk =>
   (dispatch) => {
+    dispatch(isInitializedAC(true))
     authAPI
       .login(values)
       .then((res) => {
@@ -126,15 +126,22 @@ export const loginTC =
       .catch((res) => {
         dispatch(setAppErrorAC(res.message))
       })
+      .finally(() => {
+        dispatch(isInitializedAC(false))
+      })
   }
 
 export const forgotPasswordTC =
   (email: string, admin: string, messageStyle: string): AppThunk =>
   (dispatch) => {
+    dispatch(isInitializedAC(true))
     authAPI
       .forgotPassword({ email, from: admin, message: messageStyle })
       .then((res) => {
         console.log(res.data.info)
       })
       .catch((res) => dispatch(setAppErrorAC(res.message)))
+      .finally(() => {
+        dispatch(isInitializedAC(false))
+      })
   }
