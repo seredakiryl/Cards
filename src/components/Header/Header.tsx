@@ -1,5 +1,4 @@
 import s from './Header.module.css'
-import { Avatar } from '../profile/Avatar/Avatar'
 import { useAppSelector } from '../../store/store'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -28,7 +27,7 @@ export const Header = () => {
           shape="round"
           className={s.Button}
         >
-          Sign in
+          Sign up
         </Button>
       )}
     </div>

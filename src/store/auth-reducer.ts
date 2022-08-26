@@ -1,7 +1,6 @@
 import { authAPI } from '../api/auth-api'
-import { AppDispatch, AppThunk } from './store'
+import { AppThunk } from './store'
 import { isInitializedAC, setAppErrorAC } from './app-reducer'
-import { Dispatch } from 'redux'
 import { FormikLoginType } from '../components/auth/login/Login'
 
 const initialState = {
@@ -89,7 +88,7 @@ export const registrationTC =
       .registration({ email, password })
       .then((res) => console.log(res))
       .catch((res) => dispatch(setAppErrorAC(res.message)))
-
+  }
 export const setNewPasswordAC = (password: string, resetPasswordToken: string) =>
   ({ type: 'LOGIN/SET-NEW-PASSWORD', password, resetPasswordToken } as const)
 

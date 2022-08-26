@@ -25,7 +25,7 @@ export const Login = (props: any): JSX.Element => {
       checkbox: false,
     },
     validate: (values) => {
-      const errors: FormikErrorType = {}
+      const errors: FormikLoginType = {}
       switch (true) {
         case !values.email: {
           errors.email = 'Required'
