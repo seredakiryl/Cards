@@ -13,6 +13,7 @@ import { Spin } from 'antd/es'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
+import {Packs} from "./Components/Packs/Packs";
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
@@ -38,12 +39,13 @@ const App = () => {
       <Header />
       {error ? <Alert type="error" message={error} banner closable /> : ''}
       <Routes>
-        <Route path="/Registration" element={<Registration />}></Route>
+        <Route path="/registration" element={<Registration />}></Route>
         <Route path="/" element={<Login />}></Route>
-        <Route path="/SetNewPassword/:token" element={<CreateNewPassword />}></Route>
-        <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
-        <Route path="/Profile" element={<Profile />}></Route>
-        <Route path="/CheckEmail" element={<CheckEmail />}></Route>
+        <Route path="/set-new-password/:token" element={<CreateNewPassword />}></Route>
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/check-email" element={<CheckEmail />}></Route>
+        <Route path="/packs" element={<Packs />}></Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
