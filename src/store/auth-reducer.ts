@@ -1,4 +1,4 @@
-import { authAPI } from '../api/auth-api'
+import { authAPI } from '../Api_/auth-api'
 import { AppThunk } from './store'
 import { isInitializedAC, setAppErrorAC } from './app-reducer'
 import { FormikLoginType } from '../components/auth/login/Login'
@@ -7,8 +7,6 @@ const initialState = {
   isLoggedIn: false,
   name: 'enter your name',
   avatar: '',
-  password: '',
-  resetPasswordToken: '',
 }
 type InitialStateType = typeof initialState
 
@@ -21,8 +19,6 @@ export const authReducer = (
       return { ...state, isLoggedIn: action.value }
     case 'PROFILE/SET-NEW-NAME':
       return { ...state, name: action.name }
-    case 'LOGIN/SET-NEW-PASSWORD':
-      return { ...state, password: action.password }
     default:
       return state
   }
@@ -30,7 +26,7 @@ export const authReducer = (
 export const setIsLoggedInAC = (value: boolean) =>
   ({ type: 'LOGIN/SET-IS-LOGGED-IN', value } as const)
 
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType | SetNewPasswordActionType
+type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType
 
 export const isLoggedInTC = (): AppThunk => (dispatch) => {
   dispatch(isInitializedAC(true))
@@ -55,7 +51,7 @@ export const setNewNameTC =
     dispatch(isInitializedAC(true))
     authAPI
       .changeName(name, avatar)
-      .then((res) => {
+      .then(() => {
         dispatch(setNewNameAC(name, avatar))
       })
       .catch((res) => {
@@ -69,7 +65,7 @@ export const logOutTC = (): AppThunk => (dispatch) => {
   dispatch(isInitializedAC(true))
   authAPI
     .logout()
-    .then((res) => {
+    .then(() => {
       dispatch(setIsLoggedInAC(false))
     })
     .catch((res) => {
@@ -92,10 +88,6 @@ export const registrationTC =
         dispatch(isInitializedAC(false))
       })
   }
-export const setNewPasswordAC = (password: string, resetPasswordToken: string) =>
-  ({ type: 'LOGIN/SET-NEW-PASSWORD', password, resetPasswordToken } as const)
-
-type SetNewPasswordActionType = ReturnType<typeof setNewPasswordAC>
 
 export const setNewPasswordTC =
   (password: string, resetPasswordToken: string | undefined): AppThunk =>
@@ -103,9 +95,7 @@ export const setNewPasswordTC =
     dispatch(isInitializedAC(true))
     authAPI
       .newPassword({ password, resetPasswordToken })
-      .then((res) => {
-        dispatch(setNewPasswordAC(password, 'some-token-from-url'))
-      })
+      .then((res) => {})
       .catch((res) => {
         dispatch(setAppErrorAC(res.message))
       })
@@ -137,9 +127,7 @@ export const forgotPasswordTC =
     dispatch(isInitializedAC(true))
     authAPI
       .forgotPassword({ email, from: admin, message: messageStyle })
-      .then((res) => {
-        console.log(res.data.info)
-      })
+      .then((res) => {})
       .catch((res) => dispatch(setAppErrorAC(res.message)))
       .finally(() => {
         dispatch(isInitializedAC(false))

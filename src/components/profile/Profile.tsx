@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom'
 
 export const Profile = () => {
   let isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+
   if (isLoggedIn === false) {
     return <Navigate to="/" />
   }
