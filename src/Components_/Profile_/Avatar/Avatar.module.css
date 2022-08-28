@@ -1,0 +1,7 @@
+.avatar {
+    width: 96px;
+    height: 96px;
+
+    background-image: url("../../../Assets_/Images_/avatar.png");
+    background-size: cover;
+}

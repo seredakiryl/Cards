@@ -1,23 +1,23 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Registration } from './components/auth/registration/Registration'
-import { Profile } from './components/profile/Profile'
-import { Login } from './components/auth/login/Login'
-import { Error404 } from './components/Error404_/Error404'
-import { Header } from './components/Header/Header'
+import { Registration } from './Components_/Auth_/Registration_/Registration'
+import { Profile } from './Components_/Profile_/Profile'
+import { Login } from './Components_/Auth_/Login_/Login'
+import { Error404 } from './Components_/Error404_/Error404'
+import { Header } from './Components_/Header/Header'
 import { Alert } from 'antd'
-import { useAppDispatch, useAppSelector } from './store/store'
+import { useAppDispatch, useAppSelector } from './Store_/store'
 import { useEffect } from 'react'
-import { isLoggedInTC } from './store/auth-reducer'
+import { isLoggedInTC } from './Store_/auth-reducer'
 import { Spin } from 'antd/es'
-import { ForgotPassword } from './components/auth/ForgotPassword/ForgotPassword'
-import { CheckEmail } from './components/auth/CheckEmail/CheckEmail'
-import { CreateNewPassword } from './components/auth/CreateNewPassword/CreateNewPassword'
+import { ForgotPassword } from './Components_/Auth_/ForgotPassword/ForgotPassword'
+import { CheckEmail } from './Components_/Auth_/CheckEmail/CheckEmail'
+import { CreateNewPassword } from './Components_/Auth_/CreateNewPassword/CreateNewPassword'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)
   const isInitialized = useAppSelector((state) => state.app.initialized)
-  // const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+  // const isLoggedIn = useAppSelector((state) => state.Auth_.isLoggedIn)
 
   const dispatch = useAppDispatch()
 
