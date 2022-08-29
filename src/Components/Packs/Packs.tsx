@@ -7,9 +7,12 @@ import { PacksHeader } from './PacksHeader/PacksHeader'
 
 export const Packs = () => {
   useEffect(() => {
-    packsAPI.getPack().then(res => {
-      console.log(res.data)
-    })
+    packsAPI
+      .getPack()
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch(() => console.log('error'))
   }, [])
 
   return (

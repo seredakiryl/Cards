@@ -6,8 +6,8 @@ import { useAppSelector } from '../../Store/store'
 import s from './Header.module.css'
 
 export const Header = () => {
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  const name = useAppSelector(state => state.auth.name)
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+  const name = useAppSelector((state) => state.auth.name)
   const navigate = useNavigate()
   const navigateToRegistration = () => {
     navigate('/Registration')

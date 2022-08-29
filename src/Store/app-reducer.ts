@@ -8,9 +8,9 @@ export const appReducer = (
   action: ActionsType
 ): InitialStateType => {
   switch (action.type) {
-    case 'APP/SET-ERROR':
+    case 'SET-ERROR':
       return { ...state, error: action.error }
-    case 'APP/SET-INITIALIZED':
+    case 'SET-INITIALIZED':
       return { ...state, initialized: action.value }
     default:
       return state
@@ -22,8 +22,8 @@ export type InitialStateType = {
   initialized: boolean
 }
 
-export const setAppErrorAC = (error: string) => ({ type: 'APP/SET-ERROR', error } as const)
-export const isInitializedAC = (value: boolean) => ({ type: 'APP/SET-INITIALIZED', value } as const)
+export const setAppErrorAC = (error: string) => ({ type: 'SET-ERROR', error } as const)
+export const isInitializedAC = (value: boolean) => ({ type: 'SET-INITIALIZED', value } as const)
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type IsInitializedActionType = ReturnType<typeof isInitializedAC>

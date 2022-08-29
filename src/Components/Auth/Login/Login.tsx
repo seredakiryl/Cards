@@ -25,7 +25,7 @@ export const Login = (props: any): JSX.Element => {
       password: '',
       checkbox: false,
     },
-    validate: values => {
+    validate: (values) => {
       const errors: FormikLoginType = {}
 
       switch (true) {
@@ -49,7 +49,7 @@ export const Login = (props: any): JSX.Element => {
 
       return errors
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(loginTC(values))
       navigate('/Profile')
     },
@@ -96,7 +96,7 @@ export const Login = (props: any): JSX.Element => {
             type="password"
             bordered={false}
             className={s.input}
-            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             {...formik.getFieldProps('password')}
           />
           <div className={s.strip}></div>
