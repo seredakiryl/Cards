@@ -9,9 +9,9 @@ import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 import { appReducer } from './app-reducer'
 import { authReducer } from './auth-reducer'
-import { mainReducer } from './main-reducer'
+import { packsReducer } from './packs-reducer'
 const rootReducer = combineReducers({
-  main: mainReducer,
+  packs: packsReducer,
   auth: authReducer,
   app: appReducer,
 })
