@@ -1,11 +1,13 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from 'react'
-import s from './EditableSpan.module.css'
-import { useAppDispatch, useAppSelector } from '../../../Store/store'
+
 import { setNewNameTC } from '../../../Store/auth-reducer'
+import { useAppDispatch, useAppSelector } from '../../../Store/store'
+
+import s from './EditableSpan.module.css'
 
 export const EditableSpan = () => {
   let [isEdit, setIsEdit] = useState<boolean>(false)
-  const initialName = useAppSelector((state) => state.auth.name)
+  const initialName = useAppSelector(state => state.auth.name)
   let [name, setName] = useState(initialName)
   const dispatch = useAppDispatch()
 

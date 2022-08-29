@@ -1,9 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export const ShowPacks = () => {
-    return (
-        <div>
-            ShowPacks
-        </div>
-    );
-};
+  return <div>ShowPacks</div>
+}

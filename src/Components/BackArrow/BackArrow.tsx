@@ -1,5 +1,7 @@
 import React from 'react'
+
 import { useNavigate } from 'react-router-dom'
+
 import s from './BackArrow.module.css'
 
 export const BackArrow = () => {
@@ -8,6 +10,7 @@ export const BackArrow = () => {
   const navigateToLogin = () => {
     navigate('/')
   }
+
   return (
     <div className={s.wrapper}>
       <div className={s.arrowBlock} onClick={navigateToLogin}>

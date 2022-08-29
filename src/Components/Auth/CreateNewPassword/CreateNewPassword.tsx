@@ -1,12 +1,14 @@
 import React from 'react'
-import s from '../CreateNewPassword/CreateNewPassword.module.css'
-import { Title } from '../../Profile/Title/Title'
+
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { Button, Input } from 'antd'
 import { useFormik } from 'formik'
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import { setNewPasswordTC } from '../../../Store/auth-reducer'
 import { useAppDispatch } from '../../../Store/store'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Title } from '../../Profile/Title/Title'
+import s from '../CreateNewPassword/CreateNewPassword.module.css'
 
 export type FormikCreateNewPasswordType = {
   password?: string
@@ -23,16 +25,18 @@ export const CreateNewPassword = () => {
       password: '',
       token: param.token,
     },
-    validate: (values) => {
+    validate: values => {
       const errors: FormikCreateNewPasswordType = {}
+
       if (!values.password) {
         errors.password = 'enter password'
       } else if (values.password.length < 3) {
         errors.password = 'The password must contain at least 6 symbols.'
       }
+
       return errors
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       dispatch(setNewPasswordTC(values.password, values.token))
       navigate('/')
     },
@@ -50,7 +54,7 @@ export const CreateNewPassword = () => {
             type="password"
             bordered={false}
             className={s.input}
-            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             {...formik.getFieldProps('password')}
           />
           <div className={s.strip}></div>

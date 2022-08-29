@@ -1,4 +1,5 @@
 import { FormikLoginType } from '../Components/Auth/Login/Login'
+
 import { instance } from './baseInstance'
 
 export const authAPI = {

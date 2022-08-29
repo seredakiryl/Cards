@@ -1,23 +1,25 @@
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import { Registration } from './Components/Auth/Registration/Registration'
-import { Profile } from './Components/Profile/Profile'
-import { Login } from './Components/Auth/Login/Login'
-import { Error404 } from './Components/Error404/Error404'
-import { Header } from './Components/Header/Header'
-import { Alert } from 'antd'
-import { useAppDispatch, useAppSelector } from './Store/store'
 import { useEffect } from 'react'
-import { isLoggedInTC } from './Store/auth-reducer'
+
+import { Alert } from 'antd'
 import { Spin } from 'antd/es'
-import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
+import { Route, Routes } from 'react-router-dom'
+
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
+import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
+import { Login } from './Components/Auth/Login/Login'
+import { Registration } from './Components/Auth/Registration/Registration'
+import { Error404 } from './Components/Error404/Error404'
+import { Header } from './Components/Header/Header'
 import { Packs } from './Components/Packs/Packs'
+import { Profile } from './Components/Profile/Profile'
+import { isLoggedInTC } from './Store/auth-reducer'
+import { useAppDispatch, useAppSelector } from './Store/store'
+import './App.css'
 
 const App = () => {
-  const error = useAppSelector((state) => state.app.error)
-  const isInitialized = useAppSelector((state) => state.app.initialized)
+  const error = useAppSelector(state => state.app.error)
+  const isInitialized = useAppSelector(state => state.app.initialized)
   // const isLoggedIn = useAppSelector((state) => state.Auth.isLoggedIn)
 
   const dispatch = useAppDispatch()
@@ -25,7 +27,6 @@ const App = () => {
   useEffect(() => {
     dispatch(isLoggedInTC())
   }, [])
-
   if (isInitialized) {
     return (
       <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
