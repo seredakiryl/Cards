@@ -1,10 +1,13 @@
-import s from './ForgotPassword.module.css'
-import { Title } from '../../Profile/Title/Title'
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
+
 import { Button } from 'antd'
-import { useAppDispatch } from '../../../Store/store'
 import { useNavigate } from 'react-router-dom'
+
 import { forgotPasswordTC } from '../../../Store/auth-reducer'
+import { useAppDispatch } from '../../../Store/store'
+import { Title } from '../../Profile/Title/Title'
+
+import s from './ForgotPassword.module.css'
 import { admin, messageStyle } from './ParamsForForgotPassword'
 
 export const ForgotPassword = () => {

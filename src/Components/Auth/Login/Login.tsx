@@ -1,11 +1,12 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { Input } from 'antd'
-import { Button } from 'antd'
+import { Input, Button } from 'antd'
 import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
 import { Navigate, useNavigate } from 'react-router-dom'
+
 import { loginTC } from '../../../Store/auth-reducer'
 import { AppRootStateType, useAppDispatch, useAppSelector } from '../../../Store/store'
+
 import s from './Login.module.css'
 
 export type FormikLoginType = {
@@ -24,8 +25,9 @@ export const Login = (props: any): JSX.Element => {
       password: '',
       checkbox: false,
     },
-    validate: (values) => {
+    validate: values => {
       const errors: FormikLoginType = {}
+
       switch (true) {
         case !values.email: {
           errors.email = 'Required'
@@ -44,9 +46,10 @@ export const Login = (props: any): JSX.Element => {
           break
         }
       }
+
       return errors
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       dispatch(loginTC(values))
       navigate('/Profile')
     },
@@ -93,7 +96,7 @@ export const Login = (props: any): JSX.Element => {
             type="password"
             bordered={false}
             className={s.input}
-            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             {...formik.getFieldProps('password')}
           />
           <div className={s.strip}></div>

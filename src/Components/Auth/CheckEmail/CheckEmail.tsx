@@ -1,8 +1,11 @@
 import React from 'react'
-import s from './CheckEmail.module.css'
-import { Title } from '../../Profile/Title/Title'
+
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
+
+import { Title } from '../../Profile/Title/Title'
+
+import s from './CheckEmail.module.css'
 
 export const CheckEmail = () => {
   const navigate = useNavigate()

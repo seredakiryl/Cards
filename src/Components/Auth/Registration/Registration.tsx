@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom'
+import { Button, Input } from 'antd'
 import { useFormik } from 'formik'
-import { Button } from 'antd'
-import s from './Regisration.module.css'
-import { Input } from 'antd'
+import { useNavigate } from 'react-router-dom'
+
 import { registrationTC } from '../../../Store/auth-reducer'
 import { useAppDispatch } from '../../../Store/store'
+
+import s from './Regisration.module.css'
 
 export type FormikRegistrationType = {
   email?: string
@@ -24,8 +25,9 @@ export const Registration = () => {
       password: '',
       confirm_password: '',
     },
-    validate: (values) => {
+    validate: values => {
       const errors: FormikRegistrationType = {}
+
       switch (true) {
         case !values.email: {
           errors.email = 'Required'
@@ -44,20 +46,23 @@ export const Registration = () => {
           break
         }
         case !values.confirm_password: {
-          errors.confirm_password = 'Required'
-          break
+          return {
+            ...errors,
+            confirm_password: 'Required',
+          } /*errors.confirm_password = 'Required'*/
         }
         case values.confirm_password !== values.password: {
           errors.confirm_password = 'password and confirm password have must be the same'
           break
         }
         default:
-          errors
+          return errors
       }
+
       return errors
     },
 
-    onSubmit: (values) => {
+    onSubmit: values => {
       dispatch(registrationTC(values.email, values.password))
       navigate('/')
     },
