@@ -13,7 +13,7 @@ import { Spin } from 'antd/es'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
-import {Packs} from "./Components/Packs/Packs";
+import { Packs } from './Components/Packs/Packs'
 
 const App = () => {
   const error = useAppSelector((state) => state.app.error)

@@ -1,9 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export const SearchInput = () => {
-    return (
-        <div>
-            SearchInput
-        </div>
-    );
-};
+  return <div>SearchInput</div>
+}

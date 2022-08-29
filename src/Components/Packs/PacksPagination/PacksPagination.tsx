@@ -1,9 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export const PacksPagination = () => {
-    return (
-        <div>
-            PacksPagination
-        </div>
-    );
-};
+  return <div>PacksPagination</div>
+}

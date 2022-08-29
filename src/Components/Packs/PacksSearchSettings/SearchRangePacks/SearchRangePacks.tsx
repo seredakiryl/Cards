@@ -1,9 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export const SearchRangePacks = () => {
-    return (
-        <div>
-            SearchRangePacks
-        </div>
-    );
-};
+  return <div>SearchRangePacks</div>
+}
