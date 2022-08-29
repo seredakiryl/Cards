@@ -54,7 +54,7 @@ const initialState: InitialStateType = {
 }
 
 type ActionsType = any
-export const mainReducer = (
+export const packsReducer = (
   state: InitialStateType = initialState,
   action: ActionsType
 ): InitialStateType => {
