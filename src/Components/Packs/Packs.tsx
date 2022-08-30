@@ -4,6 +4,7 @@ import { packsAPI } from '../../Api/packs-api'
 
 import s from './Packs.module.css'
 import { PacksHeader } from './PacksHeader/PacksHeader'
+import { SearchInput } from './PacksSearchSettings/SearchInput/SearchInput'
 
 export const Packs = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ export const Packs = () => {
   return (
     <div className={s.wrapper}>
       <PacksHeader />
+      <SearchInput />
     </div>
   )
 }
