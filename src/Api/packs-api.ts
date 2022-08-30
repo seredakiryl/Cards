@@ -4,7 +4,7 @@ export const packsAPI = {
   addPack(model: AddPackModelType) {
     return instance.post('/cards/pack', model)
   },
-  getPack() {
+  getPack(model1: any) {
     return instance.get('/cards/pack', model1)
   },
 }
@@ -16,16 +16,6 @@ type CardsPackType = {
   name: string
   deckCover?: string
   private: boolean
-}
-const model1: arrayCardsType = {
-  params: {
-    packName: 'english',
-    min: 3,
-    max: 9,
-    sortPacks: '0updatet',
-    page: 1,
-    pageCount: 8,
-  },
 }
 
 type arrayCardsType = {

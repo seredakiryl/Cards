@@ -3,12 +3,14 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import s from './BackArrow.module.css'
-
-export const BackArrow = () => {
+type PropsType = {
+  url: string
+}
+export const BackArrow = (props: PropsType) => {
   const navigate = useNavigate()
 
   const navigateToLogin = () => {
-    navigate('/')
+    navigate(props.url)
   }
 
   return (

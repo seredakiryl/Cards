@@ -1,12 +1,14 @@
 import { authAPI } from '../Api/auth-api'
 import { FormikLoginType } from '../Components/Auth/Login/Login'
 
-import { isInitializedAC, setAppErrorAC } from './app-reducer'
+import { setAppErrorAC, setSuccessAC } from './app-reducer'
 import { AppThunk } from './store'
 
 const initialState = {
   isLoggedIn: false,
+  isFetching: false,
   name: 'enter your name',
+  email: '',
   avatar: '',
 }
 
@@ -17,40 +19,39 @@ export const authReducer = (
   action: ActionsType
 ): InitialStateType => {
   switch (action.type) {
-    case 'LOGIN/SET-IS-LOGGED-IN':
-      return { ...state, isLoggedIn: action.value }
-    case 'PROFILE/SET-NEW-NAME':
+    case 'AUTH/SET-NEW-NAME':
       return { ...state, name: action.name }
+    case 'AUTH/SET-EMAIL':
+      return { ...state, email: action.email }
+    case 'AUTH/SET-IS-LOGGED-IN':
+      return { ...state, isLoggedIn: action.value }
+    case 'AUTH/SET-IS-FETCHING':
+      return { ...state, isFetching: action.value }
     default:
       return state
   }
 }
 export const setIsLoggedInAC = (value: boolean) =>
-  ({ type: 'LOGIN/SET-IS-LOGGED-IN', value } as const)
+  ({ type: 'AUTH/SET-IS-LOGGED-IN', value } as const)
 
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetNewNameACType
-
-export const isLoggedInTC = (): AppThunk => (dispatch) => {
-  dispatch(isInitializedAC(true))
-  authAPI
-    .me()
-    .then((res) => {
-      dispatch(setIsLoggedInAC(true))
-      dispatch(setNewNameAC(res.data.name, res.data.avatar))
-    })
-    .finally(() => {
-      dispatch(isInitializedAC(false))
-    })
-}
 export const setNewNameAC = (name: string, avatar: string) =>
-  ({ type: 'PROFILE/SET-NEW-NAME', name, avatar } as const)
+  ({ type: 'AUTH/SET-NEW-NAME', name, avatar } as const)
 
+export const setEmailAC = (email: string) => ({ type: 'AUTH/SET-EMAIL', email } as const)
+
+export const setIsFetchingAC = (value: boolean) =>
+  ({ type: 'AUTH/SET-IS-FETCHING', value } as const)
+
+type SetIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
 type SetNewNameACType = ReturnType<typeof setNewNameAC>
+type SetEmailACType = ReturnType<typeof setEmailAC>
+type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+type ActionsType = SetIsLoggedInACType | SetNewNameACType | SetIsFetchingACType | SetEmailACType
 
 export const setNewNameTC =
   (name: string, avatar: string): AppThunk =>
   (dispatch) => {
-    dispatch(isInitializedAC(true))
+    dispatch(setIsFetchingAC(true))
     authAPI
       .changeName(name, avatar)
       .then(() => {
@@ -60,11 +61,11 @@ export const setNewNameTC =
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
-        dispatch(isInitializedAC(false))
+        dispatch(setIsFetchingAC(false))
       })
   }
 export const logOutTC = (): AppThunk => (dispatch) => {
-  dispatch(isInitializedAC(true))
+  dispatch(setIsFetchingAC(true))
   authAPI
     .logout()
     .then(() => {
@@ -74,27 +75,27 @@ export const logOutTC = (): AppThunk => (dispatch) => {
       dispatch(setAppErrorAC(res.message))
     })
     .finally(() => {
-      dispatch(isInitializedAC(false))
+      dispatch(setIsFetchingAC(false))
     })
 }
 
 export const registrationTC =
   (email: string, password: string): AppThunk =>
   (dispatch) => {
-    dispatch(isInitializedAC(true))
+    dispatch(setIsFetchingAC(true))
     authAPI
       .registration({ email, password })
-      .then((res) => console.log(res))
+      .then(() => setSuccessAC('Registration successfully completed'))
       .catch((res) => dispatch(setAppErrorAC(res.message)))
       .finally(() => {
-        dispatch(isInitializedAC(false))
+        dispatch(setIsFetchingAC(false))
       })
   }
 
 export const setNewPasswordTC =
   (password: string, resetPasswordToken: string | undefined): AppThunk =>
   (dispatch) => {
-    dispatch(isInitializedAC(true))
+    dispatch(setIsFetchingAC(true))
     authAPI
       .newPassword({ password, resetPasswordToken })
       .then((res) => {})
@@ -102,14 +103,14 @@ export const setNewPasswordTC =
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
-        dispatch(isInitializedAC(false))
+        dispatch(setIsFetchingAC(false))
       })
   }
 
 export const loginTC =
   (values: FormikLoginType): AppThunk =>
   (dispatch) => {
-    dispatch(isInitializedAC(true))
+    dispatch(setIsFetchingAC(true))
     authAPI
       .login(values)
       .then((res) => {
@@ -119,19 +120,19 @@ export const loginTC =
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
-        dispatch(isInitializedAC(false))
+        dispatch(setIsFetchingAC(false))
       })
   }
 
 export const forgotPasswordTC =
   (email: string, admin: string, messageStyle: string): AppThunk =>
   (dispatch) => {
-    dispatch(isInitializedAC(true))
+    dispatch(setIsFetchingAC(true))
     authAPI
       .forgotPassword({ email, from: admin, message: messageStyle })
       .then((res) => {})
       .catch((res) => dispatch(setAppErrorAC(res.message)))
       .finally(() => {
-        dispatch(isInitializedAC(false))
+        dispatch(setIsFetchingAC(false))
       })
   }

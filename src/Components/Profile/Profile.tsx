@@ -12,20 +12,20 @@ import s from './Profile.module.css'
 
 export const Profile = () => {
   let isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
-
+  let email = useAppSelector((state) => state.auth.email)
   if (isLoggedIn === false) {
     return <Navigate to="/" />
   }
 
   return (
     <div>
-      <BackArrow />
+      <BackArrow url={'/registration'} />
       <div className={s.wrapper}>
         <Title text={'Personal Information'} />
         <Avatar />
         <EditableSpan />
         <div>
-          <span className={s.mail}>your-email@gmail.com</span>
+          <span className={s.mail}>{email}</span>
         </div>
         <ButtonLogOut />
       </div>

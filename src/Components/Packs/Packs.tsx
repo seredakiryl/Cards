@@ -1,23 +1,22 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
-import { packsAPI } from '../../Api/packs-api'
+import { getPacksTC } from '../../Store/packs-reducer'
+import { useAppDispatch, useAppSelector } from '../../Store/store'
 
 import s from './Packs.module.css'
 import { PacksHeader } from './PacksHeader/PacksHeader'
 
-export const Packs = () => {
+export const Packs = React.memo(() => {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    packsAPI
-      .getPack()
-      .then((res) => {
-        console.log(res.data)
-      })
-      .catch(() => console.log('error'))
-  }, [])
+    isLoggedIn && dispatch(getPacksTC())
+  }, [isLoggedIn])
 
   return (
     <div className={s.wrapper}>
       <PacksHeader />
     </div>
   )
-}
+})

@@ -8,6 +8,7 @@ import s from './EditableSpan.module.css'
 export const EditableSpan = () => {
   let [isEdit, setIsEdit] = useState<boolean>(false)
   const initialName = useAppSelector((state) => state.auth.name)
+
   let [name, setName] = useState(initialName)
   const dispatch = useAppDispatch()
 
