@@ -10,7 +10,6 @@ import s from './Profile.module.css'
 import { Title } from './Title/Title'
 
 export const Profile = () => {
-
   let isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   let email = useAppSelector((state) => state.auth.email)
 

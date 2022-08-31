@@ -25,7 +25,7 @@ export const CreateNewPassword = () => {
       password: '',
       token: param.token,
     },
-    validate: values => {
+    validate: (values) => {
       const errors: FormikCreateNewPasswordType = {}
 
       if (!values.password) {
@@ -36,7 +36,7 @@ export const CreateNewPassword = () => {
 
       return errors
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(setNewPasswordTC(values.password, values.token))
       navigate('/')
     },
@@ -54,7 +54,7 @@ export const CreateNewPassword = () => {
             type="password"
             bordered={false}
             className={s.input}
-            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             {...formik.getFieldProps('password')}
           />
           <div className={s.strip}></div>

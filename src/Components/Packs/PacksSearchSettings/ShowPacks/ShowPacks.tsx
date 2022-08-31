@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Radio, RadioChangeEvent } from 'antd'
 
 import { useAppDispatch } from '../../../../Store/store'
-import {findCardsIdPackAC} from "../../../../Store/packs-reducer";
+import { findCardsIdPackAC } from '../../../../Store/packs-reducer'
 const options = [
   {
     label: 'ALL',
@@ -20,7 +20,7 @@ export const ShowPacks = () => {
   const [value, setValue] = useState('MY')
 
   const onChange = ({ target: { value } }: RadioChangeEvent) => {
-      setValue(value)
+    setValue(value)
     dispatch(findCardsIdPackAC(value))
   }
 

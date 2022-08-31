@@ -6,7 +6,6 @@ export const packsAPI = {
   },
   getPack(getModel: arrayCardsType) {
     return instance.get('/cards/pack', getModel)
-
   },
 }
 
