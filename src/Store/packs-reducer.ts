@@ -118,34 +118,27 @@ export const findCardsIdPackAC = (value?: string) => {
   return { type: 'PACKS/FIND_CARDS_ID', value } as const
 }
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
-type findPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
-type findMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
-type findMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
-type catchMyIdACType = ReturnType<typeof catchMyIdAC>
-type findCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
+type FindPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
+type FindMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
+type FindMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
+type CatchMyIdACType = ReturnType<typeof catchMyIdAC>
+type FindCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
 
 type ActionsType =
-  | findPacksThroughInputACType
-  | findMinCardsInPackACType
-  | findMaxCardsInPackACType
-  | catchMyIdACType
-  | findCardsIdPackACType
+  | FindPacksThroughInputACType
+  | FindMinCardsInPackACType
+  | FindMaxCardsInPackACType
+  | CatchMyIdACType
+  | FindCardsIdPackACType
   | SetIsFetchingACType
 
-export const getPacksTC = (): AppThunk => (dispatch) => {
-  packsAPI
-    .getPack({
-      params: {
-        packName: 'english',
-        min: 3,
-        max: 9,
-        sortPacks: '0updatet',
-        page: 1,
-        pageCount: 8,
-      },
-    })
-    .then((res) => {
-      console.log(res.data)
-    })
-    .finally(() => {})
-}
+export const getPacksTC =
+  (model: any): AppThunk =>
+  dispatch => {
+    packsAPI
+      .getPack(model)
+      .then(res => {
+        console.log(res.data)
+      })
+      .finally(() => {})
+  }
