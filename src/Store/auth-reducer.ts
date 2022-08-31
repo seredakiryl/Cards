@@ -3,6 +3,7 @@ import { FormikLoginType } from '../Components/Auth/Login/Login'
 
 import { setAppErrorAC, setSuccessAC } from './app-reducer'
 import { AppThunk } from './store'
+import {catchMyIdAC, findCardsIdPackAC} from "./packs-reducer";
 
 const initialState = {
   isLoggedIn: false,
@@ -43,6 +44,7 @@ export const setIsFetchingAC = (value: boolean) =>
   ({ type: 'AUTH/SET-IS-FETCHING', value } as const)
 
 type SetIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
+
 type SetNewNameACType = ReturnType<typeof setNewNameAC>
 type SetEmailACType = ReturnType<typeof setEmailAC>
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
@@ -52,26 +54,29 @@ export const setNewNameTC =
   (name: string, avatar: string): AppThunk =>
   (dispatch) => {
     dispatch(setIsFetchingAC(true))
+
     authAPI
       .changeName(name, avatar)
       .then(() => {
         dispatch(setNewNameAC(name, avatar))
       })
-      .catch((res) => {
+      .catch(res => {
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
         dispatch(setIsFetchingAC(false))
       })
   }
+
 export const logOutTC = (): AppThunk => (dispatch) => {
   dispatch(setIsFetchingAC(true))
+
   authAPI
     .logout()
     .then(() => {
       dispatch(setIsLoggedInAC(false))
     })
-    .catch((res) => {
+    .catch(res => {
       dispatch(setAppErrorAC(res.message))
     })
     .finally(() => {
@@ -98,8 +103,8 @@ export const setNewPasswordTC =
     dispatch(setIsFetchingAC(true))
     authAPI
       .newPassword({ password, resetPasswordToken })
-      .then((res) => {})
-      .catch((res) => {
+      .then(res => {})
+      .catch(res => {
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
@@ -109,14 +114,15 @@ export const setNewPasswordTC =
 
 export const loginTC =
   (values: FormikLoginType): AppThunk =>
+
   (dispatch) => {
     dispatch(setIsFetchingAC(true))
     authAPI
       .login(values)
-      .then((res) => {
+      .then(res => {
         dispatch(setIsLoggedInAC(true))
       })
-      .catch((res) => {
+      .catch(res => {
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
@@ -130,8 +136,8 @@ export const forgotPasswordTC =
     dispatch(setIsFetchingAC(true))
     authAPI
       .forgotPassword({ email, from: admin, message: messageStyle })
-      .then((res) => {})
-      .catch((res) => dispatch(setAppErrorAC(res.message)))
+      .then(res => {})
+      .catch(res => dispatch(setAppErrorAC(res.message)))
       .finally(() => {
         dispatch(setIsFetchingAC(false))
       })

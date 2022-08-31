@@ -20,6 +20,7 @@ import { Spiner } from './Common/Spin/Spin'
 import { isLoggedInTC } from './Store/app-reducer'
 
 const App = () => {
+
   const error = useAppSelector((state) => state.app.error)
   const success = useAppSelector((state) => state.app.error)
   const isFetching = useAppSelector((state) => state.app.isFetching)

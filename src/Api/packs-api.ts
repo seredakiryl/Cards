@@ -1,11 +1,12 @@
 import { instance } from './baseInstance'
 
 export const packsAPI = {
-  addPack(model: AddPackModelType) {
-    return instance.post('/cards/pack', model)
+  addPack(postModel: AddPackModelType) {
+    return instance.post('/cards/pack', postModel)
   },
-  getPack(model1: any) {
-    return instance.get('/cards/pack', model1)
+  getPack(getModel: arrayCardsType) {
+    return instance.get('/cards/pack', getModel)
+
   },
 }
 
@@ -20,12 +21,12 @@ type CardsPackType = {
 
 type arrayCardsType = {
   params: {
-    packName: string
-    min: number
-    max: number
-    sortPacks: string
-    page: number
-    pageCount: number
+    packName?: string
+    min?: number
+    max?: number
+    sortPacks?: string
+    page?: number
+    pageCount?: number
     user_id?: string
   }
 }

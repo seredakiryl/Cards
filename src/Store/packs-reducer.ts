@@ -5,12 +5,15 @@ import { AppThunk } from './store'
 type InitialStateType = {
   isFetching: boolean
   packs: Array<PacksType>
-  pageCount: number
-  page: number
-  packName: string
-  minCardsCount: number
+  cardPacksTotalCount: number
   maxCardsCount: number
-  sortPacks: string
+  minCardsCount: number
+  page: number
+  pageCount: number
+  token: string
+  tokenDeathTime: number
+  packName: string
+  user_id: string
 }
 
 type PacksType = {
@@ -51,13 +54,24 @@ const initialState: InitialStateType = {
       _id: '',
     },
   ],
-  pageCount: 8,
-  page: 1,
-  packName: '',
-  minCardsCount: 0,
+  cardPacksTotalCount: 11,
   maxCardsCount: 8,
-  sortPacks: '',
+  minCardsCount: 0,
+  page: 1,
+  pageCount: 8,
+  token: '',
+  tokenDeathTime: 1661891431872,
+  packName: '',
+  user_id:'',
 }
+
+type ActionsType =
+  | findPacksThroughInputACType
+  | findMinCardsInPackACType
+  | findMaxCardsInPackACType
+  | catchMyIdACType
+  | findCardsIdPackACType
+
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -66,6 +80,23 @@ export const packsReducer = (
   switch (action.type) {
     case 'PACKS/SET-IS-FETCHING':
       return { ...state, isFetching: action.value }
+    case 'PACKS/FIND_PACK_INPUT': {
+      return { ...state, packName: action.inputValue }
+    }
+    case 'PACKS/FIND_MIN_CARDS_IN_PACKS': {
+      return { ...state, minCardsCount: action.value }
+    }
+    case 'PACKS/FIND_MAX_CARDS_IN_PACKS': {
+      return { ...state, maxCardsCount: action.value }
+    }
+    case 'PACKS/CATCH_MY_ID':{
+      return { ...state, user_id: action.user_id}
+    }
+    case 'PACKS/FIND_CARDS_ID': {
+      return {
+        ...state, user_id: action.value==='ALL'?"":state.user_id
+      }
+    }
     default:
       return state
   }
@@ -94,3 +125,32 @@ export const getPacksTC = (): AppThunk => (dispatch) => {
     })
     .finally(() => {})
 }
+
+type findPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
+export const findPacksThroughInputAC = (inputValue: string) => {
+  return {
+    type: 'PACKS/FIND_PACK_INPUT',
+    inputValue,
+  } as const
+}
+
+type findMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
+export const findMinCardsInPackAC = (value: number) => {
+  return { type: 'PACKS/FIND_MIN_CARDS_IN_PACKS', value } as const
+}
+
+type findMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
+export const findMaxCardsInPackAC = (value: number) => {
+  return { type: 'PACKS/FIND_MAX_CARDS_IN_PACKS', value } as const
+}
+
+type catchMyIdACType = ReturnType<typeof catchMyIdAC>
+export const catchMyIdAC=(user_id:string)=>{
+  return {type: 'PACKS/CATCH_MY_ID', user_id}as const
+}
+
+type findCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
+export const findCardsIdPackAC = (value?: string) => {
+  return { type: 'PACKS/FIND_CARDS_ID', value } as const
+}
+

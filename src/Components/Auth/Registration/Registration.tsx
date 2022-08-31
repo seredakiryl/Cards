@@ -25,7 +25,7 @@ export const Registration = () => {
       password: '',
       confirm_password: '',
     },
-    validate: (values) => {
+    validate: values => {
       const errors: FormikRegistrationType = {}
 
       switch (true) {
@@ -61,8 +61,8 @@ export const Registration = () => {
       return errors
     },
 
-    onSubmit: (values) => {
-      console.log(1)
+    onSubmit: values => {
+
       dispatch(registrationTC(values.email, values.password))
     },
   })
