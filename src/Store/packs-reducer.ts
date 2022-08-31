@@ -62,16 +62,8 @@ const initialState: InitialStateType = {
   token: '',
   tokenDeathTime: 1661891431872,
   packName: '',
-  user_id:'',
+  user_id: '',
 }
-
-type ActionsType =
-  | findPacksThroughInputACType
-  | findMinCardsInPackACType
-  | findMaxCardsInPackACType
-  | catchMyIdACType
-  | findCardsIdPackACType
-
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -89,12 +81,13 @@ export const packsReducer = (
     case 'PACKS/FIND_MAX_CARDS_IN_PACKS': {
       return { ...state, maxCardsCount: action.value }
     }
-    case 'PACKS/CATCH_MY_ID':{
-      return { ...state, user_id: action.user_id}
+    case 'PACKS/CATCH_MY_ID': {
+      return { ...state, user_id: action.user_id }
     }
     case 'PACKS/FIND_CARDS_ID': {
       return {
-        ...state, user_id: action.value==='ALL'?"":state.user_id
+        ...state,
+        user_id: action.value === 'ALL' ? '' : state.user_id,
       }
     }
     default:
@@ -105,8 +98,39 @@ export const packsReducer = (
 export const setIsFetchingAC = (value: boolean) =>
   ({ type: 'PACKS/SET-IS-FETCHING', value } as const)
 
+export const findPacksThroughInputAC = (inputValue: string) => {
+  return {
+    type: 'PACKS/FIND_PACK_INPUT',
+    inputValue,
+  } as const
+}
+
+export const findMinCardsInPackAC = (value: number) => {
+  return { type: 'PACKS/FIND_MIN_CARDS_IN_PACKS', value } as const
+}
+export const findMaxCardsInPackAC = (value: number) => {
+  return { type: 'PACKS/FIND_MAX_CARDS_IN_PACKS', value } as const
+}
+export const catchMyIdAC = (user_id: string) => {
+  return { type: 'PACKS/CATCH_MY_ID', user_id } as const
+}
+export const findCardsIdPackAC = (value?: string) => {
+  return { type: 'PACKS/FIND_CARDS_ID', value } as const
+}
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
-type ActionsType = SetIsFetchingACType
+type findPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
+type findMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
+type findMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
+type catchMyIdACType = ReturnType<typeof catchMyIdAC>
+type findCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
+
+type ActionsType =
+  | findPacksThroughInputACType
+  | findMinCardsInPackACType
+  | findMaxCardsInPackACType
+  | catchMyIdACType
+  | findCardsIdPackACType
+  | SetIsFetchingACType
 
 export const getPacksTC = (): AppThunk => (dispatch) => {
   packsAPI
@@ -125,32 +149,3 @@ export const getPacksTC = (): AppThunk => (dispatch) => {
     })
     .finally(() => {})
 }
-
-type findPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
-export const findPacksThroughInputAC = (inputValue: string) => {
-  return {
-    type: 'PACKS/FIND_PACK_INPUT',
-    inputValue,
-  } as const
-}
-
-type findMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
-export const findMinCardsInPackAC = (value: number) => {
-  return { type: 'PACKS/FIND_MIN_CARDS_IN_PACKS', value } as const
-}
-
-type findMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
-export const findMaxCardsInPackAC = (value: number) => {
-  return { type: 'PACKS/FIND_MAX_CARDS_IN_PACKS', value } as const
-}
-
-type catchMyIdACType = ReturnType<typeof catchMyIdAC>
-export const catchMyIdAC=(user_id:string)=>{
-  return {type: 'PACKS/CATCH_MY_ID', user_id}as const
-}
-
-type findCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
-export const findCardsIdPackAC = (value?: string) => {
-  return { type: 'PACKS/FIND_CARDS_ID', value } as const
-}
-

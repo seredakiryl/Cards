@@ -3,7 +3,6 @@ import { FormikLoginType } from '../Components/Auth/Login/Login'
 
 import { setAppErrorAC, setSuccessAC } from './app-reducer'
 import { AppThunk } from './store'
-import {catchMyIdAC, findCardsIdPackAC} from "./packs-reducer";
 
 const initialState = {
   isLoggedIn: false,
@@ -60,7 +59,7 @@ export const setNewNameTC =
       .then(() => {
         dispatch(setNewNameAC(name, avatar))
       })
-      .catch(res => {
+      .catch((res) => {
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
@@ -76,7 +75,7 @@ export const logOutTC = (): AppThunk => (dispatch) => {
     .then(() => {
       dispatch(setIsLoggedInAC(false))
     })
-    .catch(res => {
+    .catch((res) => {
       dispatch(setAppErrorAC(res.message))
     })
     .finally(() => {
@@ -103,8 +102,8 @@ export const setNewPasswordTC =
     dispatch(setIsFetchingAC(true))
     authAPI
       .newPassword({ password, resetPasswordToken })
-      .then(res => {})
-      .catch(res => {
+      .then((res) => {})
+      .catch((res) => {
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
@@ -114,15 +113,14 @@ export const setNewPasswordTC =
 
 export const loginTC =
   (values: FormikLoginType): AppThunk =>
-
   (dispatch) => {
     dispatch(setIsFetchingAC(true))
     authAPI
       .login(values)
-      .then(res => {
+      .then((res) => {
         dispatch(setIsLoggedInAC(true))
       })
-      .catch(res => {
+      .catch((res) => {
         dispatch(setAppErrorAC(res.message))
       })
       .finally(() => {
@@ -136,8 +134,8 @@ export const forgotPasswordTC =
     dispatch(setIsFetchingAC(true))
     authAPI
       .forgotPassword({ email, from: admin, message: messageStyle })
-      .then(res => {})
-      .catch(res => dispatch(setAppErrorAC(res.message)))
+      .then((res) => {})
+      .catch((res) => dispatch(setAppErrorAC(res.message)))
       .finally(() => {
         dispatch(setIsFetchingAC(false))
       })
