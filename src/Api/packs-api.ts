@@ -6,6 +6,7 @@ export const packsAPI = {
   },
   getPack(getModel: arrayCardsType) {
     return instance.get('/cards/pack', getModel)
+
   },
 }
 
@@ -17,6 +18,7 @@ type CardsPackType = {
   deckCover?: string
   private: boolean
 }
+
 type arrayCardsType = {
   params: {
     packName?: string

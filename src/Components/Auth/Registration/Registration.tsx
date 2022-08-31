@@ -58,13 +58,12 @@ export const Registration = () => {
         default:
           return errors
       }
-
       return errors
     },
 
     onSubmit: values => {
+
       dispatch(registrationTC(values.email, values.password))
-      navigate('/')
     },
   })
 

@@ -1,4 +1,9 @@
+import { packsAPI } from '../Api/packs-api'
+
+import { AppThunk } from './store'
+
 type InitialStateType = {
+  isFetching: boolean
   packs: Array<PacksType>
   cardPacksTotalCount: number
   maxCardsCount: number
@@ -29,6 +34,7 @@ type PacksType = {
   _id: string
 }
 const initialState: InitialStateType = {
+  isFetching: false,
   packs: [
     {
       cardsCount: 3,
@@ -63,14 +69,17 @@ type ActionsType =
   | findPacksThroughInputACType
   | findMinCardsInPackACType
   | findMaxCardsInPackACType
-    |catchMyIdACType
+  | catchMyIdACType
   | findCardsIdPackACType
+
 
 export const packsReducer = (
   state: InitialStateType = initialState,
   action: ActionsType
 ): InitialStateType => {
   switch (action.type) {
+    case 'PACKS/SET-IS-FETCHING':
+      return { ...state, isFetching: action.value }
     case 'PACKS/FIND_PACK_INPUT': {
       return { ...state, packName: action.inputValue }
     }
@@ -91,6 +100,30 @@ export const packsReducer = (
     default:
       return state
   }
+}
+
+export const setIsFetchingAC = (value: boolean) =>
+  ({ type: 'PACKS/SET-IS-FETCHING', value } as const)
+
+type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+type ActionsType = SetIsFetchingACType
+
+export const getPacksTC = (): AppThunk => (dispatch) => {
+  packsAPI
+    .getPack({
+      params: {
+        packName: 'english',
+        min: 3,
+        max: 9,
+        sortPacks: '0updatet',
+        page: 1,
+        pageCount: 8,
+      },
+    })
+    .then((res) => {
+      console.log(res.data)
+    })
+    .finally(() => {})
 }
 
 type findPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>

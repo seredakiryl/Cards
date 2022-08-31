@@ -3,6 +3,7 @@ import { Input, Button } from 'antd'
 import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { Spiner } from '../../../Common/Spin/Spin'
 
 import { loginTC } from '../../../Store/auth-reducer'
 import { AppRootStateType, useAppDispatch, useAppSelector } from '../../../Store/store'
@@ -17,6 +18,7 @@ export type FormikLoginType = {
 
 export const Login = (props: any): JSX.Element => {
   const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn)
+  const isFetching = useAppSelector((state) => state.auth.isFetching)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const formik = useFormik({
@@ -55,10 +57,6 @@ export const Login = (props: any): JSX.Element => {
     },
   })
 
-  if (isLoggedIn) {
-    return <Navigate to="/Profile" />
-  }
-
   const RedirectToRegistration = () => {
     navigate('/Registration')
   }
@@ -67,6 +65,13 @@ export const Login = (props: any): JSX.Element => {
     navigate('/ForgotPassword')
   }
 
+  if (isLoggedIn) {
+    return <Navigate to="/Profile" />
+  }
+
+  if (isFetching) {
+    return <Spiner />
+  }
   return (
     <div className={s.wrapper}>
       <div>

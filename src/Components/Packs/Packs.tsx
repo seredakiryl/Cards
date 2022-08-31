@@ -1,15 +1,21 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
+
+
+import { getPacksTC } from '../../Store/packs-reducer'
+import { useAppDispatch, useAppSelector } from '../../Store/store'
 
 import { useSelector } from 'react-redux'
 
 import { packsAPI } from '../../Api/packs-api'
 import { store, useAppSelector } from '../../Store/store'
 
-import s from './Packs.module.css'
+
 import { PacksHeader } from './PacksHeader/PacksHeader'
 import { SearchInput } from './PacksSearchSettings/SearchInput/SearchInput'
 import { SearchRangePacks } from './PacksSearchSettings/SearchRangePacks/SearchRangePacks'
 import { ShowPacks } from './PacksSearchSettings/ShowPacks/ShowPacks'
+import s from './Packs.module.css'
+
 
 export const Packs = () => {
   const packName = useAppSelector(state => state.packs.packName)
@@ -46,4 +52,4 @@ export const Packs = () => {
       <SearchRangePacks />
     </div>
   )
-}
+})

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { Alert } from 'antd'
-import { Spin } from 'antd/es'
+
 import { Route, Routes } from 'react-router-dom'
 
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
@@ -13,31 +13,33 @@ import { Error404 } from './Components/Error404/Error404'
 import { Header } from './Components/Header/Header'
 import { Packs } from './Components/Packs/Packs'
 import { Profile } from './Components/Profile/Profile'
-import { isLoggedInTC } from './Store/auth-reducer'
+
 import { useAppDispatch, useAppSelector } from './Store/store'
 import './App.css'
+import { Spiner } from './Common/Spin/Spin'
+import { isLoggedInTC } from './Store/app-reducer'
 
 const App = () => {
-  const error = useAppSelector(state => state.app.error)
-  const isInitialized = useAppSelector(state => state.app.initialized)
+
+  const error = useAppSelector((state) => state.app.error)
+  const success = useAppSelector((state) => state.app.error)
+  const isFetching = useAppSelector((state) => state.app.isFetching)
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(isLoggedInTC())
   }, [])
-  if (isInitialized) {
-    return (
-      <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
-        <Spin size="large" />
-      </div>
-    )
+
+  if (isFetching) {
+    return <Spiner />
   }
 
   return (
     <div>
       <Header />
-      {error ? <Alert type="error" message={error} banner closable /> : ''}
+      {error && <Alert type="error" message={error} banner closable />}
+      {success && <Alert message="Success Tips" type="success" showIcon />}
       <Routes>
         <Route path="/registration" element={<Registration />}></Route>
         <Route path="/" element={<Login />}></Route>
