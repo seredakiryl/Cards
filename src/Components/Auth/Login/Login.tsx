@@ -3,8 +3,8 @@ import { Input, Button } from 'antd'
 import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { Spiner } from '../../../Common/Spin/Spin'
 
+import { Spiner } from '../../../Common/Spin/Spin'
 import { loginTC } from '../../../Store/auth-reducer'
 import { AppRootStateType, useAppDispatch, useAppSelector } from '../../../Store/store'
 
@@ -18,7 +18,7 @@ export type FormikLoginType = {
 
 export const Login = (props: any): JSX.Element => {
   const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn)
-  const isFetching = useAppSelector((state) => state.auth.isFetching)
+  const isFetching = useAppSelector(state => state.auth.isFetching)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const formik = useFormik({
@@ -27,7 +27,7 @@ export const Login = (props: any): JSX.Element => {
       password: '',
       checkbox: false,
     },
-    validate: (values) => {
+    validate: values => {
       const errors: FormikLoginType = {}
 
       switch (true) {
@@ -51,7 +51,7 @@ export const Login = (props: any): JSX.Element => {
 
       return errors
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       dispatch(loginTC(values))
       navigate('/Profile')
     },
@@ -72,6 +72,7 @@ export const Login = (props: any): JSX.Element => {
   if (isFetching) {
     return <Spiner />
   }
+
   return (
     <div className={s.wrapper}>
       <div>
@@ -101,7 +102,7 @@ export const Login = (props: any): JSX.Element => {
             type="password"
             bordered={false}
             className={s.input}
-            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             {...formik.getFieldProps('password')}
           />
           <div className={s.strip}></div>

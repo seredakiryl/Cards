@@ -1,5 +1,7 @@
 import { authAPI } from '../Api/auth-api'
+
 import { setEmailAC, setIsLoggedInAC, setNewNameAC } from './auth-reducer'
+import { catchMyIdAC } from './packs-reducer'
 import { AppThunk } from './store'
 
 export type InitialStateType = {
@@ -38,17 +40,19 @@ export const setAppErrorAC = (error: string) => ({ type: 'APP/SET-ERROR', error 
 export const setSuccessAC = (success: string) => ({ type: 'APP/SET-SUCCESS', success } as const)
 export const isFetchingAppAC = (value: boolean) => ({ type: 'APP/SET-INITIALIZED', value } as const)
 
-export const isLoggedInTC = (): AppThunk => (dispatch) => {
+export const isLoggedInTC = (): AppThunk => dispatch => {
   dispatch(isFetchingAppAC(true))
   authAPI
     .me()
-    .then((res) => {
-      let { name, avatar, email } = res.data
+    .then(res => {
+      let { name, avatar, email, _id } = res.data
+
       dispatch(setIsLoggedInAC(true))
       dispatch(setNewNameAC(name, avatar))
       dispatch(setEmailAC(email))
+      dispatch(catchMyIdAC(_id))
     })
-    .catch((res) => console.log(res))
+    .catch(res => console.log(res))
     .finally(() => {
       dispatch(isFetchingAppAC(false))
     })

@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
 import { Alert } from 'antd'
-
 import { Route, Routes } from 'react-router-dom'
 
+import { Spiner } from './Common/Spin/Spin'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
@@ -13,16 +13,14 @@ import { Error404 } from './Components/Error404/Error404'
 import { Header } from './Components/Header/Header'
 import { Packs } from './Components/Packs/Packs'
 import { Profile } from './Components/Profile/Profile'
-
+import { isLoggedInTC } from './Store/app-reducer'
 import { useAppDispatch, useAppSelector } from './Store/store'
 import './App.css'
-import { Spiner } from './Common/Spin/Spin'
-import { isLoggedInTC } from './Store/app-reducer'
 
 const App = () => {
-  const error = useAppSelector((state) => state.app.error)
-  const success = useAppSelector((state) => state.app.error)
-  const isFetching = useAppSelector((state) => state.app.isFetching)
+  const error = useAppSelector(state => state.app.error)
+  const success = useAppSelector(state => state.app.error)
+  const isFetching = useAppSelector(state => state.app.isFetching)
 
   const dispatch = useAppDispatch()
 

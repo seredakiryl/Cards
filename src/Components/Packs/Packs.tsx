@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react'
-import { useAppSelector } from '../../Store/store'
+
 import { packsAPI } from '../../Api/packs-api'
+import { getPacksTC } from '../../Store/packs-reducer'
+import { useAppDispatch, useAppSelector } from '../../Store/store'
+
+import s from './Packs.module.css'
 import { PacksHeader } from './PacksHeader/PacksHeader'
 import { SearchInput } from './PacksSearchSettings/SearchInput/SearchInput'
 import { SearchRangePacks } from './PacksSearchSettings/SearchRangePacks/SearchRangePacks'
 import { ShowPacks } from './PacksSearchSettings/ShowPacks/ShowPacks'
-import s from './Packs.module.css'
 
 export const Packs = () => {
-  const packName = useAppSelector((state) => state.packs.packName)
-  const minCards = useAppSelector((state) => state.packs.minCardsCount)
-  const maxCards = useAppSelector((state) => state.packs.maxCardsCount)
-  const mycard = useAppSelector((state) => state.packs.user_id)
+  const dispatch = useAppDispatch()
+  const packName = useAppSelector(state => state.packs.packName)
+  const minCards = useAppSelector(state => state.packs.minCardsCount)
+  const maxCards = useAppSelector(state => state.packs.maxCardsCount)
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+  const mycard = useAppSelector(state => state.packs.user_id)
+
   const getModel: any = {
     params: {
       packName: packName,
@@ -25,13 +31,7 @@ export const Packs = () => {
   }
 
   useEffect(() => {
-    console.log('go')
-    packsAPI
-      .getPack(getModel)
-      .then((res) => {
-        console.log(res.data)
-      })
-      .catch(() => console.log('error'))
+    isLoggedIn && dispatch(getPacksTC(getModel))
   }, [getModel])
 
   return (

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { Radio, RadioChangeEvent } from 'antd'
 
-import { useAppDispatch } from '../../../../Store/store'
 import { findCardsIdPackAC } from '../../../../Store/packs-reducer'
+import { useAppDispatch } from '../../../../Store/store'
 const options = [
   {
     label: 'ALL',
