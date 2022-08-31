@@ -25,9 +25,12 @@ export const HeaderProfile = (props: HeaderProfileType) => {
     console.log('to profile')
     navigate('/profile')
   }
+  const onLeave = () => {
+    props.onHidden()
+  }
 
   return (
-    <div className={s.wrapper} onMouseLeave={() => props.onHidden()}>
+    <div className={s.wrapper} onMouseLeave={onLeave}>
       <div className={s.block} onClick={toProfileHandler}>
         <span className={s.profile}></span>
         Profile

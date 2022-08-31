@@ -22,7 +22,6 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     width: 100%;
 
@@ -35,12 +34,14 @@
 .profile {
     width: 16px;
     height: 16px;
+    margin-right: 10px;
 
     background-image: url("../../../Assets/Icons/user.png");
 }
 .logOut {
     width: 16px;
     height: 16px;
+    margin-right: 10px;
 
     background-image: url("../../../Assets/Icons/logout.png");
 }

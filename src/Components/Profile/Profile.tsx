@@ -19,7 +19,7 @@ export const Profile = () => {
 
   return (
     <div>
-      <BackArrow url={'/registration'} />
+      <BackArrow url={'/packs'} />
       <div className={s.wrapper}>
         <Title text={'Personal Information'} />
         <Avatar />
