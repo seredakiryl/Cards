@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  width: 280px;
+}
+
+.slider {
+  width: 150px;
+}
+
+.input {
+  width: 30px;
+  height: 30px;
+}
