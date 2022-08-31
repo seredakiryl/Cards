@@ -4,3 +4,8 @@
 
   padding: 36px 136px;
 }
+
+.searchSettings {
+  display: flex;
+  justify-content: space-between;
+}

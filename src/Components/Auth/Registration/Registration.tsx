@@ -58,6 +58,7 @@ export const Registration = () => {
         default:
           return errors
       }
+
       return errors
     },
 

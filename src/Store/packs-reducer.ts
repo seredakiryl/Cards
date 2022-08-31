@@ -90,6 +90,12 @@ export const packsReducer = (
         user_id: action.value === 'ALL' ? '' : state.user_id,
       }
     }
+    case 'PACKS/SET_PACKS': {
+      return {
+        ...state,
+        packs: action.packs,
+      }
+    }
     default:
       return state
   }
@@ -117,12 +123,17 @@ export const catchMyIdAC = (user_id: string) => {
 export const findCardsIdPackAC = (value?: string) => {
   return { type: 'PACKS/FIND_CARDS_ID', value } as const
 }
+export const setPacksAC = (packs: Array<PacksType>) => {
+  return { type: 'PACKS/SET_PACKS', packs } as const
+}
+
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
 type FindPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
 type FindMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
 type FindMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
 type CatchMyIdACType = ReturnType<typeof catchMyIdAC>
 type FindCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
+type SetPackskACType = ReturnType<typeof setPacksAC>
 
 type ActionsType =
   | FindPacksThroughInputACType
@@ -131,6 +142,7 @@ type ActionsType =
   | CatchMyIdACType
   | FindCardsIdPackACType
   | SetIsFetchingACType
+  | SetPackskACType
 
 export const getPacksTC =
   (model: any): AppThunk =>
@@ -138,7 +150,8 @@ export const getPacksTC =
     packsAPI
       .getPack(model)
       .then(res => {
-        console.log(res.data)
+        console.log(res)
+        dispatch(setPacksAC(res.data.cardPacks))
       })
       .finally(() => {})
   }

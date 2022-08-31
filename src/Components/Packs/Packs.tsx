@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 
-import { packsAPI } from '../../Api/packs-api'
 import { getPacksTC } from '../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../Store/store'
 
@@ -9,6 +8,7 @@ import { PacksHeader } from './PacksHeader/PacksHeader'
 import { SearchInput } from './PacksSearchSettings/SearchInput/SearchInput'
 import { SearchRangePacks } from './PacksSearchSettings/SearchRangePacks/SearchRangePacks'
 import { ShowPacks } from './PacksSearchSettings/ShowPacks/ShowPacks'
+import { PacksTable } from './PacksTable/PacksTable'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
@@ -37,9 +37,12 @@ export const Packs = () => {
   return (
     <div className={s.wrapper}>
       <PacksHeader />
-      <SearchInput />
-      <ShowPacks />
-      <SearchRangePacks />
+      <div className={s.searchSettings}>
+        <SearchInput />
+        <ShowPacks />
+        <SearchRangePacks />
+      </div>
+      <PacksTable />
     </div>
   )
 }

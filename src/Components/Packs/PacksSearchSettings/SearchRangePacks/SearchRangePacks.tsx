@@ -5,6 +5,7 @@ import { Input, Slider } from 'antd'
 import { findMaxCardsInPackAC, findMinCardsInPackAC } from '../../../../Store/packs-reducer'
 import { useAppDispatch } from '../../../../Store/store'
 
+import s from './SearchRangePacks.module.css'
 export const SearchRangePacks = () => {
   const dispatch = useAppDispatch()
   const [min, setMin] = useState(0)
@@ -31,16 +32,17 @@ export const SearchRangePacks = () => {
   }, [min, max])
 
   return (
-    <div>
-      <Input value={min} onChange={onChangeMinHandler} />
+    <div className={s.wrapper}>
+      <Input className={s.input} value={min} onChange={onChangeMinHandler} />
       <Slider
+        className={s.slider}
         range
         step={1}
         defaultValue={[min, max]}
         onChange={onChange}
         onAfterChange={onAfterChange}
       />
-      <Input value={max} onChange={onChangeMaxHandler} />
+      <Input className={s.input} value={max} onChange={onChangeMaxHandler} />
     </div>
   )
 }
