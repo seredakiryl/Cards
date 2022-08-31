@@ -1,4 +1,6 @@
 .wrapper {
+  position: relative;
+
   display: flex;
   justify-content: space-between;
 
@@ -27,6 +29,8 @@
   border-bottom: 1px dashed #000000;
 }
 .userAva {
+  cursor: pointer;
+
   width: 36px;
   height: 36px;
   margin-left: 12px;

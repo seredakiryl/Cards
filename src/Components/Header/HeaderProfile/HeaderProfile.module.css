@@ -1,0 +1,46 @@
+.wrapper {
+    position: absolute;
+    z-index: 100;
+    top: 50px;
+    right: 136px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 122px;
+    height: 104px;
+    padding: 18px;
+
+    background: #FFFFFF;
+    border: 1px solid #CFCFCF;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.06);
+}
+.block {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+}
+.profile {
+    width: 16px;
+    height: 16px;
+
+    background-image: url("../../../Assets/Icons/user.png");
+}
+.logOut {
+    width: 16px;
+    height: 16px;
+
+    background-image: url("../../../Assets/Icons/logout.png");
+}
