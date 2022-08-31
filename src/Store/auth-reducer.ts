@@ -3,6 +3,7 @@ import { FormikLoginType } from '../Components/Auth/Login/Login'
 
 import { isInitializedAC, setAppErrorAC } from './app-reducer'
 import { AppThunk } from './store'
+import {catchMyIdAC, findCardsIdPackAC} from "./packs-reducer";
 
 const initialState = {
   isLoggedIn: false,
@@ -37,6 +38,8 @@ export const isLoggedInTC = (): AppThunk => dispatch => {
     .then(res => {
       dispatch(setIsLoggedInAC(true))
       dispatch(setNewNameAC(res.data.name, res.data.avatar))
+console.log(res.data._id)
+        dispatch(catchMyIdAC(res.data._id))
     })
     .finally(() => {
       dispatch(isInitializedAC(false))

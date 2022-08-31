@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Radio, RadioChangeEvent } from 'antd'
 
 import { useAppDispatch } from '../../../../Store/store'
+import {findCardsIdPackAC} from "../../../../Store/packs-reducer";
 const options = [
   {
     label: 'ALL',
@@ -16,16 +17,12 @@ const options = [
 
 export const ShowPacks = () => {
   const dispatch = useAppDispatch()
-  const [value, setValue] = useState('ALL')
+  const [value, setValue] = useState('MY')
 
   const onChange = ({ target: { value } }: RadioChangeEvent) => {
-    console.log('radio3 checked', value)
-    setValue(value)
+      setValue(value)
+    dispatch(findCardsIdPackAC(value))
   }
-
-  useEffect(() => {
-    dispatch()
-  }, [value])
 
   return (
     <div>

@@ -15,6 +15,7 @@ export const Packs = () => {
   const packName = useAppSelector(state => state.packs.packName)
   const minCards = useAppSelector(state => state.packs.minCardsCount)
   const maxCards = useAppSelector(state => state.packs.maxCardsCount)
+  const mycard = useAppSelector(state => state.packs.user_id)
   const getModel: any = {
     params: {
       packName: packName,
@@ -23,10 +24,12 @@ export const Packs = () => {
       sortPacks: '0updatet',
       page: 1,
       pageCount: 8,
+        user_id:mycard
     },
   }
 
   useEffect(() => {
+    console.log('go')
     packsAPI
       .getPack(getModel)
       .then(res => {
