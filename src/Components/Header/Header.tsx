@@ -1,13 +1,20 @@
+import { useState } from 'react'
+
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppSelector } from '../../Store/store'
 
 import s from './Header.module.css'
+import { HeaderProfile } from './HeaderProfile/HeaderProfile'
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const name = useAppSelector(state => state.auth.name)
+  let [isHidden, setIsHidden] = useState(true)
+  const onShowAvaHandler = () => {
+    setIsHidden(!isHidden)
+  }
   const navigate = useNavigate()
   const navigateToRegistration = () => {
     navigate('/Registration')
@@ -19,7 +26,7 @@ export const Header = () => {
       {isLoggedIn ? (
         <div className={s.userBlock}>
           <div className={s.userName}>{name}</div>
-          <div className={s.userAva}></div>
+          <div className={s.userAva} onClick={onShowAvaHandler}></div>
         </div>
       ) : (
         <Button
@@ -32,6 +39,7 @@ export const Header = () => {
           Sign up
         </Button>
       )}
+      {isHidden ? null : <HeaderProfile onHidden={onShowAvaHandler} />}
     </div>
   )
 }
