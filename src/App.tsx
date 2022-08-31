@@ -18,8 +18,8 @@ import { useAppDispatch, useAppSelector } from './Store/store'
 import './App.css'
 
 const App = () => {
-  const error = useAppSelector((state) => state.app.error)
-  const isInitialized = useAppSelector((state) => state.app.initialized)
+  const error = useAppSelector(state => state.app.error)
+  const isInitialized = useAppSelector(state => state.app.initialized)
 
   const dispatch = useAppDispatch()
 

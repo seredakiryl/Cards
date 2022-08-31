@@ -5,7 +5,6 @@ import s from './title.module.css'
 type TitleType = {
   text: string
 }
-
 export const Title = (props: TitleType) => {
   return (
     <div>
