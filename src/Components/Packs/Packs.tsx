@@ -17,6 +17,8 @@ export const Packs = () => {
   const maxCards = useAppSelector(state => state.packs.maxCardsCount)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const mycard = useAppSelector(state => state.packs.user_id)
+  const page = useAppSelector(state => state.packs.page)
+  const pageCount = useAppSelector(state => state.packs.pageCount)
 
   const getModel: any = {
     params: {
@@ -24,8 +26,8 @@ export const Packs = () => {
       min: minCards,
       max: maxCards,
       sortPacks: '0updatet',
-      page: 1,
-      pageCount: 8,
+      page: page,
+      pageCount: pageCount,
       user_id: mycard,
     },
   }

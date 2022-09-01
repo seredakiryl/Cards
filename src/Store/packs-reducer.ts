@@ -102,6 +102,9 @@ export const packsReducer = (
     case 'PACKS/GET_TOTAL_PACKS': {
       return { ...state, cardPacksTotalCount: action.totalNumberPacks }
     }
+    case 'PACKS/SET_PAGE_COUNT': {
+      return { ...state, pageCount: action.value }
+    }
     default:
       return state
   }
@@ -140,6 +143,10 @@ export const getTotalPacksAC = (totalNumberPacks: number) => {
 export const setPacksPageAC = (value: number) => {
   return { type: 'PACKS/SET_PACKS_PAGE', value } as const
 }
+
+export const setPageCountAC = (value: number) => {
+  return { type: 'PACKS/SET_PAGE_COUNT', value } as const
+}
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
 type FindPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
 type FindMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
@@ -149,6 +156,7 @@ type FindCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
 type SetPacksACType = ReturnType<typeof setPacksAC>
 type SetPacksPageACType = ReturnType<typeof setPacksPageAC>
 type GetTotalPacksACType = ReturnType<typeof getTotalPacksAC>
+type SetPageCountACType = ReturnType<typeof setPageCountAC>
 
 type ActionsType =
   | FindPacksThroughInputACType
@@ -160,6 +168,7 @@ type ActionsType =
   | SetPacksACType
   | SetPacksPageACType
   | GetTotalPacksACType
+  | SetPageCountACType
 
 export const getPacksTC =
   (model: any): AppThunk =>
@@ -172,11 +181,4 @@ export const getPacksTC =
         dispatch(getTotalPacksAC(res.data.cardPacksTotalCount))
       })
       .finally(() => {})
-  }
-export const setPacksPageTC =
-  (model: any): AppThunk =>
-  dispatch => {
-    packsAPI.getPack(model).then(res => {
-      dispatch(setPacksPageAC(res.data.packs.page))
-    })
   }

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-
 import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 
-import { getPacksTC, setPacksPageTC } from '../../../Store/packs-reducer'
+import { setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../Store/store'
 
 interface DataType {
@@ -14,12 +12,10 @@ interface DataType {
 }
 export const PacksTable = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const packs = useAppSelector(state => state.packs.packs)
   const totalCountPacks = useAppSelector(state => state.packs.cardPacksTotalCount)
-  const initialPage = useAppSelector(state => state.packs.page)
-  const [page, setPage] = useState(initialPage)
-  const [pageSize, setPageSize] = useState(8)
+  const pageCount = useAppSelector(state => state.packs.pageCount)
+  const page = useAppSelector(state => state.packs.page)
 
   const columns: ColumnsType<DataType> = [
     {
@@ -48,8 +44,8 @@ export const PacksTable = () => {
     return {
       name: p.name,
       cardsCount: p.cardsCount,
-      lastUpdated: p.updated,
-      createdBy: p.created,
+      lastUpdated: p.updated.slice(0, 10),
+      createdBy: p.created.slice(0, 10),
     }
   })
 
@@ -59,14 +55,15 @@ export const PacksTable = () => {
         columns={columns}
         dataSource={data}
         size="middle"
+        scroll={{ y: 450 }}
         pagination={{
           current: page,
-          pageSize: pageSize,
+          pageSize: pageCount,
           total: totalCountPacks,
           position: ['bottomLeft'],
           onChange: (page, pageSize) => {
-            setPage(page)
-            setPageSize(pageSize)
+            dispatch(setPacksPageAC(page))
+            dispatch(setPageCountAC(pageSize))
           },
         }}
       />
