@@ -4,7 +4,7 @@ export const packsAPI = {
   addPack(postModel: AddPackModelType) {
     return instance.post('/cards/pack', postModel)
   },
-  getPack(getModel: arrayCardsType) {
+  getPack(getModel: ArrayCardsType) {
     return instance.get('/cards/pack', getModel)
   },
 }
@@ -18,7 +18,7 @@ type CardsPackType = {
   private: boolean
 }
 
-type arrayCardsType = {
+type ArrayCardsType = {
   params: {
     packName?: string
     min?: number

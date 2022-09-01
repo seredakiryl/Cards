@@ -32,17 +32,20 @@ export const SearchRangePacks = () => {
   }, [min, max])
 
   return (
-    <div className={s.wrapper}>
-      <Input className={s.input} value={min} onChange={onChangeMinHandler} />
-      <Slider
-        className={s.slider}
-        range
-        step={1}
-        defaultValue={[min, max]}
-        onChange={onChange}
-        onAfterChange={onAfterChange}
-      />
-      <Input className={s.input} value={max} onChange={onChangeMaxHandler} />
+    <div>
+      <span>Number of cards</span>
+      <div className={s.wrapper}>
+        <Input className={s.input} value={min} onChange={onChangeMinHandler} />
+        <Slider
+          className={s.slider}
+          range
+          step={1}
+          defaultValue={[min, max]}
+          onChange={onChange}
+          onAfterChange={onAfterChange}
+        />
+        <Input className={s.input} value={max} onChange={onChangeMaxHandler} />
+      </div>
     </div>
   )
 }

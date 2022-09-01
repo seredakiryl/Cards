@@ -96,6 +96,12 @@ export const packsReducer = (
         packs: action.packs,
       }
     }
+    case 'PACKS/SET_PACKS_PAGE': {
+      return { ...state, page: action.value }
+    }
+    case 'PACKS/GET_TOTAL_PACKS': {
+      return { ...state, cardPacksTotalCount: action.totalNumberPacks }
+    }
     default:
       return state
   }
@@ -127,13 +133,22 @@ export const setPacksAC = (packs: Array<PacksType>) => {
   return { type: 'PACKS/SET_PACKS', packs } as const
 }
 
+export const getTotalPacksAC = (totalNumberPacks: number) => {
+  return { type: 'PACKS/GET_TOTAL_PACKS', totalNumberPacks } as const
+}
+
+export const setPacksPageAC = (value: number) => {
+  return { type: 'PACKS/SET_PACKS_PAGE', value } as const
+}
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
 type FindPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
 type FindMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
 type FindMaxCardsInPackACType = ReturnType<typeof findMaxCardsInPackAC>
 type CatchMyIdACType = ReturnType<typeof catchMyIdAC>
 type FindCardsIdPackACType = ReturnType<typeof findCardsIdPackAC>
-type SetPackskACType = ReturnType<typeof setPacksAC>
+type SetPacksACType = ReturnType<typeof setPacksAC>
+type SetPacksPageACType = ReturnType<typeof setPacksPageAC>
+type GetTotalPacksACType = ReturnType<typeof getTotalPacksAC>
 
 type ActionsType =
   | FindPacksThroughInputACType
@@ -142,7 +157,9 @@ type ActionsType =
   | CatchMyIdACType
   | FindCardsIdPackACType
   | SetIsFetchingACType
-  | SetPackskACType
+  | SetPacksACType
+  | SetPacksPageACType
+  | GetTotalPacksACType
 
 export const getPacksTC =
   (model: any): AppThunk =>
@@ -152,6 +169,14 @@ export const getPacksTC =
       .then(res => {
         console.log(res)
         dispatch(setPacksAC(res.data.cardPacks))
+        dispatch(getTotalPacksAC(res.data.cardPacksTotalCount))
       })
       .finally(() => {})
+  }
+export const setPacksPageTC =
+  (model: any): AppThunk =>
+  dispatch => {
+    packsAPI.getPack(model).then(res => {
+      dispatch(setPacksPageAC(res.data.packs.page))
+    })
   }
