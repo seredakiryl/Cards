@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 
-import { useAppSelector } from '../../../Store/store'
+import { getPacksTC, setPacksPageTC } from '../../../Store/packs-reducer'
+import { useAppDispatch, useAppSelector } from '../../../Store/store'
 
 interface DataType {
   name: string
@@ -12,7 +13,13 @@ interface DataType {
   createdBy: string
 }
 export const PacksTable = () => {
+  const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const packs = useAppSelector(state => state.packs.packs)
+  const totalCountPacks = useAppSelector(state => state.packs.cardPacksTotalCount)
+  const initialPage = useAppSelector(state => state.packs.page)
+  const [page, setPage] = useState(initialPage)
+  const [pageSize, setPageSize] = useState(8)
 
   const columns: ColumnsType<DataType> = [
     {
@@ -46,15 +53,22 @@ export const PacksTable = () => {
     }
   })
 
-  console.log(data)
-
   return (
     <div>
       <Table
         columns={columns}
         dataSource={data}
         size="middle"
-        pagination={{ pageSize: 10, total: 80, position: ['bottomLeft'] }}
+        pagination={{
+          current: page,
+          pageSize: pageSize,
+          total: totalCountPacks,
+          position: ['bottomLeft'],
+          onChange: (page, pageSize) => {
+            setPage(page)
+            setPageSize(pageSize)
+          },
+        }}
       />
     </div>
   )

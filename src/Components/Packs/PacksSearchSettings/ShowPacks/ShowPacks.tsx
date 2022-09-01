@@ -4,6 +4,9 @@ import { Radio, RadioChangeEvent } from 'antd'
 
 import { findCardsIdPackAC } from '../../../../Store/packs-reducer'
 import { useAppDispatch } from '../../../../Store/store'
+
+import s from './ShowPacks.module.css'
+
 const options = [
   {
     label: 'ALL',
@@ -25,7 +28,8 @@ export const ShowPacks = () => {
   }
 
   return (
-    <div>
+    <div className={s.wrapper}>
+      <span>Show packs cards</span>
       <Radio.Group
         options={options}
         onChange={onChange}
