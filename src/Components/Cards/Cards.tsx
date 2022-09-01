@@ -6,6 +6,10 @@ import { Button } from 'antd'
 import s from './Cards.module.css'
 
 export const Cards = () => {
+  const onclickHandler = () => {
+    console.log('tratata')
+  }
+
   return (
     <div className={s.wrapper}>
       <div>
@@ -13,8 +17,8 @@ export const Cards = () => {
         <span>Back to Packs List</span>
       </div>
       <h1>Name Pack</h1>
-      <Button type="primary" shape="round" size={'middle'}>
-        Download
+      <Button type="primary" shape="round" size={'middle'} onClick={onclickHandler}>
+        Add new card
       </Button>
     </div>
   )
