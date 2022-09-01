@@ -7,13 +7,22 @@ import { useAppDispatch } from '../../../../Store/store'
 
 import { useDebounce } from './UseDebounce'
 
-export const SearchInput = () => {
+type SearchInputType = {
+  packName: string
+}
+
+export const SearchInput = (props: SearchInputType) => {
   const dispatch = useAppDispatch()
   const [value, setValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value, 1000)
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value)
+    // dispatch(findPacksThroughInputAC(event.currentTarget.value))
   }
+
+  useEffect(() => {
+    setValue(props.packName)
+  }, [props.packName])
 
   useEffect(() => {
     dispatch(findPacksThroughInputAC(debouncedValue))
@@ -22,7 +31,7 @@ export const SearchInput = () => {
   return (
     <div>
       <span>Search</span>
-      <Input placeholder="Provide your text" onChange={onChangeHandler} />
+      <Input placeholder="Provide your text" onChange={onChangeHandler} value={value} />
     </div>
   )
 }
