@@ -9,6 +9,7 @@ import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNew
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
 import { Login } from './Components/Auth/Login/Login'
 import { Registration } from './Components/Auth/Registration/Registration'
+import { Cards } from './Components/Cards/Cards'
 import { Error404 } from './Components/Error404/Error404'
 import { Header } from './Components/Header/Header'
 import { Packs } from './Components/Packs/Packs'
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/check-email" element={<CheckEmail />}></Route>
         <Route path="/packs" element={<Packs />}></Route>
+        <Route path="/cards" element={<Cards />}></Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
