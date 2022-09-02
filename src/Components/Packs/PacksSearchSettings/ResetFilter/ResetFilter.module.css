@@ -1,8 +1,8 @@
 .filter {
-    cursor: pointer;
+  cursor: pointer;
 
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 
-    background-image: url("../../../../Assets/Icons/Filter-Remove.png");
+  background-image: url('../../../../Assets/Icons/Filter-Remove.png');
 }
