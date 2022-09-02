@@ -17,7 +17,7 @@ export const Packs = () => {
   const minCards = useAppSelector(state => state.packs.minCardsCount)
   const maxCards = useAppSelector(state => state.packs.maxCardsCount)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  const myCard = useAppSelector(state => state.packs.user_id)
+  const myAndAll = useAppSelector(state => state.packs.myAndAll)
   const page = useAppSelector(state => state.packs.page)
   const pageCount = useAppSelector(state => state.packs.pageCount)
   const sortPacks = useAppSelector(state => state.packs.sortPacks)
@@ -30,7 +30,7 @@ export const Packs = () => {
       sortPacks: sortPacks,
       page: page,
       pageCount: pageCount,
-      user_id: myCard,
+      user_id: myAndAll,
     },
   }
 

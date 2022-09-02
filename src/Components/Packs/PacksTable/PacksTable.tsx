@@ -3,7 +3,7 @@ import React from 'react'
 import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 
-import { PacksType, setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
+import { setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../Store/store'
 
 import { ActionsPacks } from './ActionsPacks/ActionPacks'
@@ -23,6 +23,7 @@ type PropsType = {
 export const PacksTable = (props: PropsType) => {
   const dispatch = useAppDispatch()
   const totalCountPacks = useAppSelector(state => state.packs.cardPacksTotalCount)
+  const userId = useAppSelector(state => state.packs.user_id)
   const packs = useAppSelector(state => state.packs.packs)
   const columns: ColumnsType<DataType> = [
     {
@@ -54,7 +55,9 @@ export const PacksTable = (props: PropsType) => {
       cardsCount: p.cardsCount,
       lastUpdated: p.updated.slice(0, 10),
       createdBy: p.created.slice(0, 10),
-      actions: <ActionsPacks packId={p._id} name={p.name} />,
+      actions: (
+        <ActionsPacks packId={p._id} name={p.name} userId={userId} creatorUserId={p.user_id} />
+      ),
     }
   })
 
