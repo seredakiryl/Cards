@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../Store/store'
 
 import s from './Packs.module.css'
 import { PacksHeader } from './PacksHeader/PacksHeader'
+import { ResetFiler } from './PacksSearchSettings/ResetFilter/ResetFiler'
 import { SearchInput } from './PacksSearchSettings/SearchInput/SearchInput'
 import { SearchRangePacks } from './PacksSearchSettings/SearchRangePacks/SearchRangePacks'
 import { ShowPacks } from './PacksSearchSettings/ShowPacks/ShowPacks'
@@ -16,7 +17,7 @@ export const Packs = () => {
   const minCards = useAppSelector(state => state.packs.minCardsCount)
   const maxCards = useAppSelector(state => state.packs.maxCardsCount)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  const mycard = useAppSelector(state => state.packs.user_id)
+  const myCard = useAppSelector(state => state.packs.user_id)
   const page = useAppSelector(state => state.packs.page)
   const pageCount = useAppSelector(state => state.packs.pageCount)
   const sortPacks = useAppSelector(state => state.packs.sortPacks)
@@ -29,7 +30,7 @@ export const Packs = () => {
       sortPacks: sortPacks,
       page: page,
       pageCount: pageCount,
-      user_id: mycard,
+      user_id: myCard,
     },
   }
 
@@ -41,9 +42,10 @@ export const Packs = () => {
     <div className={s.wrapper}>
       <PacksHeader />
       <div className={s.searchSettings}>
-        <SearchInput />
+        <SearchInput packName={packName} />
         <ShowPacks />
-        <SearchRangePacks />
+        <SearchRangePacks min={minCards} max={maxCards} />
+        <ResetFiler />
       </div>
       <PacksTable pageCount={pageCount} page={page} />
     </div>

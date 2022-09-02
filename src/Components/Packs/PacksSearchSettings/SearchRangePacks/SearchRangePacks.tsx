@@ -6,45 +6,37 @@ import { findMaxCardsInPackAC, findMinCardsInPackAC } from '../../../../Store/pa
 import { useAppDispatch } from '../../../../Store/store'
 
 import s from './SearchRangePacks.module.css'
-export const SearchRangePacks = () => {
+type SearchRangePacksType = {
+  min: number
+  max: number
+}
+export const SearchRangePacks = (props: SearchRangePacksType) => {
   const dispatch = useAppDispatch()
-  const [min, setMin] = useState(0)
-  const [max, setMax] = useState(15)
   const onChange = (value: [number, number]) => {
-    setMin(value[0])
-    setMax(value[1])
-  }
-
-  const onAfterChange = (value: [number, number]) => {
-    setMin(value[0])
-    setMax(value[1])
+    dispatch(findMinCardsInPackAC(value[0]))
+    dispatch(findMaxCardsInPackAC(value[1]))
   }
   const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setMin(+e.currentTarget.value)
+    dispatch(findMinCardsInPackAC(+e.currentTarget.value))
   }
   const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setMax(+e.currentTarget.value)
+    dispatch(findMaxCardsInPackAC(+e.currentTarget.value))
   }
-
-  useEffect(() => {
-    dispatch(findMinCardsInPackAC(min))
-    dispatch(findMaxCardsInPackAC(max))
-  }, [min, max])
 
   return (
     <div>
       <span>Number of cards</span>
       <div className={s.wrapper}>
-        <Input className={s.input} value={min} onChange={onChangeMinHandler} />
+        <Input className={s.input} value={props.min} onChange={onChangeMinHandler} />
         <Slider
           className={s.slider}
           range
           step={1}
-          defaultValue={[min, max]}
+          value={[props.min, props.max]}
           onChange={onChange}
-          onAfterChange={onAfterChange}
+          onAfterChange={onChange}
         />
-        <Input className={s.input} value={max} onChange={onChangeMaxHandler} />
+        <Input className={s.input} value={props.max} onChange={onChangeMaxHandler} />
       </div>
     </div>
   )
