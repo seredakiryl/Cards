@@ -21,6 +21,7 @@ export const Packs = () => {
   const maxCards = useDebounce(maxCardsCount, 1000)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
+
   const getTableData = useCallback(() => {
     const getModel: any = {
       params: {
@@ -33,6 +34,7 @@ export const Packs = () => {
         user_id: user_id,
       },
     }
+
 
     isLoggedIn && dispatch(getPacksTC(getModel))
   }, [])
@@ -50,7 +52,7 @@ export const Packs = () => {
         <SearchRangePacks min={minCardsCount} max={maxCardsCount} />
         <ResetFiler />
       </div>
-      <PacksTable />
+      <PacksTable pageCount={pageCount} page={page} />
     </div>
   )
 }
