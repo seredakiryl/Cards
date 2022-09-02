@@ -20,13 +20,14 @@ export const Packs = () => {
   const myCard = useAppSelector(state => state.packs.user_id)
   const page = useAppSelector(state => state.packs.page)
   const pageCount = useAppSelector(state => state.packs.pageCount)
+  const sortPacks = useAppSelector(state => state.packs.sortPacks)
 
   const getModel: any = {
     params: {
       packName: packName,
       min: minCards,
       max: maxCards,
-      sortPacks: '0updatet',
+      sortPacks: sortPacks,
       page: page,
       pageCount: pageCount,
       user_id: myCard,
@@ -46,7 +47,7 @@ export const Packs = () => {
         <SearchRangePacks min={minCards} max={maxCards} />
         <ResetFiler />
       </div>
-      <PacksTable />
+      <PacksTable pageCount={pageCount} page={page} />
     </div>
   )
 }

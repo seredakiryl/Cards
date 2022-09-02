@@ -7,10 +7,28 @@ export const packsAPI = {
   getPack(getModel: ArrayCardsType) {
     return instance.get('/cards/pack', getModel)
   },
+  deletePack(id: string) {
+    return instance.delete(`/cards/pack?id=${id}`)
+  },
+  editPackName(id: string, packMame: string) {
+    return instance.put(`/cards/pack`, {
+      cardsPack: {
+        _id: id,
+        name: packMame,
+      },
+    })
+  },
 }
 
 type AddPackModelType = {
   cardsPack: CardsPackType
+}
+
+type EditNamePackType = {
+  cardsPack: {
+    _id: string
+    name: string
+  }
 }
 type CardsPackType = {
   name: string

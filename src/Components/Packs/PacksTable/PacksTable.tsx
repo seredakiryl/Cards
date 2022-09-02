@@ -1,22 +1,29 @@
+import React from 'react'
+
 import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 
-import { setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
+import { PacksType, setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../Store/store'
 
-interface DataType {
+import { ActionsPacks } from './ActionsPacks/ActionPacks'
+import { SortPacks } from './SortPacks/SortPacks'
+
+type DataType = {
   name: string
   cardsCount: number
   lastUpdated: string
   createdBy: string
 }
-export const PacksTable = () => {
-  const dispatch = useAppDispatch()
-  const packs = useAppSelector(state => state.packs.packs)
-  const totalCountPacks = useAppSelector(state => state.packs.cardPacksTotalCount)
-  const pageCount = useAppSelector(state => state.packs.pageCount)
-  const page = useAppSelector(state => state.packs.page)
 
+type PropsType = {
+  pageCount: number
+  page: number
+}
+export const PacksTable = (props: PropsType) => {
+  const dispatch = useAppDispatch()
+  const totalCountPacks = useAppSelector(state => state.packs.cardPacksTotalCount)
+  const packs = useAppSelector(state => state.packs.packs)
   const columns: ColumnsType<DataType> = [
     {
       title: 'Name',
@@ -27,7 +34,7 @@ export const PacksTable = () => {
       dataIndex: 'cardsCount',
     },
     {
-      title: 'Last Updated',
+      title: <SortPacks />,
       dataIndex: 'lastUpdated',
     },
     {
@@ -42,10 +49,12 @@ export const PacksTable = () => {
 
   let data = packs.map(p => {
     return {
+      key: p._id,
       name: p.name,
       cardsCount: p.cardsCount,
       lastUpdated: p.updated.slice(0, 10),
       createdBy: p.created.slice(0, 10),
+      actions: <ActionsPacks packId={p._id} name={p.name} />,
     }
   })
 
@@ -55,10 +64,9 @@ export const PacksTable = () => {
         columns={columns}
         dataSource={data}
         size="middle"
-        scroll={{ y: 450 }}
         pagination={{
-          current: page,
-          pageSize: pageCount,
+          current: props.page,
+          pageSize: props.pageCount,
           total: totalCountPacks,
           position: ['bottomLeft'],
           onChange: (page, pageSize) => {

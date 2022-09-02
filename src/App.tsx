@@ -20,7 +20,7 @@ import './App.css'
 
 const App = () => {
   const error = useAppSelector(state => state.app.error)
-  const success = useAppSelector(state => state.app.error)
+  const success = useAppSelector(state => state.app.success)
   const isFetching = useAppSelector(state => state.app.isFetching)
 
   const dispatch = useAppDispatch()

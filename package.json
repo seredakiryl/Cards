@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://seredakiryl.github.io/Cards/",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -58,6 +59,9 @@
     "eslint": "8.22.0",
     "eslint-config-it-incubator": "^1.0.10",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "patch-package": "^6.4.7",
@@ -67,9 +71,6 @@
     "stylelint": "^14.10.0",
     "stylelint-config-clean-order": "^0.9.0",
     "stylelint-prettier": "^2.0.0",
-    "typescript": "^4.4.2",
-    "eslint-import-resolver-typescript": "^3.5.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-import-resolver-node": "^0.3.6"
+    "typescript": "^4.4.2"
   }
 }
