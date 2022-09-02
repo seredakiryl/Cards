@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
+import useDebounce from '../../Hooks/useDebounce'
 import { getPacksTC } from '../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../Store/store'
 
@@ -13,30 +14,34 @@ import { PacksTable } from './PacksTable/PacksTable'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
-  const packName = useAppSelector(state => state.packs.packName)
-  const minCards = useAppSelector(state => state.packs.minCardsCount)
-  const maxCards = useAppSelector(state => state.packs.maxCardsCount)
+  const { packName, maxCardsCount, minCardsCount, page, pageCount, user_id } = useAppSelector(
+    state => state.packs
+  )
+  const minCards = useDebounce(minCardsCount, 1000)
+  const maxCards = useDebounce(maxCardsCount, 1000)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  const myAndAll = useAppSelector(state => state.packs.myAndAll)
-  const page = useAppSelector(state => state.packs.page)
-  const pageCount = useAppSelector(state => state.packs.pageCount)
-  const sortPacks = useAppSelector(state => state.packs.sortPacks)
 
-  const getModel: any = {
-    params: {
-      packName: packName,
-      min: minCards,
-      max: maxCards,
-      sortPacks: sortPacks,
-      page: page,
-      pageCount: pageCount,
-      user_id: myAndAll,
-    },
-  }
+
+  const getTableData = useCallback(() => {
+    const getModel: any = {
+      params: {
+        packName: packName,
+        min: minCardsCount,
+        max: maxCardsCount,
+        sortPacks: '0updatet',
+        page: page,
+        pageCount: pageCount,
+        user_id: user_id,
+      },
+    }
+
+
+    isLoggedIn && dispatch(getPacksTC(getModel))
+  }, [])
 
   useEffect(() => {
-    isLoggedIn && dispatch(getPacksTC(getModel))
-  }, [getModel])
+    getTableData()
+  }, [minCards, maxCards])
 
   return (
     <div className={s.wrapper}>
@@ -44,7 +49,7 @@ export const Packs = () => {
       <div className={s.searchSettings}>
         <SearchInput packName={packName} />
         <ShowPacks />
-        <SearchRangePacks min={minCards} max={maxCards} />
+        <SearchRangePacks min={minCardsCount} max={maxCardsCount} />
         <ResetFiler />
       </div>
       <PacksTable pageCount={pageCount} page={page} />
