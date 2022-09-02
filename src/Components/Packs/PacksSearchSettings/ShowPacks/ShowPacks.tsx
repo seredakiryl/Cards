@@ -7,18 +7,18 @@ import { useAppDispatch } from '../../../../Store/store'
 
 import s from './ShowPacks.module.css'
 
-const options = [
-  {
-    label: 'ALL',
-    value: 'ALL',
-  },
-  {
-    label: 'MY',
-    value: 'MY',
-  },
-]
-
 export const ShowPacks = () => {
+  const options = [
+    {
+      label: 'ALL',
+      value: 'ALL',
+    },
+    {
+      label: 'MY',
+      value: 'MY',
+    },
+  ]
+
   const dispatch = useAppDispatch()
   const [value, setValue] = useState('MY')
 

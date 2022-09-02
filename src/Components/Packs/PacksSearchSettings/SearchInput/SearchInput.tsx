@@ -15,10 +15,6 @@ export const SearchInput = () => {
     setValue(event.currentTarget.value)
   }
 
-  useEffect(() => {
-    dispatch(findPacksThroughInputAC(debouncedValue))
-  }, [debouncedValue])
-
   return (
     <div>
       <span>Search</span>

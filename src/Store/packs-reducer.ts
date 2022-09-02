@@ -14,9 +14,10 @@ type InitialStateType = {
   tokenDeathTime: number
   packName: string
   user_id: string
+  sortPacks: string
 }
 
-type PacksType = {
+export type PacksType = {
   cardsCount: number
   created: string
   grade: number
@@ -35,30 +36,13 @@ type PacksType = {
 }
 const initialState: InitialStateType = {
   isFetching: false,
-  packs: [
-    {
-      cardsCount: 3,
-      created: '',
-      grade: 0,
-      more_id: '',
-      name: '',
-      path: '',
-      private: false,
-      rating: 0,
-      shots: 0,
-      type: '',
-      updated: '',
-      user_id: '',
-      user_name: '',
-      __v: 0,
-      _id: '',
-    },
-  ],
+  packs: [],
   cardPacksTotalCount: 11,
   maxCardsCount: 8,
   minCardsCount: 0,
   page: 1,
   pageCount: 8,
+  sortPacks: '0updated',
   token: '',
   tokenDeathTime: 1661891431872,
   packName: '',
@@ -105,6 +89,9 @@ export const packsReducer = (
     case 'PACKS/SET_PAGE_COUNT': {
       return { ...state, pageCount: action.value }
     }
+    case 'PACKS/SET_SORT_PACKS': {
+      return { ...state, sortPacks: state.sortPacks === action.value ? '0updated' : '1updated' }
+    }
     default:
       return state
   }
@@ -147,6 +134,11 @@ export const setPacksPageAC = (value: number) => {
 export const setPageCountAC = (value: number) => {
   return { type: 'PACKS/SET_PAGE_COUNT', value } as const
 }
+
+export const setSortPackstAC = (value: string) => {
+  return { type: 'PACKS/SET_SORT_PACKS', value } as const
+}
+
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
 type FindPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
 type FindMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
@@ -157,6 +149,7 @@ type SetPacksACType = ReturnType<typeof setPacksAC>
 type SetPacksPageACType = ReturnType<typeof setPacksPageAC>
 type GetTotalPacksACType = ReturnType<typeof getTotalPacksAC>
 type SetPageCountACType = ReturnType<typeof setPageCountAC>
+type SetSortPacksACType = ReturnType<typeof setSortPackstAC>
 
 type ActionsType =
   | FindPacksThroughInputACType
@@ -169,6 +162,7 @@ type ActionsType =
   | SetPacksPageACType
   | GetTotalPacksACType
   | SetPageCountACType
+  | SetSortPacksACType
 
 export const getPacksTC =
   (model: any): AppThunk =>
@@ -176,9 +170,31 @@ export const getPacksTC =
     packsAPI
       .getPack(model)
       .then(res => {
-        console.log(res)
+        console.log('packs Thunk')
         dispatch(setPacksAC(res.data.cardPacks))
         dispatch(getTotalPacksAC(res.data.cardPacksTotalCount))
+      })
+      .finally(() => {})
+  }
+
+export const deletePackTC =
+  (id: string): AppThunk =>
+  dispatch => {
+    packsAPI
+      .deletePack(id)
+      .then(res => {
+        console.log('Колода Удалилась все збц')
+      })
+      .finally(() => {})
+  }
+
+export const editPackNameTC =
+  (id: string, packName: string): AppThunk =>
+  dispatch => {
+    packsAPI
+      .editPackName(id, packName)
+      .then(res => {
+        console.log('Название поменялось збц')
       })
       .finally(() => {})
   }
