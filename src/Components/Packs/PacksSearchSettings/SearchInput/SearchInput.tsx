@@ -2,10 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { Input } from 'antd'
 
+import useDebounce from '../../../../Hooks/useDebounce'
 import { findPacksThroughInputAC } from '../../../../Store/packs-reducer'
 import { useAppDispatch } from '../../../../Store/store'
-
-import { useDebounce } from './UseDebounce'
 
 type SearchInputType = {
   packName: string
@@ -14,7 +13,7 @@ type SearchInputType = {
 export const SearchInput = (props: SearchInputType) => {
   const dispatch = useAppDispatch()
   const [value, setValue] = useState<string>('')
-  const debouncedValue = useDebounce<string>(value, 1000)
+  const debouncedValue = useDebounce(value, 1000)
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value)
     // dispatch(findPacksThroughInputAC(event.currentTarget.value))

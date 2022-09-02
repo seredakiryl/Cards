@@ -14,34 +14,27 @@ import { PacksTable } from './PacksTable/PacksTable'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
-  const { packName, maxCardsCount, minCardsCount, page, pageCount, user_id } = useAppSelector(
-    state => state.packs
-  )
+  const { packName, maxCardsCount, minCardsCount, page, pageCount, sortPacks, myAndAll } =
+    useAppSelector(state => state.packs)
   const minCards = useDebounce(minCardsCount, 1000)
   const maxCards = useDebounce(maxCardsCount, 1000)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
-
-  const getTableData = useCallback(() => {
-    const getModel: any = {
-      params: {
-        packName: packName,
-        min: minCardsCount,
-        max: maxCardsCount,
-        sortPacks: '0updatet',
-        page: page,
-        pageCount: pageCount,
-        user_id: user_id,
-      },
-    }
-
-
-    isLoggedIn && dispatch(getPacksTC(getModel))
-  }, [])
+  const getModel: any = {
+    params: {
+      packName: packName,
+      min: minCards,
+      max: maxCards,
+      sortPacks: sortPacks,
+      page: page,
+      pageCount: pageCount,
+      user_id: myAndAll,
+    },
+  }
 
   useEffect(() => {
-    getTableData()
-  }, [minCards, maxCards])
+    isLoggedIn && dispatch(getPacksTC(getModel))
+  }, [packName, minCards, maxCards, sortPacks, page, pageCount, myAndAll])
 
   return (
     <div className={s.wrapper}>
