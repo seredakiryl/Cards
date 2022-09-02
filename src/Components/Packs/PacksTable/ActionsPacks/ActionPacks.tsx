@@ -6,6 +6,8 @@ import { useAppDispatch } from '../../../../Store/store'
 type PropsType = {
   packId: string
   name: string
+  userId: string
+  creatorUserId: string
 }
 
 export const ActionsPacks = (props: PropsType) => {
@@ -24,18 +26,22 @@ export const ActionsPacks = (props: PropsType) => {
           console.log('tratata')
         }}
       />
-      <EditOutlined
-        style={{ fontSize: '18px', padding: '4px' }}
-        onClick={() => {
-          dispatch(editPackNameTC(props.packId, `${props.name}+1`))
-        }}
-      />
-      <DeleteOutlined
-        style={{ fontSize: '18px', padding: '4px' }}
-        onClick={() => {
-          dispatch(deletePackTC(props.packId))
-        }}
-      />
+      {props.userId == props.creatorUserId && (
+        <EditOutlined
+          style={{ fontSize: '18px', padding: '4px' }}
+          onClick={() => {
+            dispatch(editPackNameTC(props.packId, `${props.name}+1`))
+          }}
+        />
+      )}
+      {props.userId == props.creatorUserId && (
+        <DeleteOutlined
+          style={{ fontSize: '18px', padding: '4px' }}
+          onClick={() => {
+            dispatch(deletePackTC(props.packId))
+          }}
+        />
+      )}
     </div>
   )
 }

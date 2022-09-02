@@ -15,6 +15,7 @@ type InitialStateType = {
   packName: string
   user_id: string
   sortPacks: string
+  myAndAll: string
 }
 
 export type PacksType = {
@@ -47,6 +48,7 @@ const initialState: InitialStateType = {
   tokenDeathTime: 1661891431872,
   packName: '',
   user_id: '',
+  myAndAll: '',
 }
 
 export const packsReducer = (
@@ -91,6 +93,9 @@ export const packsReducer = (
     }
     case 'PACKS/SET_SORT_PACKS': {
       return { ...state, sortPacks: state.sortPacks === action.value ? '0updated' : '1updated' }
+    }
+    case 'PACKS/SET_MY_AND_ALL': {
+      return { ...state, myAndAll: action.myAndAll === 'MY' ? state.user_id : '' }
     }
     default:
       return state
@@ -139,6 +144,10 @@ export const setSortPackstAC = (value: string) => {
   return { type: 'PACKS/SET_SORT_PACKS', value } as const
 }
 
+export const setmyAndAllAC = (myAndAll: string) => {
+  return { type: 'PACKS/SET_MY_AND_ALL', myAndAll } as const
+}
+
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
 type FindPacksThroughInputACType = ReturnType<typeof findPacksThroughInputAC>
 type FindMinCardsInPackACType = ReturnType<typeof findMinCardsInPackAC>
@@ -150,6 +159,7 @@ type SetPacksPageACType = ReturnType<typeof setPacksPageAC>
 type GetTotalPacksACType = ReturnType<typeof getTotalPacksAC>
 type SetPageCountACType = ReturnType<typeof setPageCountAC>
 type SetSortPacksACType = ReturnType<typeof setSortPackstAC>
+type SetMyAndAllACType = ReturnType<typeof setmyAndAllAC>
 
 type ActionsType =
   | FindPacksThroughInputACType
@@ -163,6 +173,7 @@ type ActionsType =
   | GetTotalPacksACType
   | SetPageCountACType
   | SetSortPacksACType
+  | SetMyAndAllACType
 
 export const getPacksTC =
   (model: any): AppThunk =>
