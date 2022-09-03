@@ -9,7 +9,7 @@ import s from './ShowPacks.module.css'
 
 export const ShowPacks = () => {
   const dispatch = useAppDispatch()
-  const [value, setValue] = useState<any>('MY')
+  const [value, setValue] = useState<any>('ALL')
 
   useEffect(() => {
     dispatch(setmyAndAllAC(value))
@@ -18,7 +18,7 @@ export const ShowPacks = () => {
   return (
     <div className={s.wrapper}>
       <span>Show packs cards</span>
-      <Segmented options={['ALL', 'MY']} value={value} onChange={setValue} />;
+      <Segmented options={['ALL', 'MY']} value={value} onChange={setValue} />
     </div>
   )
 }

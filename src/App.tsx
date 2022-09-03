@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-import { Alert } from 'antd'
+import { Alert, Spin } from 'antd'
 import { Route, Routes } from 'react-router-dom'
 
-import { Spiner } from './Common/Spin/Spin'
+import s from './App.module.css'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
@@ -16,7 +16,6 @@ import { Packs } from './Components/Packs/Packs'
 import { Profile } from './Components/Profile/Profile'
 import { isLoggedInTC } from './Store/app-reducer'
 import { useAppDispatch, useAppSelector } from './Store/store'
-import './App.css'
 
 const App = () => {
   const error = useAppSelector(state => state.app.error)
@@ -30,7 +29,11 @@ const App = () => {
   }, [])
 
   if (isFetching) {
-    return <Spiner />
+    return (
+      <div className={s.spin}>
+        <Spin size="large" />
+      </div>
+    )
   }
 
   return (

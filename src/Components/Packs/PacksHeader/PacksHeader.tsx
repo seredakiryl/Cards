@@ -2,14 +2,16 @@ import React from 'react'
 
 import { Button } from 'antd'
 
-import { packsAPI } from '../../../Api/packs-api'
+import { addNewPack } from '../../../Store/packs-reducer'
+import { useAppDispatch } from '../../../Store/store'
 import { Title } from '../../Profile/Title/Title'
 
 import s from './PacksHeader.module.css'
 
 export const PacksHeader = () => {
+  const dispatch = useAppDispatch()
   const addNewPackHandler = () => {
-    packsAPI.addPack({ cardsPack: { name: 'the best pack ever!!!', private: false } })
+    dispatch(addNewPack({ cardsPack: { name: 'the best pack ever!!!', private: false } }))
   }
 
   return (
