@@ -1,3 +1,4 @@
+import { Spin } from 'antd'
 import { Navigate } from 'react-router-dom'
 
 import { useAppSelector } from '../../Store/store'
@@ -12,9 +13,18 @@ import { Title } from './Title/Title'
 export const Profile = () => {
   let isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   let email = useAppSelector(state => state.auth.email)
+  let isFetching = useAppSelector(state => state.auth.isFetching)
 
   if (isLoggedIn === false) {
     return <Navigate to="/" />
+  }
+
+  if (isFetching) {
+    return (
+      <div className={s.spin}>
+        <Spin size="large" />
+      </div>
+    )
   }
 
   return (

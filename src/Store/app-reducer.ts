@@ -30,30 +30,29 @@ export const appReducer = (
       return state
   }
 }
-export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
-export type SetSuccessActionType = ReturnType<typeof setSuccessAC>
-export type IsFetchingActionType = ReturnType<typeof isFetchingAppAC>
 
-type ActionsType = SetAppErrorActionType | IsFetchingActionType | SetSuccessActionType
+type ActionsType =
+  | ReturnType<typeof setAppErrorAC>
+  | ReturnType<typeof setSuccessAC>
+  | ReturnType<typeof isFetchingAppAC>
 
 export const setAppErrorAC = (error: string) => ({ type: 'APP/SET-ERROR', error } as const)
 export const setSuccessAC = (success: string) => ({ type: 'APP/SET-SUCCESS', success } as const)
 export const isFetchingAppAC = (value: boolean) => ({ type: 'APP/SET-INITIALIZED', value } as const)
 
-export const isLoggedInTC = (): AppThunk => dispatch => {
-  dispatch(isFetchingAppAC(true))
-  authAPI
-    .me()
-    .then(res => {
-      let { name, avatar, email, _id } = res.data
+export const isLoggedInTC = (): AppThunk => async dispatch => {
+  try {
+    dispatch(isFetchingAppAC(true))
+    const res = await authAPI.me()
+    let { name, avatar, email, _id } = res.data
 
-      dispatch(setIsLoggedInAC(true))
-      dispatch(setNewNameAC(name, avatar))
-      dispatch(setEmailAC(email))
-      dispatch(catchMyIdAC(_id))
-    })
-    .catch(res => console.log(res))
-    .finally(() => {
-      dispatch(isFetchingAppAC(false))
-    })
+    dispatch(setIsLoggedInAC(true))
+    dispatch(setNewNameAC(name, avatar))
+    dispatch(setEmailAC(email))
+    dispatch(catchMyIdAC(_id))
+  } catch (error) {
+    console.log(error)
+  } finally {
+    dispatch(isFetchingAppAC(false))
+  }
 }

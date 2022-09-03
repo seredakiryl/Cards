@@ -116,3 +116,9 @@
   line-height: 24px;
   text-decoration: underline;
 }
+
+.spin {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+}

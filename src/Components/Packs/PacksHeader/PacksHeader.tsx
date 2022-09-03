@@ -2,7 +2,8 @@ import React, {ChangeEvent, useState} from 'react'
 
 import { Button } from 'antd'
 
-import { packsAPI } from '../../../Api/packs-api'
+import { addNewPack } from '../../../Store/packs-reducer'
+import { useAppDispatch } from '../../../Store/store'
 import { Title } from '../../Profile/Title/Title'
 import { CustomModal } from "../../../Common/CustomModal/CustomModal";
 
@@ -10,16 +11,20 @@ import s from './PacksHeader.module.css';
 
 
 export const PacksHeader = () => {
+
+  const dispatch = useAppDispatch()
+  const addNewPackHandler = () => {
+    dispatch(addNewPack({ cardsPack: { name: 'the best pack ever!!!', private: false } }))
+
     const [packName, setPackName] = useState('')
     const [isPrivate, setIsPrivate] = useState(false)
-  const addNewPackHandler = (packName: string, isPrivate: boolean) => {
-    packsAPI.addPack({ cardsPack: { name: packName, private: isPrivate } })
-  }
+ 
   const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPackName(e.currentTarget.value)
   }
   const setPrivatePack = (e: ChangeEvent<HTMLInputElement>) => {
       setIsPrivate(e.currentTarget.checked)
+
   }
   return (
     <div className={s.wrapper}>

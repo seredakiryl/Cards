@@ -11,7 +11,7 @@ const root = ReactDOM.render(
   <HashRouter>
     <Provider store={store}>
       <App />
-    </Provider>{' '}
+    </Provider>
   </HashRouter>,
   document.getElementById('root')
 )

@@ -1,10 +1,9 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { Input, Button } from 'antd'
+import { Input, Button, Spin } from 'antd'
 import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
 import { Navigate, useNavigate } from 'react-router-dom'
 
-import { Spiner } from '../../../Common/Spin/Spin'
 import { loginTC } from '../../../Store/auth-reducer'
 import { AppRootStateType, useAppDispatch, useAppSelector } from '../../../Store/store'
 
@@ -16,7 +15,7 @@ export type FormikLoginType = {
   checkbox?: boolean
 }
 
-export const Login = (props: any): JSX.Element => {
+export const Login = (): JSX.Element => {
   const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn)
   const isFetching = useAppSelector(state => state.auth.isFetching)
   const navigate = useNavigate()
@@ -53,16 +52,16 @@ export const Login = (props: any): JSX.Element => {
     },
     onSubmit: values => {
       dispatch(loginTC(values))
-      navigate('/Profile')
+      navigate('/profile')
     },
   })
 
   const RedirectToRegistration = () => {
-    navigate('/Registration')
+    navigate('/registration')
   }
 
   const navigateToForrgotPassword = () => {
-    navigate('/ForgotPassword')
+    navigate('/forgot-password')
   }
 
   if (isLoggedIn) {
@@ -70,7 +69,11 @@ export const Login = (props: any): JSX.Element => {
   }
 
   if (isFetching) {
-    return <Spiner />
+    return (
+      <div className={s.spin}>
+        <Spin size="large" />
+      </div>
+    )
   }
 
   return (
