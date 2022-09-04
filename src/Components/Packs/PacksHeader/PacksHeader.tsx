@@ -11,7 +11,7 @@ export const PacksHeader = () => {
   const dispatch = useAppDispatch()
 
   const addNewPackHandler = () => {
-    dispatch(addNewPack({ cardsPack: { name: 'the best pack ever!!!', private: false } }))
+    dispatch(addNewPack({ cardsPack: { name: packName, private: isPrivate } }))
   }
   const [packName, setPackName] = useState('')
   const [isPrivate, setIsPrivate] = useState(false)
