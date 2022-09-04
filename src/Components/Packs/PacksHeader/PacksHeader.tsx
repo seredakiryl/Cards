@@ -32,8 +32,16 @@ export const PacksHeader = () => {
         packName={packName}
         isPrivate={isPrivate}
       >
-        <input type="text" onChange={onHandleChange} />
-        <input type="checkbox" onChange={setPrivatePack} />
+        <div className={s.modalInner}>
+          <div className={s.modalInputBlock}>
+            <span>Name pack</span>
+            <input type="text" onChange={onHandleChange} className={s.modalInput} placeholder={'Yor new pack name here'} autoFocus />
+          </div>
+          <div className={s.modalCheckbox}>
+            <input type="checkbox" onChange={setPrivatePack} />
+            <span className={s.modalCheckboxText}>Private pack</span>
+          </div>
+        </div>
       </CustomModal>
     </div>
   )
