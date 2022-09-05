@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import useDebounce from '../../Hooks/useDebounce'
 import { getPacksTC } from '../../Store/packs-reducer'
@@ -14,8 +14,11 @@ import { PacksTable } from './PacksTable/PacksTable'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
-  const { packName, maxCardsCount, minCardsCount, page, pageCount, sortPacks, myAndAll } =
-    useAppSelector(state => state.packs)
+  const { packName, maxCardsCount, minCardsCount, page, pageCount, sortPacks } = useAppSelector(
+    state => state.packs.queryParams
+  )
+  const myAndAll = useAppSelector(state => state.packs.myAndAll)
+  const isFetching = useAppSelector(state => state.packs.isFetching)
   const minCards = useDebounce(minCardsCount, 1000)
   const maxCards = useDebounce(maxCardsCount, 1000)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -45,7 +48,7 @@ export const Packs = () => {
         <SearchRangePacks min={minCardsCount} max={maxCardsCount} />
         <ResetFiler />
       </div>
-      <PacksTable pageCount={pageCount} page={page} />
+      <PacksTable pageCount={pageCount} page={page} isFetching={isFetching} />
     </div>
   )
 }

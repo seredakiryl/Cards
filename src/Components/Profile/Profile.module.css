@@ -19,3 +19,9 @@
 
   opacity: 0.5;
 }
+
+.spin {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+}

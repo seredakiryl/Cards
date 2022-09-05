@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 
-import { Alert } from 'antd'
+import { Alert, Spin } from 'antd'
 import { Route, Routes } from 'react-router-dom'
 
-import './App.css'
-import { Spiner } from './Common/Spin/Spin'
+
+
+import s from './App.module.css'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
@@ -31,7 +32,11 @@ const App = () => {
   }, [])
 
   if (isFetching) {
-    return <Spiner />
+    return (
+      <div className={s.spin}>
+        <Spin size="large" />
+      </div>
+    )
   }
 
   return (

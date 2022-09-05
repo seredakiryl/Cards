@@ -1,29 +1,48 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
-import { Button } from 'antd'
-
-import { packsAPI } from '../../../Api/packs-api'
+import { CustomModal } from '../../../Common/CustomModal/CustomModal'
+import { addNewPack } from '../../../Store/packs-reducer'
+import { useAppDispatch } from '../../../Store/store'
 import { Title } from '../../Profile/Title/Title'
 
 import s from './PacksHeader.module.css'
 
 export const PacksHeader = () => {
+  const dispatch = useAppDispatch()
+
   const addNewPackHandler = () => {
-    packsAPI.addPack({ cardsPack: { name: 'the best pack ever!!!', private: false } })
+    dispatch(addNewPack({ cardsPack: { name: packName, private: isPrivate } }))
+  }
+  const [packName, setPackName] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
+
+  const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPackName(e.currentTarget.value)
+  }
+  const setPrivatePack = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsPrivate(e.currentTarget.checked)
   }
 
   return (
     <div className={s.wrapper}>
       <Title text={'Packs list'} />
-      <Button
-        type="primary"
-        htmlType="submit"
-        shape="round"
-        className={s.button}
-        onClick={addNewPackHandler}
+      <CustomModal
+        buttonName={'Add new pack'}
+        onCallback={addNewPackHandler}
+        packName={packName}
+        isPrivate={isPrivate}
       >
-        Add new pack
-      </Button>
+        <div className={s.modalInner}>
+          <div className={s.modalInputBlock}>
+            <span>Name pack</span>
+            <input type="text" onChange={onHandleChange} className={s.modalInput} placeholder={'Yor new pack name here'} autoFocus />
+          </div>
+          <div className={s.modalCheckbox}>
+            <input type="checkbox" onChange={setPrivatePack} />
+            <span className={s.modalCheckboxText}>Private pack</span>
+          </div>
+        </div>
+      </CustomModal>
     </div>
   )
 }

@@ -17,7 +17,7 @@ export const Header = () => {
   }
   const navigate = useNavigate()
   const navigateToRegistration = () => {
-    navigate('/Registration')
+    navigate('/')
   }
 
   return (
@@ -36,7 +36,7 @@ export const Header = () => {
           shape="round"
           className={s.Button}
         >
-          Sign up
+          Sign in
         </Button>
       )}
       {isHidden ? null : <HeaderProfile onHidden={onShowAvaHandler} />}

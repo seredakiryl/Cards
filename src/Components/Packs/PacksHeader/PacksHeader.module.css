@@ -11,3 +11,33 @@
   text-align: center;
   letter-spacing: 0.01em;
 }
+.modalInner {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 150px;
+}
+.modalInputBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.modalInput {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+.modalCheckbox {
+  display: flex;
+  align-items: center;
+}
+.modalCheckboxText {
+  margin-left: 10px;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+
+  opacity: 0.8;
+}

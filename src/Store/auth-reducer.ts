@@ -42,101 +42,90 @@ export const setEmailAC = (email: string) => ({ type: 'AUTH/SET-EMAIL', email } 
 export const setIsFetchingAC = (value: boolean) =>
   ({ type: 'AUTH/SET-IS-FETCHING', value } as const)
 
-type SetIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
-
-type SetNewNameACType = ReturnType<typeof setNewNameAC>
-type SetEmailACType = ReturnType<typeof setEmailAC>
-type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
-type ActionsType = SetIsLoggedInACType | SetNewNameACType | SetIsFetchingACType | SetEmailACType
+type ActionsType =
+  | ReturnType<typeof setIsLoggedInAC>
+  | ReturnType<typeof setNewNameAC>
+  | ReturnType<typeof setIsFetchingAC>
+  | ReturnType<typeof setEmailAC>
 
 export const setNewNameTC =
   (name: string, avatar: string): AppThunk =>
-  dispatch => {
-    dispatch(setIsFetchingAC(true))
+  async dispatch => {
+    try {
+      dispatch(setIsFetchingAC(true))
+      await authAPI.changeName(name, avatar)
 
-    authAPI
-      .changeName(name, avatar)
-      .then(() => {
-        dispatch(setNewNameAC(name, avatar))
-      })
-      .catch(res => {
-        dispatch(setAppErrorAC(res.message))
-      })
-      .finally(() => {
-        dispatch(setIsFetchingAC(false))
-      })
+      dispatch(setNewNameAC(name, avatar))
+    } catch (res) {
+      console.log(res)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }
 
-export const logOutTC = (): AppThunk => dispatch => {
-  dispatch(setIsFetchingAC(true))
-
-  authAPI
-    .logout()
-    .then(() => {
-      dispatch(setIsLoggedInAC(false))
-    })
-    .catch(res => {
-      dispatch(setAppErrorAC(res.message))
-    })
-    .finally(() => {
-      dispatch(setIsFetchingAC(false))
-    })
+export const logOutTC = (): AppThunk => async dispatch => {
+  try {
+    dispatch(setIsFetchingAC(true))
+    await authAPI.logout()
+    dispatch(setIsLoggedInAC(false))
+  } catch (error) {
+    console.log(error)
+  } finally {
+    dispatch(setIsFetchingAC(false))
+  }
 }
 
 export const registrationTC =
   (email: string, password: string): AppThunk =>
-  dispatch => {
-    dispatch(setIsFetchingAC(true))
-    authAPI
-      .registration({ email, password })
-      .then(() => setSuccessAC('Registration successfully completed'))
-      .catch(res => dispatch(setAppErrorAC(res.message)))
-      .finally(() => {
-        dispatch(setIsFetchingAC(false))
-      })
+  async dispatch => {
+    try {
+      dispatch(setIsFetchingAC(true))
+      await authAPI.registration({ email, password })
+
+      dispatch(setSuccessAC('Registration successfully completed'))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }
 
 export const setNewPasswordTC =
   (password: string, resetPasswordToken: string | undefined): AppThunk =>
-  dispatch => {
-    dispatch(setIsFetchingAC(true))
-    authAPI
-      .newPassword({ password, resetPasswordToken })
-      .then(res => {})
-      .catch(res => {
-        dispatch(setAppErrorAC(res.message))
-      })
-      .finally(() => {
-        dispatch(setIsFetchingAC(false))
-      })
+  async dispatch => {
+    try {
+      dispatch(setIsFetchingAC(true))
+      await authAPI.newPassword({ password, resetPasswordToken })
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }
 
 export const loginTC =
   (values: FormikLoginType): AppThunk =>
-  dispatch => {
-    dispatch(setIsFetchingAC(true))
-    authAPI
-      .login(values)
-      .then(res => {
-        dispatch(setIsLoggedInAC(true))
-      })
-      .catch(res => {
-        dispatch(setAppErrorAC(res.message))
-      })
-      .finally(() => {
-        dispatch(setIsFetchingAC(false))
-      })
+  async dispatch => {
+    try {
+      dispatch(setIsFetchingAC(true))
+      await authAPI.login(values)
+      dispatch(setIsLoggedInAC(true))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }
 
 export const forgotPasswordTC =
   (email: string, admin: string, messageStyle: string): AppThunk =>
-  dispatch => {
-    dispatch(setIsFetchingAC(true))
-    authAPI
-      .forgotPassword({ email, from: admin, message: messageStyle })
-      .then(res => {})
-      .catch(res => dispatch(setAppErrorAC(res.message)))
-      .finally(() => {
-        dispatch(setIsFetchingAC(false))
-      })
+  async dispatch => {
+    try {
+      dispatch(setIsFetchingAC(true))
+      await authAPI.forgotPassword({ email, from: admin, message: messageStyle })
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }
