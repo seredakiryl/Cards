@@ -1,4 +1,4 @@
-import { cardsAPI } from './../Api/cards-api'
+import { cardsAPI, GetCardsType } from './../Api/cards-api'
 import { AppThunk } from './store'
 type InitialStateType = {
   cards: Array<CardsType>
@@ -14,7 +14,7 @@ type CardsType = {
   updated: string
   _id: string
 }
-const initialState = {
+const initialState: InitialStateType = {
   cards: [
     {
       answer: '',

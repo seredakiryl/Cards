@@ -4,7 +4,7 @@ export const cardsAPI = {
   addCard(postModel: AddCardModelType) {
     return instance.post('/cards/card', postModel)
   },
-  getCards(getCards: any) {
+  getCards(getCards: GetCardsType) {
     return instance.get('/cards/card', getCards)
   },
 }
@@ -24,15 +24,15 @@ type CardType = {
   answerVideo: string
 }
 
-type GetCardsType = {
+export type GetCardsType = {
   params: {
-    cardAnswer: 'string'
-    cardQuestion: 'string'
+    cardAnswer?: 'string'
+    cardQuestion?: 'string'
     cardsPack_id: 'string'
-    min: number
-    max: number
-    sortCards: 'string'
-    page: number
-    pageCount: number
+    min?: number
+    max?: number
+    sortCards?: 'string'
+    page?: number
+    pageCount?: number
   }
 }

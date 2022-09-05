@@ -1,11 +1,14 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { ArrowLeftOutlined } from '@ant-design/icons'
+import { Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { useNavigate } from 'react-router-dom'
 
 import { getCardsTC } from '../../../Store/cards-reducer'
+import { setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../Store/store'
+import { ActionsPacks } from '../../Packs/PacksTable/ActionsPacks/ActionPacks'
 
 import s from './CardsPack.module.css'
 interface DataType {
@@ -41,20 +44,12 @@ export const CardsPack = () => {
     },
   ]
 
-  //   let data = packs.map(p => {
-  //     return {
-  //       question: p.question,
-  //       cardsCount: p.cardsCount,
-  //       lastUpdated: p.updated.slice(0, 10),
-  //       grade: p.grade.slice(0, 10),
-  //     }
-  //   })
   const baseModel = {
-    // cardAnswer: '',
+    cardAnswer: '',
     // cardQuestion: '',
-    cardsPack_id: '6311e399bd3a3b1ebc2ac280',
-    min: 1,
-    max: 100,
+    cardsPack_id: '5eb6a2f72f849402d46c6ac7',
+    // min: 1,
+    // max: 100,
     // sortCards: '0grade',
     // page: 1,
     // pageCount: 8,
@@ -65,11 +60,40 @@ export const CardsPack = () => {
     console.log(cards)
   }, [])
 
+  let data = cards.map(p => {
+    return {
+      key: p._id,
+      question: p.question,
+      cardsCount: p.answer,
+      lastUpdated: p.updated.slice(0, 10),
+      createdBy: p.grade,
+      /* actions: (
+        <ActionsPacks packId={p._id} question={p.question} userId={userId} creatorUserId={p.user_id} />
+      ),*/
+    }
+  })
+
   return (
     <div className={s.wrapper}>
       <div>
         <ArrowLeftOutlined onClick={onClickHandlerBackToPackList} />
         <span>Back to Packs List</span>
+
+        <Table
+          columns={columns}
+          dataSource={data}
+          size="middle"
+          // pagination={{
+          //   current: props.page,
+          //   pageSize: props.pageCount,
+          //   total: totalCountPacks,
+          //   position: ['bottomLeft'],
+          //   onChange: (page, pageSize) => {
+          //     dispatch(setPacksPageAC(page))
+          //     dispatch(setPageCountAC(pageSize))
+          //   },
+          //}}
+        />
       </div>
     </div>
   )
