@@ -69,7 +69,7 @@ export const ActionsPacks = (props: PropsType) => {
                   <div className={s.modalInner}>
                       <div className={s.modalInputBlock}>
                           <span>Name pack</span>
-                          <input type="text" onChange={onHandleChange} className={s.modalInput} placeholder={'сюда нужно пропсами я так понимаю название пака прокинуть'} autoFocus />
+                          <input type="text" onChange={onHandleChange} className={s.modalInput} placeholder={props.name} autoFocus />
                       </div>
                       <div className={s.modalCheckbox}>
                           <input type="checkbox" onChange={setPrivatePack} />
