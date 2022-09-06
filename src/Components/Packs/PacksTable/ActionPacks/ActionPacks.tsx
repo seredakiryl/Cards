@@ -44,7 +44,7 @@ export const ActionPacks = (props: PropsType) => {
     setIsEditModalVisible(false)
     setIsDeleteModalVisible(false)
   }
-  const [packName, setPackName] = useState('')
+  const [packName, setPackName] = useState(props.name)
   const [isPrivate, setIsPrivate] = useState<boolean>(props.private)
 
   const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +90,7 @@ export const ActionPacks = (props: PropsType) => {
                   onChange={onHandleChange}
                   className={s.modalInput}
                   placeholder={props.name}
+                  value={packName}
                   autoFocus
                 />
               </div>

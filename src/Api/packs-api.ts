@@ -10,11 +10,12 @@ export const packsAPI = {
   deletePack(id: string) {
     return instance.delete(`/cards/pack?id=${id}`)
   },
-  editPackName(id: string, packMame: string) {
+  editPackName(id: string, packMame: string, isPrivate: boolean) {
     return instance.put(`/cards/pack`, {
       cardsPack: {
         _id: id,
         name: packMame,
+        private: isPrivate,
       },
     })
   },

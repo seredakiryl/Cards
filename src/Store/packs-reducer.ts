@@ -215,7 +215,7 @@ export const editPackNameTC =
 
     try {
       dispatch(setIsFetchingAC(true))
-      await packsAPI.editPackName(id, packName)
+      await packsAPI.editPackName(id, packName, isPrivate)
       dispatch(editPackNameAC(id, packName, isPrivate))
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
