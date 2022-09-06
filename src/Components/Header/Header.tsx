@@ -4,6 +4,7 @@ import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppSelector } from '../../Store/store'
+import { Avatar } from '../Profile/Avatar/Avatar'
 
 import s from './Header.module.css'
 import { HeaderProfile } from './HeaderProfile/HeaderProfile'
@@ -24,9 +25,9 @@ export const Header = () => {
     <div className={s.wrapper}>
       <div className={s.logo}></div>
       {isLoggedIn ? (
-        <div className={s.userBlock}>
+        <div className={s.userBlock} onClick={onShowAvaHandler}>
           <div className={s.userName}>{name}</div>
-          <div className={s.userAva} onClick={onShowAvaHandler}></div>
+          <Avatar className={s.userAva} />
         </div>
       ) : (
         <Button

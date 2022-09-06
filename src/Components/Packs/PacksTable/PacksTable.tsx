@@ -6,7 +6,7 @@ import { ColumnsType } from 'antd/lib/table'
 import { setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../Store/store'
 
-import { ActionsPacks } from './ActionsPacks/ActionPacks'
+import { ActionPacks } from './ActionPacks/ActionPacks'
 import s from './PacksTable.module.css'
 import { SortPacks } from './SortPacks/SortPacks'
 
@@ -59,25 +59,18 @@ export const PacksTable = (props: PropsType) => {
       lastUpdated: p.updated.slice(0, 10),
       userName: p.user_name,
       actions: (
-        <ActionsPacks packId={p._id} name={p.name} userId={userId} creatorUserId={p.user_id} />
+        <ActionPacks packId={p._id} name={p.name} userId={userId} creatorUserId={p.user_id} />
       ),
     }
   })
-
-  if (props.isFetching) {
-    return (
-      <div className={s.spin}>
-        <Spin size="large" />
-      </div>
-    )
-  }
 
   return (
     <div>
       <Table
         columns={columns}
         dataSource={data}
-        size="middle"
+        size="large"
+        loading={props.isFetching}
         pagination={{
           current: props.page,
           pageSize: props.pageCount,

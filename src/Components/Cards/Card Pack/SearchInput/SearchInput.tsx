@@ -3,11 +3,11 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Input } from 'antd'
 
 import useDebounce from '../../../../Hooks/useDebounce'
-import { findPacksThroughInputAC } from '../../../../Store/packs-reducer'
+import { setCardQustionAC } from '../../../../Store/cards-reducer'
 import { useAppDispatch } from '../../../../Store/store'
 
 type SearchInputType = {
-  packName: string
+  cardQuestion: string
 }
 
 export const SearchInput = (props: SearchInputType) => {
@@ -19,11 +19,11 @@ export const SearchInput = (props: SearchInputType) => {
   }
 
   useEffect(() => {
-    setValue(props.packName)
-  }, [props.packName])
+    setValue(props.cardQuestion)
+  }, [props.cardQuestion])
 
   useEffect(() => {
-    dispatch(findPacksThroughInputAC(debouncedValue))
+    dispatch(setCardQustionAC(debouncedValue))
   }, [debouncedValue])
 
   return (
