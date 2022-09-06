@@ -197,13 +197,13 @@ export const deletePackTC =
   }
 
 export const editPackNameTC =
-  (id: string, packName: string): AppThunk =>
+  (id: string, packName: string, isPrivate: boolean): AppThunk =>
   async (dispatch, getState) => {
     const model = getState().packs.queryParams
 
     try {
       dispatch(setIsFetchingAC(true))
-      await packsAPI.editPackName(id, packName)
+      await packsAPI.editPackName(id, packName, isPrivate)
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
       console.log(error)

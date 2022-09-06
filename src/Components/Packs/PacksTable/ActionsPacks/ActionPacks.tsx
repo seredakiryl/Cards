@@ -28,7 +28,7 @@ export const ActionsPacks = (props: PropsType) => {
 
     const handleEditOk = () => {
         setIsEditModalVisible(false)
-        dispatch(editPackNameTC(props.packId, packName))
+        dispatch(editPackNameTC(props.packId, packName, isPrivate))
     }
     const handleDeleteOk = () => {
         setIsDeleteModalVisible(false)
