@@ -15,6 +15,7 @@ type PropsType = {
   name: string
   userId: string
   creatorUserId: string
+  private: boolean
 }
 
 export const ActionPacks = (props: PropsType) => {
@@ -33,7 +34,7 @@ export const ActionPacks = (props: PropsType) => {
 
   const handleEditOk = () => {
     setIsEditModalVisible(false)
-    dispatch(editPackNameTC(props.packId, packName))
+    dispatch(editPackNameTC(props.packId, packName, isPrivate))
   }
   const handleDeleteOk = () => {
     setIsDeleteModalVisible(false)
@@ -44,7 +45,7 @@ export const ActionPacks = (props: PropsType) => {
     setIsDeleteModalVisible(false)
   }
   const [packName, setPackName] = useState('')
-  const [isPrivate, setIsPrivate] = useState(false)
+  const [isPrivate, setIsPrivate] = useState<boolean>(props.private)
 
   const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPackName(e.currentTarget.value)
@@ -93,7 +94,7 @@ export const ActionPacks = (props: PropsType) => {
                 />
               </div>
               <div className={s.modalCheckbox}>
-                <input type="checkbox" onChange={setPrivatePack} />
+                <input type="checkbox" onChange={setPrivatePack} checked={isPrivate} />
                 <span className={s.modalCheckboxText}>Private pack</span>
               </div>
             </div>
