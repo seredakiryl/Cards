@@ -171,6 +171,7 @@ export const getPacksTC =
       dispatch(setIsFetchingAC(true))
       const res = await packsAPI.getPack(model)
 
+      console.log(res.data)
       dispatch(setPacksAC(res.data.cardPacks))
       dispatch(getTotalPacksAC(res.data.cardPacksTotalCount))
     } catch (error) {

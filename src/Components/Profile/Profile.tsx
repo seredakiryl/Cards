@@ -11,9 +11,7 @@ import s from './Profile.module.css'
 import { Title } from './Title/Title'
 
 export const Profile = () => {
-  let isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  let email = useAppSelector(state => state.auth.email)
-  let isFetching = useAppSelector(state => state.auth.isFetching)
+  let { isLoggedIn, email, isFetching, avatar } = useAppSelector(state => state.auth)
 
   if (isLoggedIn === false) {
     return <Navigate to="/" />
@@ -28,15 +26,13 @@ export const Profile = () => {
   }
 
   return (
-    <div>
+    <div className={s.wrapper}>
       <BackArrow url={'/packs'} />
-      <div className={s.wrapper}>
+      <div className={s.content}>
         <Title text={'Personal Information'} />
-        <Avatar />
+        <Avatar avatar={avatar} />
         <EditableSpan />
-        <div>
-          <span className={s.mail}>{email}</span>
-        </div>
+        <span className={s.mail}>{email}</span>
         <ButtonLogOut />
       </div>
     </div>

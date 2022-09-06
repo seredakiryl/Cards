@@ -1,35 +1,29 @@
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 
+import { getCardsTC } from '../../Store/cards-reducer'
+import { useAppDispatch, useAppSelector } from '../../Store/store'
+
+import { HeaderCards } from './Card Pack/CardsHeader/HeaderCards'
+import { CardsTable } from './Card Pack/CardsTable/CardsTable'
+import { SearchInput } from './Card Pack/SearchInput/SearchInput'
 import s from './Cards.module.css'
 
 export const Cards = () => {
-  const dispatch = useDispatch()
-  const baseModel = {
-    card: {
-      cardsPack_id: '630e99065141d700040db4c0',
-      question: 'no question',
-      answer: 'no answer',
-      grade: 0,
-      shots: 0,
-      answerImg: 'url or base 64',
-      questionImg: 'url or base 64',
-      questionVideo: 'url or base 64',
-      answerVideo: 'url or base 64',
-    },
-  }
+  const dispatch = useAppDispatch()
+
+  const { page, pageCount, cardQuestion, cardsPack_id } = useAppSelector(
+    state => state.cards.queryParams
+  )
+
+  useEffect(() => {
+    dispatch(getCardsTC())
+  }, [page, pageCount, cardQuestion])
 
   return (
     <div className={s.wrapper}>
-      <div>
-        <ArrowLeftOutlined />
-        <span>Back to Packs List</span>
-      </div>
-      <h1>Name Pack</h1>
-      <Button type="primary" shape="round" size={'middle'} /**onClick={onclickHandlerAddNewCard}*/>
-        Add new card
-      </Button>
+      <HeaderCards cardsPackId={cardsPack_id} />
+      <SearchInput cardQuestion={cardQuestion} />
+      <CardsTable page={page} pageCount={pageCount} />
     </div>
   )
 }

@@ -35,8 +35,9 @@
   height: 36px;
   margin-left: 12px;
 
-  background-image: url('../../Assets/Images/avatar.png');
+  object-fit: cover;
   background-size: cover;
+  border-radius: 50%;
 }
 
 .Button {

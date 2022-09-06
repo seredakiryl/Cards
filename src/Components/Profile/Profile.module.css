@@ -1,4 +1,8 @@
 .wrapper {
+  padding: 36px 136px;
+}
+
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +14,7 @@
   font-family: 'Montserrat';
 }
 .mail {
+  display: block;
   align-items: center;
 
   font-family: 'Montserrat';

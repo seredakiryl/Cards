@@ -35,7 +35,13 @@ export const PacksHeader = () => {
         <div className={s.modalInner}>
           <div className={s.modalInputBlock}>
             <span>Name pack</span>
-            <input type="text" onChange={onHandleChange} className={s.modalInput} placeholder={'Yor new pack name here'} autoFocus />
+            <input
+              type="text"
+              onChange={onHandleChange}
+              className={s.modalInput}
+              placeholder={'Yor new pack name here'}
+              autoFocus
+            />
           </div>
           <div className={s.modalCheckbox}>
             <input type="checkbox" onChange={setPrivatePack} />
