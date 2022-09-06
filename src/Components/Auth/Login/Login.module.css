@@ -122,3 +122,6 @@
   top: 40%;
   left: 50%;
 }
+.errorStyle{
+  color: red;
+}
