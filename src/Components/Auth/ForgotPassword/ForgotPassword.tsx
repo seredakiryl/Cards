@@ -15,7 +15,6 @@ export const ForgotPassword = () => {
   const navigate = useNavigate()
   let [email, setEmail] = useState('')
 
-  //------
   const [emailDirty, setEmailDirty] = useState(false)
   const [emailError, setEmailError] = useState('Required')
 
@@ -32,7 +31,6 @@ export const ForgotPassword = () => {
       setEmailError('')
     }
   }
-  //------
   const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value)
   }

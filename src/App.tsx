@@ -4,6 +4,7 @@ import { Alert, Spin } from 'antd'
 import { Route, Routes } from 'react-router-dom'
 
 import s from './App.module.css'
+import { Path } from './Common/Navigate/Path'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
@@ -42,15 +43,15 @@ const App = () => {
       {error && <Alert type="error" message={error} banner closable />}
       {success && <Alert message="Success Tips" type="success" showIcon />}
       <Routes>
-        <Route path="/registration" element={<Registration />}></Route>
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/set-new-password/:token" element={<CreateNewPassword />}></Route>
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/check-email" element={<CheckEmail />}></Route>
-        <Route path="/packs" element={<Packs />}></Route>
-        <Route path="/cards" element={<Cards />}></Route>
-        <Route path="*" element={<Error404 />} />
+        <Route path={Path.REGISTRATION} element={<Registration />}></Route>
+        <Route path={Path.LOGIN} element={<Login />}></Route>
+        <Route path={Path.NEW_PASSWORD} element={<CreateNewPassword />}></Route>
+        <Route path={Path.FORGOT_PASSWORD} element={<ForgotPassword />}></Route>
+        <Route path={Path.PROFILE} element={<Profile />}></Route>
+        <Route path={Path.CHECK_EMAIL} element={<CheckEmail />}></Route>
+        <Route path={Path.PACKS} element={<Packs />}></Route>
+        <Route path={Path.CARDS} element={<Cards />}></Route>
+        <Route path={Path.ERROR_404} element={<Error404 />} />
       </Routes>
     </div>
   )
