@@ -112,3 +112,6 @@
   line-height: 24px;
   text-decoration: underline;
 }
+.errorStyle{
+  color: red;
+}

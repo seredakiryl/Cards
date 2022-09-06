@@ -29,37 +29,43 @@ export const Registration = () => {
       const errors: FormikRegistrationType = {}
 
       switch (true) {
-        case !values.email: {
-          errors.email = 'Required'
-          break
-        }
-        case !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email): {
-          errors.email = 'Invalid email address'
-          break
-        }
-        case !values.password: {
-          errors.password = 'Required'
-          break
-        }
-        case values.password.length < 5: {
-          errors.password = 'password must be at least 5 characters long'
-          break
-        }
-        case !values.confirm_password: {
+        case !values.email:
+          return {
+            ...errors,
+            email: 'Required',
+          }
+        /* 2 вариант - переписываем значение ошибки и делаем брейк, возвращаем в конце ошибку
+         errors.email = 'Required'
+         break
+         */
+        case !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email):
+          return {
+            ...errors,
+            email: 'Invalid email address',
+          }
+        case !values.password:
+          return {
+            ...errors,
+            password: 'Required',
+          }
+        case values.password.length < 5:
+          return {
+            ...errors,
+            password: 'password must be at least 5 characters long',
+          }
+        case !values.confirm_password:
           return {
             ...errors,
             confirm_password: 'Required',
-          } /*errors.confirm_password = 'Required'*/
-        }
-        case values.confirm_password !== values.password: {
-          errors.confirm_password = 'password and confirm password have must be the same'
-          break
-        }
+          }
+        case values.confirm_password !== values.password:
+          return {
+            ...errors,
+            confirm_password: 'password and confirm password have must be the same',
+          }
         default:
           return errors
       }
-
-      return errors
     },
 
     onSubmit: values => {
@@ -84,7 +90,7 @@ export const Registration = () => {
         />
         <div className={s.strip}></div>
         {formik.touched.email && formik.errors.email && (
-          <div style={{ color: 'red' }}>{formik.errors.email}</div>
+          <div className={s.errorStyle}>{formik.errors.email}</div>
         )}
         <label htmlFor={'password'} className={s.label}>
           Password
@@ -99,7 +105,7 @@ export const Registration = () => {
         />
         <div className={s.strip}></div>
         {formik.touched.password && formik.errors.password && (
-          <div style={{ color: 'red' }}>{formik.errors.password}</div>
+          <div className={s.errorStyle}>{formik.errors.password}</div>
         )}
 
         <label htmlFor={'confirmPassword'} className={s.label}>
@@ -115,7 +121,7 @@ export const Registration = () => {
         />
         <div className={s.strip}></div>
         {formik.touched.confirm_password && formik.errors.confirm_password && (
-          <div style={{ color: 'red' }}>{formik.errors.confirm_password}</div>
+          <div className={s.errorStyle}>{formik.errors.confirm_password}</div>
         )}
 
         <Button

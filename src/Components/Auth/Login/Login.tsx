@@ -30,25 +30,33 @@ export const Login = (): JSX.Element => {
       const errors: FormikLoginType = {}
 
       switch (true) {
-        case !values.email: {
-          errors.email = 'Required'
+        case !values.email:
+          return {
+            ...errors,
+            email: 'Required',
+          }
+        /* 2 вариант - переписываем значение ошибки и делаем брейк, возвращаем в конце ошибку
+         errors.email = 'Required'
           break
-        }
-        case !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email): {
-          errors.email = 'Invalid email address'
-          break
-        }
-        case !values.password: {
-          errors.password = 'enter password'
-          break
-        }
-        case values.password.length < 5: {
-          errors.password = 'The password must contain at least 5 symbols.'
-          break
-        }
+         */
+        case !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email):
+          return {
+            ...errors,
+            email: 'Invalid email address',
+          }
+        case !values.password:
+          return {
+            ...errors,
+            password: 'enter password',
+          }
+        case values.password.length < 5:
+          return {
+            ...errors,
+            password: 'The password must contain at least 5 symbols.',
+          }
+        default:
+          return errors
       }
-
-      return errors
     },
     onSubmit: values => {
       dispatch(loginTC(values))
@@ -94,7 +102,7 @@ export const Login = (): JSX.Element => {
           />
           <div className={s.strip}></div>
           {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: 'red' }}>{formik.errors.email}</div>
+            <div className={s.errorStyle}>{formik.errors.email}</div>
           ) : null}
           <label htmlFor={'password'} className={s.label}>
             Password
@@ -110,7 +118,7 @@ export const Login = (): JSX.Element => {
           />
           <div className={s.strip}></div>
           {formik.touched.password && formik.errors.password ? (
-            <div style={{ color: 'red' }}>{formik.errors.password}</div>
+            <div className={s.errorStyle}>{formik.errors.password}</div>
           ) : null}
           <div className={s.checkbox}>
             <Checkbox checked={formik.values.checkbox} {...formik.getFieldProps('checkbox')}>
