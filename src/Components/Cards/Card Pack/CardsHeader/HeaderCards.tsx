@@ -1,7 +1,7 @@
 import {Button, Modal} from 'antd'
 import { BackArrow } from '../../../BackArrow/BackArrow'
 import {Title} from "../../../Profile/Title/Title";
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './HeaderCards.module.css'
 
 type PropsType = {
@@ -10,6 +10,8 @@ type PropsType = {
 export const HeaderCards = (props: PropsType) => {
 
     const [isAddCardModalVisible, setAddCardModalVisible] = useState(false)
+    const [question, setQuestion] = useState('')
+    const [answer, setAnswer] = useState('')
 
     const showAddCardModal = () => {
         setAddCardModalVisible(true)
@@ -21,6 +23,12 @@ export const HeaderCards = (props: PropsType) => {
     }
     const handleCancel = () => {
         setAddCardModalVisible(false)
+    }
+    const onSetCardQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setQuestion(e.currentTarget.value)
+    }
+    const onSetCardAnswerHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setAnswer(e.currentTarget.value)
     }
 
   return (
@@ -36,6 +44,8 @@ export const HeaderCards = (props: PropsType) => {
                     onOk={handleAddCardOk}
                     onCancel={handleCancel}
                 >
+                    <input type={'text'} onChange={onSetCardQuestionHandler} placeholder={'enter new question'}></input>
+                    <input type={'text'} onChange={onSetCardAnswerHandler} placeholder={'enter the answer'}></input>
                 </Modal>
             </div>
         </div>
