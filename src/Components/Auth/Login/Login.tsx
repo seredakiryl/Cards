@@ -4,6 +4,7 @@ import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useFormik } from 'formik'
 import { Navigate, useNavigate } from 'react-router-dom'
 
+import { Path } from '../../../Common/Navigate/Path'
 import { loginTC } from '../../../Store/auth-reducer'
 import { AppRootStateType, useAppDispatch, useAppSelector } from '../../../Store/store'
 
@@ -60,20 +61,20 @@ export const Login = (): JSX.Element => {
     },
     onSubmit: values => {
       dispatch(loginTC(values))
-      navigate('/profile')
+      navigate(Path.PROFILE)
     },
   })
 
   const RedirectToRegistration = () => {
-    navigate('/registration')
+    navigate(Path.REGISTRATION)
   }
 
   const navigateToForrgotPassword = () => {
-    navigate('/forgot-password')
+    navigate(Path.FORGOT_PASSWORD)
   }
 
   if (isLoggedIn) {
-    return <Navigate to="/Profile" />
+    return <Navigate to={Path.PROFILE} />
   }
 
   if (isFetching) {

@@ -5,6 +5,7 @@ import { Button, Input } from 'antd'
 import { useFormik } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { Path } from '../../../Common/Navigate/Path'
 import { setNewPasswordTC } from '../../../Store/auth-reducer'
 import { useAppDispatch } from '../../../Store/store'
 import { Title } from '../../Profile/Title/Title'
@@ -38,7 +39,7 @@ export const CreateNewPassword = () => {
     },
     onSubmit: values => {
       dispatch(setNewPasswordTC(values.password, values.token))
-      navigate('/')
+      navigate(Path.LOGIN)
     },
   })
 

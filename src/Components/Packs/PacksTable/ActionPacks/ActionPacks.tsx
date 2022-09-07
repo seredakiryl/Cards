@@ -2,12 +2,12 @@ import React, { ChangeEvent, useState } from 'react'
 
 import { BookOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
+import { Path } from '../../../../Common/Navigate/Path'
 import { setCardsPackIdAC } from '../../../../Store/cards-reducer'
 import { deletePackTC, editPackNameTC } from '../../../../Store/packs-reducer'
 import { useAppDispatch } from '../../../../Store/store'
-import { Cards } from '../../../Cards/Cards'
 import s from '../../PacksHeader/PacksHeader.module.css'
 
 type PropsType = {
@@ -53,7 +53,7 @@ export const ActionPacks = (props: PropsType) => {
     setIsPrivate(e.currentTarget.checked)
   }
   const getCards = () => {
-    navigate('/cards')
+    navigate(Path.CARDS)
     dispatch(setCardsPackIdAC(props.packId))
   }
 

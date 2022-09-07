@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import s from './App.module.css'
 import { Path } from './Common/Navigate/Path'
+import { ProtectedRoutes } from './Common/Navigate/ProtectedRoutes'
 import { CheckEmail } from './Components/Auth/CheckEmail/CheckEmail'
 import { CreateNewPassword } from './Components/Auth/CreateNewPassword/CreateNewPassword'
 import { ForgotPassword } from './Components/Auth/ForgotPassword/ForgotPassword'
@@ -47,11 +48,13 @@ const App = () => {
         <Route path={Path.LOGIN} element={<Login />}></Route>
         <Route path={Path.NEW_PASSWORD} element={<CreateNewPassword />}></Route>
         <Route path={Path.FORGOT_PASSWORD} element={<ForgotPassword />}></Route>
-        <Route path={Path.PROFILE} element={<Profile />}></Route>
-        <Route path={Path.CHECK_EMAIL} element={<CheckEmail />}></Route>
-        <Route path={Path.PACKS} element={<Packs />}></Route>
-        <Route path={Path.CARDS} element={<Cards />}></Route>
-        <Route path={Path.ERROR_404} element={<Error404 />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path={Path.PROFILE} element={<Profile />}></Route>
+          <Route path={Path.CHECK_EMAIL} element={<CheckEmail />}></Route>
+          <Route path={Path.PACKS} element={<Packs />}></Route>
+          <Route path={Path.CARDS} element={<Cards />}></Route>
+          <Route path={Path.ERROR_404} element={<Error404 />} />
+        </Route>
       </Routes>
     </div>
   )

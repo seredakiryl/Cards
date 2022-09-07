@@ -3,6 +3,7 @@ import React from 'react'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
+import { Path } from '../../../Common/Navigate/Path'
 import { Title } from '../../Profile/Title/Title'
 
 import s from './CheckEmail.module.css'
@@ -10,7 +11,7 @@ import s from './CheckEmail.module.css'
 export const CheckEmail = () => {
   const navigate = useNavigate()
   const navigateToLogin = () => {
-    navigate('/')
+    navigate(Path.LOGIN)
   }
 
   return (
