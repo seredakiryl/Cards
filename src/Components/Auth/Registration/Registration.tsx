@@ -2,6 +2,7 @@ import { Button, Input } from 'antd'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
+import { Path } from '../../../Common/Navigate/Path'
 import { registrationTC } from '../../../Store/auth-reducer'
 import { useAppDispatch } from '../../../Store/store'
 
@@ -17,7 +18,7 @@ export const Registration = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const rederectToLogin = () => {
-    navigate('/')
+    navigate(Path.LOGIN)
   }
   const formik = useFormik({
     initialValues: {

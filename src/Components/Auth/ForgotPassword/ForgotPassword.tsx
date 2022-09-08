@@ -3,6 +3,7 @@ import { ChangeEvent, FocusEvent, KeyboardEvent, useState } from 'react'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
+import { Path } from '../../../Common/Navigate/Path'
 import { forgotPasswordTC } from '../../../Store/auth-reducer'
 import { useAppDispatch } from '../../../Store/store'
 import { Title } from '../../Profile/Title/Title'
@@ -31,7 +32,6 @@ export const ForgotPassword = () => {
       setEmailError('')
     }
   }
-
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       onSendPassword()
@@ -40,7 +40,7 @@ export const ForgotPassword = () => {
 
   const onSendPassword = () => {
     dispatch(forgotPasswordTC(email, admin, messageStyle))
-    navigate('/check-email')
+    navigate(Path.CHECK_EMAIL)
   }
 
   return (
