@@ -59,7 +59,13 @@ export const PacksTable = (props: PropsType) => {
       lastUpdated: p.updated.slice(0, 10),
       userName: p.user_name,
       actions: (
-        <ActionPacks packId={p._id} name={p.name} userId={userId} creatorUserId={p.user_id} private={p.private} />
+        <ActionPacks
+          packId={p._id}
+          name={p.name}
+          userId={userId}
+          creatorUserId={p.user_id}
+          private={p.private}
+        />
       ),
     }
   })
