@@ -32,9 +32,6 @@ export const ForgotPassword = () => {
       setEmailError('')
     }
   }
-  const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value)
-  }
   const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       onSendPassword()
@@ -55,7 +52,6 @@ export const ForgotPassword = () => {
           value={email}
           className={s.input}
           placeholder={email}
-          // onChange={onchangeHandler}
           onChange={e => emailHandler(e)}
           onKeyPress={onEnterHandler}
           onBlur={e => blurHandler(e)}

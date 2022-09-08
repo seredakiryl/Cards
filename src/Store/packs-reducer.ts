@@ -9,7 +9,7 @@ export type PacksType = {
   more_id: string
   name: string
   path: string
-  private: false
+  private: boolean
   rating: number
   shots: number
   type: string
@@ -103,7 +103,14 @@ export const packsReducer = (
     case 'PACKS/SET_MY_AND_ALL': {
       return { ...state, myAndAll: action.myAndAll == 'MY' ? state.queryParams.user_id : '' }
     }
-
+    case 'PACKS/SET_PACKS_NAME_AND_PRIVATE': {
+      return {
+        ...state,
+        packs: state.packs.map(el => {
+          return el._id === action.id ? { ...el, name: action.name, private: action.isPrivate } : el
+        })
+      }
+    }
     default:
       return state
   }
@@ -149,6 +156,9 @@ export const setSortPackstAC = (value: string) => {
 export const setmyAndAllAC = (myAndAll: string) => {
   return { type: 'PACKS/SET_MY_AND_ALL', myAndAll } as const
 }
+export const editPackNameAC = (id: string, name: string, isPrivate: boolean) => {
+  return { type: 'PACKS/SET_PACKS_NAME_AND_PRIVATE', id, name, isPrivate } as const
+}
 
 type ActionsType =
   | ReturnType<typeof findPacksThroughInputAC>
@@ -163,6 +173,7 @@ type ActionsType =
   | ReturnType<typeof setPageCountAC>
   | ReturnType<typeof setSortPackstAC>
   | ReturnType<typeof setmyAndAllAC>
+  | ReturnType<typeof editPackNameAC>
 
 export const getPacksTC =
   (model: any): AppThunk =>
@@ -198,13 +209,14 @@ export const deletePackTC =
   }
 
 export const editPackNameTC =
-  (id: string, packName: string): AppThunk =>
+  (id: string, packName: string, isPrivate: boolean): AppThunk =>
   async (dispatch, getState) => {
     const model = getState().packs.queryParams
 
     try {
       dispatch(setIsFetchingAC(true))
-      await packsAPI.editPackName(id, packName)
+      await packsAPI.editPackName(id, packName, isPrivate)
+      dispatch(editPackNameAC(id, packName, isPrivate))
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
       console.log(error)

@@ -1,4 +1,9 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+}
+.inner {
+  display: flex;
+  justify-content: space-between;
 }
