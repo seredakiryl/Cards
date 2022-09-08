@@ -1,4 +1,4 @@
-import { cardsAPI } from './../Api/cards-api'
+import { cardsAPI, CardType} from './../Api/cards-api'
 import { AppThunk } from './store'
 type InitialStateType = {
   cards: CardsType[]
@@ -109,3 +109,17 @@ export const getCardsTC =
       dispatch(setIsFetchingAC(false))
     }
   }
+
+}
+export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
+  dispatch(setIsFetchingAC(true))
+  try {
+    await cardsAPI.addCard({ card: card })
+    dispatch(getCardsTC())
+  } catch (error) {
+      console.log(error)
+  } finally {
+      dispatch(setIsFetchingAC(false))
+  }
+}
+

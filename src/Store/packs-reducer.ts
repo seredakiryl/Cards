@@ -7,7 +7,7 @@ export type PacksType = {
   created: string
   grade: number
   more_id: string
-  name: string
+  name: string | null
   path: string
   private: boolean
   rating: number
@@ -38,7 +38,7 @@ const initialState: InitialStateType = {
   tokenDeathTime: 1661891431872,
   myAndAll: '',
   queryParams: {
-    packName: '',
+    packName: null,
     minCardsCount: 0,
     maxCardsCount: 8,
     sortPacks: '0updated',

@@ -14,14 +14,15 @@ export const Cards = () => {
   const { page, pageCount, cardQuestion, cardsPack_id } = useAppSelector(
     state => state.cards.queryParams
   )
+  const currentPack = useAppSelector(state => state.packs.packs.find(el => el._id === cardsPack_id))
 
   useEffect(() => {
     dispatch(getCardsTC())
-  }, [page, pageCount, cardQuestion])
+  }, [page, pageCount, cardQuestion, currentPack])
 
   return (
     <div className={s.wrapper}>
-      <HeaderCards cardsPackId={cardsPack_id} />
+      <HeaderCards cardsPackId={cardsPack_id} packName={currentPack.name} />
       <SearchInput cardQuestion={cardQuestion} />
       <CardsTable page={page} pageCount={pageCount} />
     </div>

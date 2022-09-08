@@ -9,10 +9,10 @@ export const cardsAPI = {
   },
 }
 
-type AddCardModelType = {
+export type AddCardModelType = {
   card: CardType
 }
-type CardType = {
+export type CardType = {
   cardsPack_id: string
   question: string
   answer: string
