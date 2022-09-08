@@ -108,7 +108,7 @@ export const packsReducer = (
         ...state,
         packs: state.packs.map(el => {
           return el._id === action.id ? { ...el, name: action.name, private: action.isPrivate } : el
-        })
+        }),
       }
     }
     default:

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { Alert, Spin } from 'antd'
 import { Route, Routes } from 'react-router-dom'
@@ -14,6 +14,7 @@ import { Registration } from './Components/Auth/Registration/Registration'
 import { Cards } from './Components/Cards/Cards'
 import { Error404 } from './Components/Error404/Error404'
 import { Header } from './Components/Header/Header'
+import LearnPage from './Components/LearnPage/LearnPage'
 import { Packs } from './Components/Packs/Packs'
 import { Profile } from './Components/Profile/Profile'
 import { isLoggedInTC } from './Store/app-reducer'
@@ -53,6 +54,7 @@ const App = () => {
           <Route path={Path.CHECK_EMAIL} element={<CheckEmail />}></Route>
           <Route path={Path.PACKS} element={<Packs />}></Route>
           <Route path={Path.CARDS} element={<Cards />}></Route>
+          <Route path="/learn-page" element={<LearnPage />}></Route>
           <Route path={Path.ERROR_404} element={<Error404 />} />
         </Route>
       </Routes>

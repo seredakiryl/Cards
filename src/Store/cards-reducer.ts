@@ -89,20 +89,27 @@ type ActionsType =
   | ReturnType<typeof setCardQustionAC>
   | ReturnType<typeof setIsFetchingAC>
 
-export const getCardsTC = (): AppThunk => async (dispatch, getState) => {
-  const params = getState().cards.queryParams
+export const getCardsTC =
+  (id?: string): AppThunk =>
+  async (dispatch, getState) => {
+    let params = getState().cards.queryParams
 
-  dispatch(setIsFetchingAC(true))
-  try {
-    const res = await cardsAPI.getCards({ params: params })
+    if (id) {
+      params = { ...params, cardsPack_id: id }
+    }
+    dispatch(setIsFetchingAC(true))
+    try {
+      const res = await cardsAPI.getCards({ params: params })
 
-    dispatch(getCardsAC(res.data.cards))
-    dispatch(getTotalCardsAC(res.data.cardsTotalCount))
-  } catch (error) {
-    console.log(error)
-  } finally {
-    dispatch(setIsFetchingAC(false))
+      dispatch(getCardsAC(res.data.cards))
+      dispatch(getTotalCardsAC(res.data.cardsTotalCount))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }
+
 }
 export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
   dispatch(setIsFetchingAC(true))
@@ -115,3 +122,4 @@ export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
       dispatch(setIsFetchingAC(false))
   }
 }
+
