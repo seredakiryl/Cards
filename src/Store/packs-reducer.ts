@@ -1,6 +1,8 @@
 import { packsAPI } from '../Api/packs-api'
 
 import { AppThunk } from './store'
+import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
+import {AxiosError} from "axios";
 
 export type PacksType = {
   cardsCount: number
@@ -202,7 +204,7 @@ export const deletePackTC =
       await packsAPI.deletePack(id)
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
-      console.log(error)
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
@@ -219,7 +221,7 @@ export const editPackNameTC =
       dispatch(editPackNameAC(id, packName, isPrivate))
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
-      console.log(error)
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
@@ -235,7 +237,7 @@ export const addNewPack =
       await packsAPI.addPack(newCard)
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
-      console.log(error)
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
