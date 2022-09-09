@@ -1,10 +1,11 @@
+import { AxiosError } from 'axios'
+
 import { authAPI } from '../Api/auth-api'
+import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
 
 import { setEmailAC, setIsLoggedInAC, setNewNameAC } from './auth-reducer'
 import { catchMyIdAC } from './packs-reducer'
 import { AppThunk } from './store'
-import { handleServerNetworkError } from "../Common/ErrorUtils/ErrorUtils";
-import { AxiosError } from "axios";
 
 export type InitialStateType = {
   error: string

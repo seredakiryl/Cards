@@ -8,7 +8,9 @@ export const ActionCards = () => {
         <Button
           type="primary"
           shape="circle"
-          onClick={() => {}}
+          onClick={() => {
+            alert('пока заглушка)')
+          }}
           icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
         />
       </Tooltip>
@@ -16,6 +18,9 @@ export const ActionCards = () => {
         <Button
           type="primary"
           shape="circle"
+          onClick={() => {
+            alert('пока заглушка)')
+          }}
           icon={<DeleteOutlined style={{ fontSize: '18px', padding: '4px' }} />}
         />
       </Tooltip>

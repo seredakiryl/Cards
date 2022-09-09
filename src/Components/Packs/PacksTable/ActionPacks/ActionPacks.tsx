@@ -25,18 +25,26 @@ export const ActionPacks = (props: PropsType) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
 
-  const showEditModal = () => {
+  const showEditModal = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsEditModalVisible(true)
   }
-  const showDeleteModal = () => {
+  const showDeleteModal = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsDeleteModalVisible(true)
   }
 
-  const handleEditOk = () => {
+  const handleEditOk = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsEditModalVisible(false)
     dispatch(editPackNameTC(props.packId, packName, isPrivate))
   }
-  const handleDeleteOk = () => {
+  const handleDeleteOk = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsDeleteModalVisible(false)
     dispatch(deletePackTC(props.packId))
   }
@@ -55,7 +63,7 @@ export const ActionPacks = (props: PropsType) => {
   }
   const learnCards = (e: SyntheticEvent) => {
     e.stopPropagation()
-
+    e.nativeEvent.stopImmediatePropagation()
     navigate(Path.LEARN_CARDS)
     dispatch(setCardsPackIdAC(props.packId))
   }
@@ -75,7 +83,7 @@ export const ActionPacks = (props: PropsType) => {
           <Button
             type="primary"
             shape="circle"
-            onClick={showEditModal}
+            onClick={e => showEditModal(e)}
             icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
           />
           <Modal
@@ -109,13 +117,13 @@ export const ActionPacks = (props: PropsType) => {
           <Button
             type="primary"
             shape="circle"
-            onClick={showDeleteModal}
+            onClick={e => showDeleteModal(e)}
             icon={<DeleteOutlined style={{ fontSize: '18px', padding: '4px' }} />}
           />
           <Modal
             title="Delete pack"
             visible={isDeleteModalVisible}
-            onOk={handleDeleteOk}
+            onOk={e => handleDeleteOk(e)}
             onCancel={handleCancel}
           >
             <span>Do you really want to remove Pack Name? All cards will be deleted.</span>

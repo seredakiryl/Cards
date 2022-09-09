@@ -1,7 +1,9 @@
+import { AxiosError } from 'axios'
+
+import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
+
 import { cardsAPI, CardType } from './../Api/cards-api'
 import { AppThunk } from './store'
-import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
-import {AxiosError} from "axios";
 type InitialStateType = {
   cards: CardsType[]
   queryParams: any
@@ -112,15 +114,16 @@ export const getCardsTC =
     }
   }
 
-
-export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
-  dispatch(setIsFetchingAC(true))
-  try {
-    await cardsAPI.addCard({ card: card })
-    dispatch(getCardsTC())
-  } catch (error) {
-    handleServerNetworkError(error as AxiosError | Error, dispatch)
-  } finally {
+export const addNewCardTC =
+  (card: CardType): AppThunk =>
+  async dispatch => {
+    dispatch(setIsFetchingAC(true))
+    try {
+      await cardsAPI.addCard({ card: card })
+      dispatch(getCardsTC())
+    } catch (error) {
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
+    } finally {
       dispatch(setIsFetchingAC(false))
     }
   }

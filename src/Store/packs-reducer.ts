@@ -1,8 +1,9 @@
+import { AxiosError } from 'axios'
+
 import { packsAPI } from '../Api/packs-api'
+import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
 
 import { AppThunk } from './store'
-import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
-import {AxiosError} from "axios";
 
 export type PacksType = {
   cardsCount: number

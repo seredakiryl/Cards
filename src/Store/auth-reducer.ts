@@ -1,10 +1,11 @@
+import { AxiosError } from 'axios'
+
 import { authAPI } from '../Api/auth-api'
+import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
 import { FormikLoginType } from '../Components/Auth/Login/Login'
 
 import { setAppErrorAC, setSuccessAC } from './app-reducer'
 import { AppThunk } from './store'
-import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
-import {AxiosError} from "axios";
 
 const initialState = {
   isLoggedIn: false,
@@ -114,7 +115,7 @@ export const loginTC =
       dispatch(setIsLoggedInAC(true))
     } catch (error) {
       // handleServerNetworkError(error as AxiosError | Error, dispatch)
-        console.log(error)
+      console.log(error)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
