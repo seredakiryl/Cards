@@ -44,7 +44,7 @@ export const ActionPacks = (props: PropsType) => {
   }
   const handleDeleteOk = (e: SyntheticEvent) => {
     e.stopPropagation()
-    e.nativeEvent.stopImmediatePropagation()
+
     setIsDeleteModalVisible(false)
     dispatch(deletePackTC(props.packId))
   }
@@ -68,6 +68,11 @@ export const ActionPacks = (props: PropsType) => {
     dispatch(setCardsPackIdAC(props.packId))
   }
 
+  const test = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+  }
+
   return (
     <div>
       <Tooltip title="learn">
@@ -86,7 +91,9 @@ export const ActionPacks = (props: PropsType) => {
             onClick={e => showEditModal(e)}
             icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
           />
+
           <Modal
+            z-index={10}
             title="Edit pack"
             visible={isEditModalVisible}
             onOk={handleEditOk}
