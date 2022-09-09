@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, MouseEvent, SyntheticEvent, useState } from 'react'
 
 import { BookOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
@@ -53,8 +53,10 @@ export const ActionPacks = (props: PropsType) => {
   const setPrivatePack = (e: ChangeEvent<HTMLInputElement>) => {
     setIsPrivate(e.currentTarget.checked)
   }
-  const getCards = () => {
-    navigate(Path.CARDS)
+  const learnCards = (e: SyntheticEvent) => {
+    e.stopPropagation()
+
+    navigate(Path.LEARN_CARDS)
     dispatch(setCardsPackIdAC(props.packId))
   }
 
@@ -65,7 +67,7 @@ export const ActionPacks = (props: PropsType) => {
           type="primary"
           shape="circle"
           icon={<BookOutlined style={{ fontSize: '18px', padding: '4px' }} />}
-          onClick={getCards}
+          onClick={e => learnCards(e)}
         />
       </Tooltip>
       {props.userId == props.creatorUserId && (

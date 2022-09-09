@@ -17,12 +17,12 @@ export const Cards = () => {
   const currentPack = useAppSelector(state => state.packs.packs.find(el => el._id === cardsPack_id))
 
   useEffect(() => {
-    dispatch(getCardsTC())
+    dispatch(getCardsTC(cardsPack_id))
   }, [page, pageCount, cardQuestion, currentPack])
 
   return (
     <div className={s.wrapper}>
-      <HeaderCards cardsPackId={cardsPack_id} packName={currentPack.name} />
+      <HeaderCards cardsPackId={cardsPack_id} packName={''} />
       <SearchInput cardQuestion={cardQuestion} />
       <CardsTable page={page} pageCount={pageCount} />
     </div>

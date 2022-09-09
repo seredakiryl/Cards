@@ -1,8 +1,13 @@
+import path from 'path'
+
 import React from 'react'
 
 import { Spin, Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
+import { useNavigate } from 'react-router-dom'
 
+import { Path } from '../../../Common/Navigate/Path'
+import { setCardsPackIdAC } from '../../../Store/cards-reducer'
 import { setPacksPageAC, setPageCountAC } from '../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../Store/store'
 
@@ -24,6 +29,8 @@ type PropsType = {
 }
 export const PacksTable = (props: PropsType) => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const totalCountPacks = useAppSelector(state => state.packs.cardPacksTotalCount)
   const userId = useAppSelector(state => state.packs.queryParams.user_id)
   const packs = useAppSelector(state => state.packs.packs)
@@ -54,6 +61,7 @@ export const PacksTable = (props: PropsType) => {
   let data = packs.map(p => {
     return {
       key: p._id,
+      pack_id: p._id,
       name: p.name.slice(0, 20),
       cardsCount: p.cardsCount,
       lastUpdated: p.updated.slice(0, 10),
@@ -69,6 +77,10 @@ export const PacksTable = (props: PropsType) => {
       ),
     }
   })
+  const onClickPack = (record: any) => {
+    dispatch(setCardsPackIdAC(record.pack_id))
+    navigate(Path.CARDS)
+  }
 
   return (
     <div>
@@ -77,6 +89,11 @@ export const PacksTable = (props: PropsType) => {
         dataSource={data}
         size="large"
         loading={props.isFetching}
+        onRow={record => {
+          return {
+            onClick: () => onClickPack(record),
+          }
+        }}
         pagination={{
           current: props.page,
           pageSize: props.pageCount,

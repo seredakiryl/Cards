@@ -7,6 +7,9 @@ export const cardsAPI = {
   getCards(getCards: GetCardsType) {
     return instance.get('/cards/card', getCards)
   },
+  addGrade(grade: any) {
+    return instance.put('/cards/grade', grade)
+  },
 }
 
 export type AddCardModelType = {

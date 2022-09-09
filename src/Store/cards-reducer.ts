@@ -1,4 +1,4 @@
-import { cardsAPI, CardType} from './../Api/cards-api'
+import { cardsAPI, CardType } from './../Api/cards-api'
 import { AppThunk } from './store'
 import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
 import {AxiosError} from "axios";
@@ -112,6 +112,7 @@ export const getCardsTC =
     }
   }
 
+
 export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
   dispatch(setIsFetchingAC(true))
   try {
@@ -121,6 +122,20 @@ export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
     handleServerNetworkError(error as AxiosError | Error, dispatch)
   } finally {
       dispatch(setIsFetchingAC(false))
+    }
   }
-}
 
+export const addGradeTC =
+  (grade: any): AppThunk =>
+  async dispatch => {
+    dispatch(setIsFetchingAC(true))
+    try {
+      await cardsAPI.addGrade(grade)
+
+      console.log('оценка отправилась')
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
+  }
