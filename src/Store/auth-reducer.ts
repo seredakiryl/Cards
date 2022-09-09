@@ -3,6 +3,8 @@ import { FormikLoginType } from '../Components/Auth/Login/Login'
 
 import { setAppErrorAC, setSuccessAC } from './app-reducer'
 import { AppThunk } from './store'
+import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
+import {AxiosError} from "axios";
 
 const initialState = {
   isLoggedIn: false,
@@ -56,8 +58,8 @@ export const setNewNameTC =
       await authAPI.changeName(name, avatar)
 
       dispatch(setNewNameAC(name, avatar))
-    } catch (res) {
-      console.log(res)
+    } catch (error) {
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
@@ -69,7 +71,7 @@ export const logOutTC = (): AppThunk => async dispatch => {
     await authAPI.logout()
     dispatch(setIsLoggedInAC(false))
   } catch (error) {
-    console.log(error)
+    handleServerNetworkError(error as AxiosError | Error, dispatch)
   } finally {
     dispatch(setIsFetchingAC(false))
   }
@@ -84,7 +86,7 @@ export const registrationTC =
 
       dispatch(setSuccessAC('Registration successfully completed'))
     } catch (error) {
-      console.log(error)
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
@@ -97,7 +99,7 @@ export const setNewPasswordTC =
       dispatch(setIsFetchingAC(true))
       await authAPI.newPassword({ password, resetPasswordToken })
     } catch (error) {
-      console.log(error)
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
@@ -111,7 +113,8 @@ export const loginTC =
       await authAPI.login(values)
       dispatch(setIsLoggedInAC(true))
     } catch (error) {
-      console.log(error)
+      // handleServerNetworkError(error as AxiosError | Error, dispatch)
+        console.log(error)
     } finally {
       dispatch(setIsFetchingAC(false))
     }
@@ -124,7 +127,7 @@ export const forgotPasswordTC =
       dispatch(setIsFetchingAC(true))
       await authAPI.forgotPassword({ email, from: admin, message: messageStyle })
     } catch (error) {
-      console.log(error)
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
     } finally {
       dispatch(setIsFetchingAC(false))
     }

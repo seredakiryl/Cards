@@ -3,6 +3,8 @@ import { authAPI } from '../Api/auth-api'
 import { setEmailAC, setIsLoggedInAC, setNewNameAC } from './auth-reducer'
 import { catchMyIdAC } from './packs-reducer'
 import { AppThunk } from './store'
+import { handleServerNetworkError } from "../Common/ErrorUtils/ErrorUtils";
+import { AxiosError } from "axios";
 
 export type InitialStateType = {
   error: string
@@ -51,7 +53,7 @@ export const isLoggedInTC = (): AppThunk => async dispatch => {
     dispatch(setEmailAC(email))
     dispatch(catchMyIdAC(_id))
   } catch (error) {
-    console.log(error)
+    handleServerNetworkError(error as AxiosError | Error, dispatch)
   } finally {
     dispatch(isFetchingAppAC(false))
   }
