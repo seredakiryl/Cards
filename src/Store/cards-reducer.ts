@@ -1,7 +1,11 @@
-import { cardsAPI, CardType} from './../Api/cards-api'
+import { AxiosError } from 'axios'
+
+import { packsAPI } from '../Api/packs-api'
+import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
+
+import { cardsAPI, CardType } from './../Api/cards-api'
 import { AppThunk } from './store'
-import {handleServerNetworkError} from "../Common/ErrorUtils/ErrorUtils";
-import {AxiosError} from "axios";
+
 type InitialStateType = {
   cards: CardsType[]
   queryParams: any
@@ -51,9 +55,18 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Act
     case 'CARDS/SET_CARDS_PACK_ID': {
       return { ...state, queryParams: { ...state.queryParams, cardsPack_id: action.cardsPackId } }
     }
-
     case 'CARDS/SET_CARD_QUESTION': {
       return { ...state, queryParams: { ...state.queryParams, cardQuestion: action.question } }
+    }
+    case 'CARDS/SET_NEW_CARD_QUESTION/ANSWER': {
+      return {
+        ...state,
+        queryParams: {
+          ...state.queryParams,
+          cardQuestion: action.question,
+          cardAnswer: action.answer,
+        },
+      }
     }
     default:
       return state
@@ -81,6 +94,9 @@ export const setCardsPackIdAC = (cardsPackId: string) => {
 export const setCardQustionAC = (question: string) => {
   return { type: 'CARDS/SET_CARD_QUESTION', question } as const
 }
+export const editCardAC = (id: string, question: string, answer: string) => {
+  return { type: 'CARDS/SET_NEW_CARD_QUESTION/ANSWER', id, question, answer } as const
+}
 
 type ActionsType =
   | ReturnType<typeof getCardsAC>
@@ -90,6 +106,7 @@ type ActionsType =
   | ReturnType<typeof setCardsPackIdAC>
   | ReturnType<typeof setCardQustionAC>
   | ReturnType<typeof setIsFetchingAC>
+  | ReturnType<typeof editCardAC>
 
 export const getCardsTC =
   (id?: string): AppThunk =>
@@ -112,15 +129,32 @@ export const getCardsTC =
     }
   }
 
-export const addNewCardTC = (card: CardType): AppThunk => async (dispatch) => {
-  dispatch(setIsFetchingAC(true))
-  try {
-    await cardsAPI.addCard({ card: card })
-    dispatch(getCardsTC())
-  } catch (error) {
-    handleServerNetworkError(error as AxiosError | Error, dispatch)
-  } finally {
+export const addNewCardTC =
+  (card: CardType): AppThunk =>
+  async dispatch => {
+    dispatch(setIsFetchingAC(true))
+    try {
+      await cardsAPI.addCard({ card: card })
+      dispatch(getCardsTC())
+    } catch (error) {
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
+    } finally {
       dispatch(setIsFetchingAC(false))
+    }
   }
-}
 
+export const editCardQuestionOrAnswer =
+  (id: string, question: string, answer: string): AppThunk =>
+  async (dispatch, getState) => {
+    const model = getState().packs.queryParams
+
+    try {
+      dispatch(setIsFetchingAC(true))
+      await cardsAPI.editCard(id, question, answer)
+      dispatch(editCardAC(id, question, answer))
+    } catch (error) {
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
+  }

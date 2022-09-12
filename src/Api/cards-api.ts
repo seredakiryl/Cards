@@ -7,6 +7,9 @@ export const cardsAPI = {
   getCards(getCards: GetCardsType) {
     return instance.get('/cards/card', getCards)
   },
+  editCard(_id: string, question: string, answer: string) {
+    return instance.put('/cards/card', { card: { _id: _id, question: question, answer: answer } })
+  },
 }
 
 export type AddCardModelType = {
@@ -35,4 +38,12 @@ export type GetCardsType = {
     page?: number
     pageCount?: number
   }
+}
+export type EditCardModelType = {
+  card: EditCardType
+}
+export type EditCardType = {
+  _id: string
+  question: string
+  answer: string
 }

@@ -48,13 +48,19 @@ export const CardsTable = (props: PropsType) => {
   ]
 
   let data = cards.map(p => {
+    {
+      console.log(p)
+    }
+
     return {
       key: p._id,
       question: p.question,
       answer: p.answer,
       lastUpdated: p.updated.slice(0, 10),
       grade: <Rate disabled defaultValue={p.grade} />,
-      actions: <ActionCards />,
+      actions: (
+        <ActionCards cardID={p._id} udserID={p.user_id} answer={p.answer} question={p.question} />
+      ),
     }
   })
 
