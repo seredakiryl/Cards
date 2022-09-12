@@ -1,9 +1,29 @@
 .wrapper {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
 }
 .inner {
   display: flex;
   justify-content: space-between;
+}
+.modalInner {
+  display: flex;
+  flex-direction: column;
+}
+.modalInputItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.inputTitle {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  opacity: 0.5;
+}
+.modalInput {
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  outline: none;
 }

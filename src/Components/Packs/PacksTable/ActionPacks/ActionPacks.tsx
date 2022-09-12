@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, MouseEvent, SyntheticEvent, useState } from 'react'
 
 import { BookOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
@@ -25,18 +25,26 @@ export const ActionPacks = (props: PropsType) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
 
-  const showEditModal = () => {
+  const showEditModal = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsEditModalVisible(true)
   }
-  const showDeleteModal = () => {
+  const showDeleteModal = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsDeleteModalVisible(true)
   }
 
-  const handleEditOk = () => {
+  const handleEditOk = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
     setIsEditModalVisible(false)
     dispatch(editPackNameTC(props.packId, packName, isPrivate))
   }
-  const handleDeleteOk = () => {
+  const handleDeleteOk = (e: SyntheticEvent) => {
+    e.stopPropagation()
+
     setIsDeleteModalVisible(false)
     dispatch(deletePackTC(props.packId))
   }
@@ -53,9 +61,16 @@ export const ActionPacks = (props: PropsType) => {
   const setPrivatePack = (e: ChangeEvent<HTMLInputElement>) => {
     setIsPrivate(e.currentTarget.checked)
   }
-  const getCards = () => {
-    navigate(Path.CARDS)
+  const learnCards = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+    navigate(Path.LEARN_CARDS)
     dispatch(setCardsPackIdAC(props.packId))
+  }
+
+  const test = (e: SyntheticEvent) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
   }
 
   return (
@@ -65,7 +80,7 @@ export const ActionPacks = (props: PropsType) => {
           type="primary"
           shape="circle"
           icon={<BookOutlined style={{ fontSize: '18px', padding: '4px' }} />}
-          onClick={getCards}
+          onClick={e => learnCards(e)}
         />
       </Tooltip>
       {props.userId == props.creatorUserId && (
@@ -73,10 +88,12 @@ export const ActionPacks = (props: PropsType) => {
           <Button
             type="primary"
             shape="circle"
-            onClick={showEditModal}
+            onClick={e => showEditModal(e)}
             icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
           />
+
           <Modal
+            z-index={10}
             title="Edit pack"
             visible={isEditModalVisible}
             onOk={handleEditOk}
@@ -107,13 +124,13 @@ export const ActionPacks = (props: PropsType) => {
           <Button
             type="primary"
             shape="circle"
-            onClick={showDeleteModal}
+            onClick={e => showDeleteModal(e)}
             icon={<DeleteOutlined style={{ fontSize: '18px', padding: '4px' }} />}
           />
           <Modal
             title="Delete pack"
             visible={isDeleteModalVisible}
-            onOk={handleDeleteOk}
+            onOk={e => handleDeleteOk(e)}
             onCancel={handleCancel}
           >
             <span>Do you really want to remove Pack Name? All cards will be deleted.</span>

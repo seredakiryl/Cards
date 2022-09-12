@@ -43,7 +43,13 @@ export const ActionCards = (props: PropsType) => {
         <Button
           type="primary"
           shape="circle"
+<<<<<<< HEAD
           onClick={showEditModal}
+=======
+          onClick={() => {
+            alert('пока заглушка)')
+          }}
+>>>>>>> 68e625ce51fcfcb77d0c570cf88d2fc7c55d810c
           icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
         />
       </Tooltip>
@@ -80,6 +86,9 @@ export const ActionCards = (props: PropsType) => {
         <Button
           type="primary"
           shape="circle"
+          onClick={() => {
+            alert('пока заглушка)')
+          }}
           icon={<DeleteOutlined style={{ fontSize: '18px', padding: '4px' }} />}
         />
       </Tooltip>
