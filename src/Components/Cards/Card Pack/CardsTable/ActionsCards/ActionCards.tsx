@@ -3,15 +3,16 @@ import React, { ChangeEvent, useState } from 'react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
 
-import { editPackNameTC } from '../../../../../Store/packs-reducer'
+import { editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
 import { useAppDispatch } from '../../../../../Store/store'
-import s from '../../../../Packs/PacksHeader/PacksHeader.module.css'
+
 type PropsType = {
   cardID: string
-  udserID: string
+  userID: string
   answer: string
   question: string
 }
+
 export const ActionCards = (props: PropsType) => {
   const dispatch = useAppDispatch()
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
@@ -22,7 +23,7 @@ export const ActionCards = (props: PropsType) => {
   const handleEditOk = () => {
     setIsEditModalVisible(false)
     console.log('press ok')
-    // dispatch(editPackNameTC(props.packId, packName, isPrivate))
+    dispatch(editCardQuestionOrAnswerTC(props.cardID, isQuestion, isAnswer))
   }
   const showEditModal = () => {
     setIsEditModalVisible(true)
@@ -43,13 +44,7 @@ export const ActionCards = (props: PropsType) => {
         <Button
           type="primary"
           shape="circle"
-<<<<<<< HEAD
           onClick={showEditModal}
-=======
-          onClick={() => {
-            alert('пока заглушка)')
-          }}
->>>>>>> 68e625ce51fcfcb77d0c570cf88d2fc7c55d810c
           icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
         />
       </Tooltip>
