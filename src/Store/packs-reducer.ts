@@ -219,7 +219,6 @@ export const editPackNameTC =
     try {
       dispatch(setIsFetchingAC(true))
       await packsAPI.editPackName(id, packName, isPrivate)
-      dispatch(editPackNameAC(id, packName, isPrivate))
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
       handleServerNetworkError(error as AxiosError | Error, dispatch)

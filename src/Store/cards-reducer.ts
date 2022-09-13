@@ -1,17 +1,11 @@
 import { AxiosError } from 'axios'
 
-<<<<<<< HEAD
 import { packsAPI } from '../Api/packs-api'
-=======
->>>>>>> 68e625ce51fcfcb77d0c570cf88d2fc7c55d810c
 import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
 
 import { cardsAPI, CardType } from './../Api/cards-api'
 import { AppThunk } from './store'
-<<<<<<< HEAD
 
-=======
->>>>>>> 68e625ce51fcfcb77d0c570cf88d2fc7c55d810c
 type InitialStateType = {
   cards: CardsType[]
   queryParams: any
@@ -149,8 +143,7 @@ export const addNewCardTC =
     }
   }
 
-<<<<<<< HEAD
-export const editCardQuestionOrAnswer =
+export const editCardQuestionOrAnswerTC =
   (id: string, question: string, answer: string): AppThunk =>
   async (dispatch, getState) => {
     const model = getState().packs.queryParams
@@ -158,21 +151,23 @@ export const editCardQuestionOrAnswer =
     try {
       dispatch(setIsFetchingAC(true))
       await cardsAPI.editCard(id, question, answer)
-      dispatch(editCardAC(id, question, answer))
+      dispatch(getCardsTC())
     } catch (error) {
       handleServerNetworkError(error as AxiosError | Error, dispatch)
-=======
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
+  }
+
 export const addGradeTC =
   (grade: any): AppThunk =>
   async dispatch => {
     dispatch(setIsFetchingAC(true))
     try {
       await cardsAPI.addGrade(grade)
-
       console.log('оценка отправилась')
     } catch (error) {
       console.log(error)
->>>>>>> 68e625ce51fcfcb77d0c570cf88d2fc7c55d810c
     } finally {
       dispatch(setIsFetchingAC(false))
     }
