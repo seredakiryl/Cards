@@ -53,8 +53,6 @@ export const isLoggedInTC = (): AppThunk => async dispatch => {
     dispatch(setNewNameAC(name, avatar))
     dispatch(setEmailAC(email))
     dispatch(catchMyIdAC(_id))
-  } catch (error) {
-    // handleServerNetworkError(error as AxiosError | Error, dispatch)
   } finally {
     dispatch(isFetchingAppAC(false))
   }

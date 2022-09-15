@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
 
+
 import { editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
 import { useAppDispatch } from '../../../../../Store/store'
 
@@ -19,11 +20,11 @@ export const ActionCards = (props: PropsType) => {
   const [isQuestion, setQuestion] = useState(props.question)
   const [isAnswer, setAnswer] = useState(props.answer)
 
-  console.log(props.cardID)
   const handleEditOk = () => {
     setIsEditModalVisible(false)
-    console.log('press ok')
-    dispatch(editCardQuestionOrAnswerTC(props.cardID, isQuestion, isAnswer))
+
+    dispatch(editCardQuestionOrAnswer(props.cardID, isQuestion, isAnswer))
+
   }
   const showEditModal = () => {
     setIsEditModalVisible(true)

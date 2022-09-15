@@ -2,7 +2,6 @@ import axios, { AxiosError } from 'axios'
 import { Dispatch } from 'redux'
 
 import { setAppErrorAC } from '../../Store/app-reducer'
-import { useAppDispatch } from '../../Store/store'
 
 export const handleServerNetworkError = (
   error: Error | AxiosError<{ error: string }>,

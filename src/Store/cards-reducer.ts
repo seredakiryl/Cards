@@ -1,6 +1,8 @@
 import { AxiosError } from 'axios'
 
+
 import { packsAPI } from '../Api/packs-api'
+
 import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
 
 import { cardsAPI, CardType } from './../Api/cards-api'
@@ -143,11 +145,11 @@ export const addNewCardTC =
     }
   }
 
-export const editCardQuestionOrAnswerTC =
-  (id: string, question: string, answer: string): AppThunk =>
-  async (dispatch, getState) => {
-    const model = getState().packs.queryParams
 
+export const editCardQuestionOrAnswerTC =
+
+  (id: string, question: string, answer: string): AppThunk =>
+  async dispatch => {
     try {
       dispatch(setIsFetchingAC(true))
       await cardsAPI.editCard(id, question, answer)
