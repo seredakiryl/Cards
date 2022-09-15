@@ -1,5 +1,8 @@
 import { AxiosError } from 'axios'
 
+
+import { packsAPI } from '../Api/packs-api'
+
 import { handleServerNetworkError } from '../Common/ErrorUtils/ErrorUtils'
 
 import { cardsAPI, CardType } from './../Api/cards-api'
@@ -142,15 +145,19 @@ export const addNewCardTC =
     }
   }
 
-export const editCardQuestionOrAnswer =
+
+export const editCardQuestionOrAnswerTC =
+
   (id: string, question: string, answer: string): AppThunk =>
   async dispatch => {
     try {
       dispatch(setIsFetchingAC(true))
       await cardsAPI.editCard(id, question, answer)
-      dispatch(editCardAC(id, question, answer))
+      dispatch(getCardsTC())
     } catch (error) {
       handleServerNetworkError(error as AxiosError | Error, dispatch)
+    } finally {
+      dispatch(setIsFetchingAC(false))
     }
   }
 
@@ -160,7 +167,6 @@ export const addGradeTC =
     dispatch(setIsFetchingAC(true))
     try {
       await cardsAPI.addGrade(grade)
-
       console.log('оценка отправилась')
     } catch (error) {
       console.log(error)

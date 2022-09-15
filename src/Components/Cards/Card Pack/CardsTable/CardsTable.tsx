@@ -55,7 +55,7 @@ export const CardsTable = (props: PropsType) => {
       lastUpdated: p.updated.slice(0, 10),
       grade: <Rate disabled defaultValue={p.grade} />,
       actions: (
-        <ActionCards cardID={p._id} udserID={p.user_id} answer={p.answer} question={p.question} />
+        <ActionCards cardID={p._id} userID={p.user_id} answer={p.answer} question={p.question} />
       ),
     }
   })
