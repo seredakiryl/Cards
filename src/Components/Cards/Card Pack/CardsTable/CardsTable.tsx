@@ -1,8 +1,8 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Rate, Table, Tooltip } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 
-import { CardsType, setCardsPageAC, setPageCountAC } from '../../../../Store/cards-reducer'
+import { CardsType, setCardsPageAC } from '../../../../Store/cards-reducer'
+import { setPageCountAC } from '../../../../Store/packs-reducer'
 import { useAppDispatch, useAppSelector } from '../../../../Store/store'
 
 import { ActionCards } from './ActionsCards/ActionCards'
@@ -48,10 +48,6 @@ export const CardsTable = (props: PropsType) => {
   ]
 
   let data = cards.map(p => {
-    {
-      console.log(p)
-    }
-
     return {
       key: p._id,
       question: p.question,

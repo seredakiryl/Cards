@@ -11,6 +11,8 @@ export const ShowPacks = () => {
   const dispatch = useAppDispatch()
   const [value, setValue] = useState<any>('ALL')
 
+  // if(value)
+
   useEffect(() => {
     dispatch(setmyAndAllAC(value))
   }, [value])

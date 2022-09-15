@@ -7,13 +7,12 @@ export const cardsAPI = {
   getCards(getCards: GetCardsType) {
     return instance.get('/cards/card', getCards)
   },
-<<<<<<< HEAD
+
   editCard(_id: string, question: string, answer: string) {
     return instance.put('/cards/card', { card: { _id: _id, question: question, answer: answer } })
-=======
+  },
   addGrade(grade: any) {
     return instance.put('/cards/grade', grade)
->>>>>>> 68e625ce51fcfcb77d0c570cf88d2fc7c55d810c
   },
 }
 

@@ -68,16 +68,7 @@ export const packsReducer = (
       return { ...state, queryParams: { ...state.queryParams, maxCardsCount: action.value } }
     }
     case 'PACKS/CATCH_MY_ID': {
-      return { ...state, queryParams: { ...state.queryParams, user_id: action.user_id } }
-    }
-    case 'PACKS/FIND_CARDS_ID': {
-      return {
-        ...state,
-        queryParams: {
-          ...state.queryParams,
-          user_id: action.value === 'ALL' ? '' : state.queryParams.user_id,
-        },
-      }
+      return { ...state, myAndAll: action.user_id }
     }
     case 'PACKS/SET_PACKS': {
       return {
@@ -104,14 +95,12 @@ export const packsReducer = (
       }
     }
     case 'PACKS/SET_MY_AND_ALL': {
-      return { ...state, myAndAll: action.myAndAll == 'MY' ? state.queryParams.user_id : '' }
-    }
-    case 'PACKS/SET_PACKS_NAME_AND_PRIVATE': {
       return {
         ...state,
-        packs: state.packs.map(el => {
-          return el._id === action.id ? { ...el, name: action.name, private: action.isPrivate } : el
-        }),
+        queryParams: {
+          ...state.queryParams,
+          user_id: action.myAndAll == 'MY' ? state.myAndAll : '',
+        },
       }
     }
     default:
@@ -138,9 +127,6 @@ export const findMaxCardsInPackAC = (value: number) => {
 export const catchMyIdAC = (user_id: string) => {
   return { type: 'PACKS/CATCH_MY_ID', user_id } as const
 }
-export const findCardsIdPackAC = (value?: string) => {
-  return { type: 'PACKS/FIND_CARDS_ID', value } as const
-}
 export const setPacksAC = (packs: Array<PacksType>) => {
   return { type: 'PACKS/SET_PACKS', packs } as const
 }
@@ -159,16 +145,12 @@ export const setSortPackstAC = (value: string) => {
 export const setmyAndAllAC = (myAndAll: string) => {
   return { type: 'PACKS/SET_MY_AND_ALL', myAndAll } as const
 }
-export const editPackNameAC = (id: string, name: string, isPrivate: boolean) => {
-  return { type: 'PACKS/SET_PACKS_NAME_AND_PRIVATE', id, name, isPrivate } as const
-}
 
 type ActionsType =
   | ReturnType<typeof findPacksThroughInputAC>
   | ReturnType<typeof findMinCardsInPackAC>
   | ReturnType<typeof findMaxCardsInPackAC>
   | ReturnType<typeof catchMyIdAC>
-  | ReturnType<typeof findCardsIdPackAC>
   | ReturnType<typeof setIsFetchingAC>
   | ReturnType<typeof setPacksAC>
   | ReturnType<typeof setPacksPageAC>
@@ -176,7 +158,6 @@ type ActionsType =
   | ReturnType<typeof setPageCountAC>
   | ReturnType<typeof setSortPackstAC>
   | ReturnType<typeof setmyAndAllAC>
-  | ReturnType<typeof editPackNameAC>
 
 export const getPacksTC =
   (model: any): AppThunk =>
@@ -185,7 +166,6 @@ export const getPacksTC =
       dispatch(setIsFetchingAC(true))
       const res = await packsAPI.getPack(model)
 
-      console.log(res.data)
       dispatch(setPacksAC(res.data.cardPacks))
       dispatch(getTotalPacksAC(res.data.cardPacksTotalCount))
     } catch (error) {
@@ -219,7 +199,7 @@ export const editPackNameTC =
     try {
       dispatch(setIsFetchingAC(true))
       await packsAPI.editPackName(id, packName, isPrivate)
-      dispatch(editPackNameAC(id, packName, isPrivate))
+
       dispatch(getPacksTC({ params: model }))
     } catch (error) {
       handleServerNetworkError(error as AxiosError | Error, dispatch)
