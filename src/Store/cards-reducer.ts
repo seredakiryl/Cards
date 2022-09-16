@@ -68,7 +68,7 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Act
         },
       }
     }
-      default:
+    default:
       return state
   }
 }
@@ -97,7 +97,6 @@ export const setCardQustionAC = (question: string) => {
 export const editCardAC = (id: string, question: string, answer: string) => {
   return { type: 'CARDS/SET_NEW_CARD_QUESTION/ANSWER', id, question, answer } as const
 }
-
 
 type ActionsType =
   | ReturnType<typeof getCardsAC>
@@ -174,15 +173,21 @@ export const addGradeTC =
     }
   }
 
-  export const deleteCardTC = (id:string):AppThunk => async dispatch=>{
+export const deleteCardTC =
+  (id: string): AppThunk =>
+  async dispatch => {
+    let params = {
+      id: id,
+    }
+
+    try {
       dispatch(setIsFetchingAC(true))
-try{
-          await  cardsAPI.deleteCart(id)
-    console.log('sent id card for delete')
-    dispatch(getCardsTC())
-      }catch (error) {
-    handleServerNetworkError(error as AxiosError | Error, dispatch)
-} finally {
-    dispatch(setIsFetchingAC(false))
-}
+      await cardsAPI.deleteCart({ params })
+      console.log('sent id card for delete')
+      dispatch(getCardsTC())
+    } catch (error) {
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
   }

@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
 
-import { editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
+import { deleteCardTC, editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
 import { useAppDispatch } from '../../../../../Store/store'
 
 type PropsType = {
@@ -43,7 +43,8 @@ export const ActionCards = (props: PropsType) => {
   }
   const handleEditDelete = () => {
     setIsDeleteModalVisible(false)
-    console.log('press delete')
+    console.log('deleteCardTC' + props.cardID)
+    dispatch(deleteCardTC(props.cardID))
     // dispatch(editCardQuestionOrAnswerTC(props.cardID, isQuestion, isAnswer))
   }
   const handleСancellationDelete = () => {

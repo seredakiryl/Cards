@@ -13,9 +13,9 @@ export const cardsAPI = {
   addGrade(grade: any) {
     return instance.put('/cards/grade', grade)
   },
-  deleteCart(deleteCard: deleteCardType){
+  deleteCart(deleteCard: deleteCardType) {
     return instance.delete('/cards/grade', deleteCard)
-  }
+  },
 }
 
 export type AddCardModelType = {
@@ -53,8 +53,8 @@ export type EditCardType = {
   question: string
   answer: string
 }
-export type deleteCardType={
+export type deleteCardType = {
   params: {
-    id:string
+    id: string
   }
 }
