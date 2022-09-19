@@ -14,10 +14,9 @@ import { PacksTable } from './PacksTable/PacksTable'
 
 export const Packs = () => {
   const dispatch = useAppDispatch()
-  const { packName, maxCardsCount, minCardsCount, page, pageCount, sortPacks } = useAppSelector(
-    state => state.packs.queryParams
-  )
-  const myAndAll = useAppSelector(state => state.packs.myAndAll)
+  const { packName, maxCardsCount, minCardsCount, page, pageCount, sortPacks, user_id } =
+    useAppSelector(state => state.packs.queryParams)
+  // const myAndAll = useAppSelector(state => state.packs.myAndAll)
   const isFetching = useAppSelector(state => state.packs.isFetching)
   const minCards = useDebounce(minCardsCount, 1000)
   const maxCards = useDebounce(maxCardsCount, 1000)
@@ -31,13 +30,13 @@ export const Packs = () => {
       sortPacks: sortPacks,
       page: page,
       pageCount: pageCount,
-      user_id: myAndAll,
+      user_id: user_id,
     },
   }
 
   useEffect(() => {
     isLoggedIn && dispatch(getPacksTC(getModel))
-  }, [packName, minCards, maxCards, sortPacks, page, pageCount, myAndAll])
+  }, [packName, minCards, maxCards, sortPacks, page, pageCount, user_id])
 
   return (
     <div className={s.wrapper}>
