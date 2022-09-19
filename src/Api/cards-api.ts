@@ -14,7 +14,7 @@ export const cardsAPI = {
     return instance.put('/cards/grade', grade)
   },
   deleteCart(deleteCard: deleteCardType) {
-    return instance.delete('/cards/grade', deleteCard)
+    return instance.delete('/cards/card', deleteCard)
   },
 }
 

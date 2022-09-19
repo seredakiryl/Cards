@@ -47,6 +47,8 @@ export const isLoggedInTC = (): AppThunk => async dispatch => {
   try {
     dispatch(isFetchingAppAC(true))
     const res = await authAPI.me()
+
+    console.log(res)
     let { name, avatar, email, _id } = res.data
 
     dispatch(setIsLoggedInAC(true))
