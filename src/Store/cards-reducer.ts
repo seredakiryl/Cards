@@ -174,3 +174,22 @@ export const addGradeTC =
       dispatch(setIsFetchingAC(false))
     }
   }
+
+export const deleteCardTC =
+  (id: string): AppThunk =>
+  async dispatch => {
+    let params = {
+      id: id,
+    }
+
+    try {
+      dispatch(setIsFetchingAC(true))
+      await cardsAPI.deleteCart({ params })
+      console.log('sent id card for delete')
+      dispatch(getCardsTC())
+    } catch (error) {
+      handleServerNetworkError(error as AxiosError | Error, dispatch)
+    } finally {
+      dispatch(setIsFetchingAC(false))
+    }
+  }

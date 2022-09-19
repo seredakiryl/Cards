@@ -3,8 +3,9 @@ import React, { ChangeEvent, useState } from 'react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
 
+import { deleteCardTC, editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
 
-import { editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
+
 import { useAppDispatch } from '../../../../../Store/store'
 
 type PropsType = {
@@ -17,6 +18,7 @@ type PropsType = {
 export const ActionCards = (props: PropsType) => {
   const dispatch = useAppDispatch()
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [isQuestion, setQuestion] = useState(props.question)
   const [isAnswer, setAnswer] = useState(props.answer)
 
@@ -37,6 +39,18 @@ export const ActionCards = (props: PropsType) => {
   }
   const onHandleChangeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
     setAnswer(e.currentTarget.value)
+  }
+  const showDeleteModal = () => {
+    setIsDeleteModalVisible(true)
+  }
+  const handleEditDelete = () => {
+    setIsDeleteModalVisible(false)
+    console.log('deleteCardTC' + props.cardID)
+    dispatch(deleteCardTC(props.cardID))
+    // dispatch(editCardQuestionOrAnswerTC(props.cardID, isQuestion, isAnswer))
+  }
+  const handleСancellationDelete = () => {
+    setIsDeleteModalVisible(false)
   }
 
   return (
@@ -82,12 +96,18 @@ export const ActionCards = (props: PropsType) => {
         <Button
           type="primary"
           shape="circle"
-          onClick={() => {
-            alert('пока заглушка)')
-          }}
+          onClick={showDeleteModal}
           icon={<DeleteOutlined style={{ fontSize: '18px', padding: '4px' }} />}
         />
       </Tooltip>
+      <Modal
+        title="Delete card"
+        visible={isDeleteModalVisible}
+        onOk={handleEditDelete}
+        onCancel={handleСancellationDelete}
+      >
+        <span>Do you really want to remove Card? Cards will be deleted.</span>
+      </Modal>
     </div>
   )
 }
