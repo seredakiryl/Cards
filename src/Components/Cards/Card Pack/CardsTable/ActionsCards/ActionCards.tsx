@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
 
 import { deleteCardTC, editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
-import { useAppDispatch } from '../../../../../Store/store'
+import { useAppDispatch, useAppSelector } from '../../../../../Store/store'
 
 type PropsType = {
   cardID: string
@@ -45,11 +45,11 @@ export const ActionCards = (props: PropsType) => {
     setIsDeleteModalVisible(false)
     console.log('deleteCardTC' + props.cardID)
     dispatch(deleteCardTC(props.cardID))
-    // dispatch(editCardQuestionOrAnswerTC(props.cardID, isQuestion, isAnswer))
   }
   const handleСancellationDelete = () => {
     setIsDeleteModalVisible(false)
   }
+  const userId = useAppSelector(state => state.packs.queryParams.user_id)
 
   return (
     <div>
@@ -59,6 +59,7 @@ export const ActionCards = (props: PropsType) => {
           shape="circle"
           onClick={showEditModal}
           icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
+          disabled={props.userID === userId}
         />
       </Tooltip>
       <Modal
