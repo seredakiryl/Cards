@@ -4,7 +4,13 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Modal, Tooltip } from 'antd'
 
 import { deleteCardTC, editCardQuestionOrAnswerTC } from '../../../../../Store/cards-reducer'
+<<<<<<< HEAD
 import { useAppDispatch, useAppSelector } from '../../../../../Store/store'
+=======
+
+
+import { useAppDispatch } from '../../../../../Store/store'
+>>>>>>> ce2f47a9288a901f20a3bb0dec65024f128e3e86
 
 type PropsType = {
   cardID: string
@@ -20,11 +26,11 @@ export const ActionCards = (props: PropsType) => {
   const [isQuestion, setQuestion] = useState(props.question)
   const [isAnswer, setAnswer] = useState(props.answer)
 
-  console.log(props.cardID)
   const handleEditOk = () => {
     setIsEditModalVisible(false)
-    console.log('press ok')
-    dispatch(editCardQuestionOrAnswerTC(props.cardID, isQuestion, isAnswer))
+
+    dispatch(editCardQuestionOrAnswer(props.cardID, isQuestion, isAnswer))
+
   }
   const showEditModal = () => {
     setIsEditModalVisible(true)
