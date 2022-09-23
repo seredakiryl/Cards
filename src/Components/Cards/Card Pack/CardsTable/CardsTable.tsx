@@ -48,14 +48,11 @@ export const CardsTable = (props: PropsType) => {
   ]
 
   let data = cards.map(p => {
-<<<<<<< HEAD
     {
       console.log(p)
       console.log('user ID:' + p.user_id)
     }
 
-=======
->>>>>>> ce2f47a9288a901f20a3bb0dec65024f128e3e86
     return {
       key: p._id,
       question: p.question,
