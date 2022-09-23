@@ -59,7 +59,7 @@ export const ActionCards = (props: PropsType) => {
           shape="circle"
           onClick={showEditModal}
           icon={<EditOutlined style={{ fontSize: '18px', padding: '4px' }} />}
-          disabled={props.userID === userId}
+          disabled={!(props.userID === userId)}
         />
       </Tooltip>
       <Modal
@@ -97,6 +97,7 @@ export const ActionCards = (props: PropsType) => {
           shape="circle"
           onClick={showDeleteModal}
           icon={<DeleteOutlined style={{ fontSize: '18px', padding: '4px' }} />}
+          disabled={!(props.userID === userId)}
         />
       </Tooltip>
       <Modal
